@@ -27,7 +27,7 @@ flowchart TB
     subgraph BUILD["build job · contents:read, issues:write · no push rights"]
       ORCH{{"orchestrator.py<br/>deterministic state machine<br/>budgets, routing, checks"}}
       AN["Analyst agent<br/>Sonnet · Read Grep Glob Write*<br/>+ A1 requirements-specifier skill"]
-      AR["Architect agent<br/>Sonnet · Read Grep Glob Write*<br/>+ A2 ARCHITECTURE.md"]
+      AR["Architect agent<br/>Sonnet · Read Grep Glob Write* Bash*<br/>+ A2 ARCHITECTURE.md"]
       DEV["Developer agent<br/>Sonnet · Read Grep Glob Edit Write Bash*<br/>source files only"]
       TE["Tester agent<br/>Sonnet · Read Grep Glob Edit Write Bash*<br/>tests/ only, base-commit worktree"]
       JUDGE["Spec judge<br/>Haiku · no tools · JSON verdict"]
@@ -70,7 +70,7 @@ flowchart TB
 | `autose-round.yml` | reusable workflow | GitHub Actions | build → release → review jobs | `orchestrator.py`, `release.py`, reviewer + `post_review.py` |
 | `orchestrator.py` | deterministic state machine (Python) | build job | `GITHUB_TOKEN` (issues: write) kept in its own process; spawns agents with a scrubbed environment | the four builder agents, the spec judge, `checks.py` |
 | Analyst | Claude Code headless, `claude-sonnet-5-5` | build job | `Read Grep Glob Write`; Write only to `spec.md` | none |
-| Architect | Claude Code headless, `claude-sonnet-5-5` | build job | `Read Grep Glob Write`; Write only to `design.md` | none |
+| Architect | Claude Code headless, `claude-sonnet-5-5` | build job | `Read Grep Glob Write Bash`; Write only to `design.md`; Bash for read-only probes, tree reset afterwards | none |
 | Developer | Claude Code headless, `claude-sonnet-5-5` | build job, head worktree | `Read Grep Glob Edit Write Bash`; edits only `markdown/**`, `docs/**`, `pyproject.toml`; no `git push/commit`, no network commands | none |
 | Tester | Claude Code headless, `claude-sonnet-5-5` | build job, **base-commit** worktree | `Read Grep Glob Edit Write Bash`; edits only `tests/**` | none |
 | Spec judge | Claude Code headless, `claude-haiku-5-5`, no tools, `--json-schema` | build job | none | none |

@@ -1,0 +1,41 @@
+diff --git a/markdown/extensions/external_links.py b/markdown/extensions/external_links.py
+new file mode 100644
+index 0000000..e9eca13
+--- /dev/null
++++ b/markdown/extensions/external_links.py
+@@ -0,0 +1,23 @@
++"""Mark links to other sites so that they open in a new tab."""
++from __future__ import annotations
++
++from . import Extension
++from ..treeprocessors import Treeprocessor
++
++
++class ExternalLinksTreeprocessor(Treeprocessor):
++    def run(self, root):
++        for a in root.iter('a'):
++            href = a.get('href', '')
++            if href.startswith(('http://', 'https://')):
++                a.set('target', '_blank')
++                a.set('rel', 'noopener noreferrer')
++
++
++class ExternalLinksExtension(Extension):
++    def extendMarkdown(self, md):
++        md.treeprocessors.register(ExternalLinksTreeprocessor(md), 'external_links', 3)
++
++
++def makeExtension(**kwargs):  # pragma: no cover
++    return ExternalLinksExtension(**kwargs)
+diff --git a/pyproject.toml b/pyproject.toml
+index 5464a00..aaaec64 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -87,6 +87,7 @@ smarty = 'markdown.extensions.smarty:SmartyExtension'
+ tables = 'markdown.extensions.tables:TableExtension'
+ toc = 'markdown.extensions.toc:TocExtension'
+ wikilinks = 'markdown.extensions.wikilinks:WikiLinkExtension'
++external_links = 'markdown.extensions.external_links:ExternalLinksExtension'
+ legacy_attrs = 'markdown.extensions.legacy_attrs:LegacyAttrExtension'
+ legacy_em = 'markdown.extensions.legacy_em:LegacyEmExtension'
+ 

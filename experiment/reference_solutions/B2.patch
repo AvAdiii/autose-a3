@@ -1,0 +1,14 @@
+diff --git a/markdown/extensions/attr_list.py b/markdown/extensions/attr_list.py
+index 060e476..d596ab1 100644
+--- a/markdown/extensions/attr_list.py
++++ b/markdown/extensions/attr_list.py
+@@ -199,6 +199,9 @@ class AttrListTreeprocessor(Treeprocessor):
+                 else:
+                     elem.set('class', v)
+             elif v is None:
++                if not k.strip(':'):
++                    # an empty list such as `{: }` assigns nothing
++                    continue
+                 # assign a valueless attribute. Maintain the historic
+                 # `key="key"` representation only for known boolean
+                 # attributes (which differ per output format). For any
