@@ -1,0 +1,44 @@
+{
+  "issue": 5,
+  "round": 0,
+  "start": "requirements",
+  "events": [],
+  "stages": {
+    "requirements": {
+      "status": "stopped",
+      "attempts": 1,
+      "reasons": [
+        "analyst agent: provider: {\"duration_api_ms\": 0, \"stop_reason\": \"stop_sequence\", \"session_id\": \"5cd7d64b-7210-4497-a68e-70b3287d46ea\", \"total_cost_usd\": 0, \"usage\": {\"output_tokens_details\": {\"thinking_tokens\": 0}, \"input_tokens\": 0, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"output_tokens\": 0, \"server_tool_use\": {\"web_search_requests\": 0, \"web_fetch_requests\": 0}, \"service_tier\": \"standard\", \"cache_c"
+      ]
+    },
+    "design": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "implementation": {
+      "status": "pending",
+      "attempts": 0
+    },
+    "testing": {
+      "status": "pending",
+      "attempts": 0
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 0,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "stopped",
+    "stage": "requirements",
+    "kind": "provider-unavailable",
+    "reason": "analyst agent: provider: {\"duration_api_ms\": 0, \"stop_reason\": \"stop_sequence\", \"session_id\": \"5cd7d64b-7210-4497-a68e-70b3287d46ea\", \"total_cost_usd\": 0, \"usage\": {\"output_tokens_details\": {\"thinking_tokens\": 0}, \"input_tokens\": 0, \"cache_creation_input_tokens\": 0, \"cache_read_input_tokens\": 0, \"output_tokens\": 0, \"server_tool_use\": {\"web_search_requests\": 0, \"web_fetch_requests\": 0}, \"service_tier\": \"standard\", \"cache_c"
+  },
+  "base": "37d65f9a25ba485b95bafbacae2545aaa25b2283"
+}

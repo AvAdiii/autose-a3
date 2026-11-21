@@ -8,3 +8,4 @@ R5-V1,V1,5,44890142013,vague issue: questions posted; maintainer answered on the
 R6-V1,V1,5,44890315260,after the maintainer's answer; CI docs lint failed (harness #20)
 R7-F2,F2,4,44890548514,rerun after ADR-011
 R8-V1,V1,5,44893689623,Claude Pro quota exhausted: provider error at the first agent call
+R9-V1,V1,5,44895471619,Claude Pro 5-hour limit still in force (resets 11:20 UTC); stopped at the first agent call

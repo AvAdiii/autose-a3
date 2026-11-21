@@ -1,47 +1,67 @@
 # Runs
 
 Every run is a real GitHub Actions run on [AvAdiii/markdown](https://github.com/AvAdiii/markdown)
-(fork of Python-Markdown at `3f2c551`). Token counts come from each job's `usage.jsonl`
-(the `result` event of every Claude Code session); `$ equiv` is the CLI's API-price estimate, the
-runs themselves were billed to a Claude Pro subscription quota. Hidden tests were run by me,
-after the run, with `experiment/hidden_tests/run_hidden.sh` on the PR head.
+(Python-Markdown forked at `3f2c551`). Columns as in `results.csv`, which `collect_runs.py` builds
+from each run's API record and artifacts. The artifacts are archived in `artifacts/<label>/`:
+`r0-build` holds spec, design, diff, test report, checks, transcripts and guard log; `r0-5-release`
+holds `pr.md` and `release.json`; `r0-6-review` holds `review.md`, `review.json` and the reviewer
+transcript.
+* **Tokens** come from each agent session's `usage.jsonl`. The runs were billed to a Claude Pro
+  subscription. `cost_usd` in the CSV is the CLI's API-price equivalent, for comparison only.
+* **Hidden tests** (`experiment/hidden_tests/`, never in the fork) were run by `collect_runs.py
+  hidden` on the exact head each run released.
 
-## R0: first real run, issue #2 (B2): infrastructure fault found
+## Pipeline runs (issues #1 to #5)
 
-- Run: [44887224113](https://github.com/AvAdiii/markdown/actions/runs/44887224113), trigger:
-  label `autose` on [#2](https://github.com/AvAdiii/markdown/issues/2), 08:56:47 to 09:03:21 UTC
-  (6 min 34 s: gate 27 s, build 2 min 11 s, release 2 min 31 s incl. CI wait, review 1 min 11 s).
-- PR: [#12](https://github.com/AvAdiii/markdown/pull/12), opened by `autose-dev-avadiii[bot]`; CI
-  green (13 checks).
-- Stages: requirements, design, implementation, testing all passed at the first attempt; 10 new
-  tests (6 fail on base, all pass on head), suite 1114 → 1124 passing.
-- Hidden tests (B2): **4/4 pass**.
-- Review (Opus, isolated): **no approval**. Every Bash call of every agent failed with
-  `Sandbox is required but failed to initialize: socat not installed`. The builders fell back to
-  Read/Edit; the reviewer could run none of its six checks, traced them statically, found no
-  defect, and returned `request_changes` *because nothing was verified*. `review.py` downgraded it
-  to a comment review (no blocking finding with evidence). This is the behaviour ADR-008 asks for:
-  no unverified approval.
-- Cause: `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=1` (ADR-005) makes Claude Code run Bash inside
-  bubblewrap, which needs `bubblewrap` + `socat` and unprivileged user namespaces; the runner has
-  none. Fixed in harness PR [#13](https://github.com/AvAdiii/markdown/pull/13): install and
-  smoke-test the sandbox in the build and review jobs, and stop the run with
-  `error_kind=sandbox` instead of continuing without Bash.
-- Tokens: output 20,188; input 58 + cache read 396,356 + cache write 99,704; $0.76 equiv;
-  agent time 146 s (analyst 22.5 s, judge 6.1 s, architect 32.3 s, developer 14.8 s, tester
-  19.2 s, reviewer 51.0 s).
+| Run | Issue | Actions run | Trigger | Attempts S1/S2/S3/S4 | PR | CI | Review | Hidden | Outcome | Output tokens | Wall |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| R0-B2 | #2 B2 | [44887224113](https://github.com/AvAdiii/markdown/actions/runs/44887224113) | label | 1/1/1/1 | [#12](https://github.com/AvAdiii/markdown/pull/12) | pass | comment | 4/4 | no approval: agent Bash broken (see below) | 20,188 | 394 s |
+| R1-B2 | #2 B2 | [44889589134](https://github.com/AvAdiii/markdown/actions/runs/44889589134) | `/autose` | 1/1/1/1 | [#12](https://github.com/AvAdiii/markdown/pull/12) | pass | approve | 4/4 | approved PR | 19,459 | 397 s |
+| R2-B1 | #1 B1 | [44890133094](https://github.com/AvAdiii/markdown/actions/runs/44890133094) | label | 2/1/1/1 | [#16](https://github.com/AvAdiii/markdown/pull/16) | pass | approve | 4/4 | approved PR | 24,007 | 454 s |
+| R3-F1 | #3 F1 | [44890136597](https://github.com/AvAdiii/markdown/actions/runs/44890136597) | label | 2/1/1/1 | [#15](https://github.com/AvAdiii/markdown/pull/15) | pass | approve | 4/4 | approved PR | 21,440 | 356 s |
+| R4-F2 | #4 F2 | [44890139146](https://github.com/AvAdiii/markdown/actions/runs/44890139146) | label | 2/–/–/– | – | – | – | – | stopped at requirements: spec judge | 13,215 | 156 s |
+| R5-V1 | #5 V1 | [44890142013](https://github.com/AvAdiii/markdown/actions/runs/44890142013) | label | 1/–/–/– | – | – | – | – | stopped: needs clarification (3 questions posted) | 3,411 | 67 s |
+| R6-V1 | #5 V1 | [44890315260](https://github.com/AvAdiii/markdown/actions/runs/44890315260) | `/autose` after answer | 2/1/1/1 | [#18](https://github.com/AvAdiii/markdown/pull/18) | **fail** | – | 4/4 | stopped at release: CI docs lints | 24,679 | 444 s |
+| R7-F2 | #4 F2 | [44890548514](https://github.com/AvAdiii/markdown/actions/runs/44890548514) | `/autose` | 1/2/1/1 | [#19](https://github.com/AvAdiii/markdown/pull/19) | pass | approve | 4/4 | approved PR | 15,859 | 398 s |
+| R8-V1 | #5 V1 | [44893689623](https://github.com/AvAdiii/markdown/actions/runs/44893689623) | `/autose` | 1/–/–/– | – | – | – | – | stopped: Claude Pro 5-hour limit | 0 | 124 s |
+| R9-V1 | #5 V1 | [44895471619](https://github.com/AvAdiii/markdown/actions/runs/44895471619) | `/autose` | 1/–/–/– | – | – | – | – | stopped: Claude Pro 5-hour limit | 0 | 155 s |
+{{R10}}
 
-## R1: issue #2 (B2) again, after the sandbox fix
+Reviews by the reviewer on the pipeline PRs are on the PRs themselves, posted by
+`github-actions[bot]`: [#12](https://github.com/AvAdiii/markdown/pull/12),
+[#15](https://github.com/AvAdiii/markdown/pull/15), [#16](https://github.com/AvAdiii/markdown/pull/16),
+[#19](https://github.com/AvAdiii/markdown/pull/19). Every PR is still open for the maintainer to
+merge or close; the workflow never merges.
 
-- Run: [44889589134](https://github.com/AvAdiii/markdown/actions/runs/44889589134), trigger: a
-  maintainer comment `/autose` on #2 (the comment trigger). Sandbox step: `sandbox ok`; zero
-  sandbox failures in any transcript; the developer ran the full suite and flake8 itself.
-- PR [#12](https://github.com/AvAdiii/markdown/pull/12) force-updated to `30f9655` (round 0 rebuilds
-  the branch from base); CI green.
-- All four build stages passed at the first attempt; 11 new tests, suite 1114 → 1125.
-- Hidden tests (B2): **4/4 pass**.
-- Review (Opus, isolated): **approve**, 6/6 own checks executed and passing (including a
-  24-input comparison of the old and new regex), posted by `github-actions` as an APPROVED review
-  on a PR authored by `autose-dev-avadiii[bot]`.
-- Time 09:26:22 to 09:33:00 UTC (6 min 38 s). Tokens: output 19,459; input 50 + cache read
-  368,687 + cache write 58,002; $0.53 equiv; agent time 142 s.
+## What each incident taught, and the harness PR that fixed it
+
+| Run | What happened | Fix |
+|---|---|---|
+| R0 | `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=1` runs agent Bash in bubblewrap, and the runner has neither bubblewrap nor socat, so every Bash call failed. The builders fell back to Read/Edit. The reviewer could run none of its six checks, found no defect by reading, and **refused to approve** unverified work: `request_changes` without a blocking finding, which `review.py` downgraded to a comment. | [#13](https://github.com/AvAdiii/markdown/pull/13): install and smoke-test the sandbox; stop with `error_kind=sandbox` if it breaks |
+| R2, R3 | The judge rejected ACs whose expected output was "the same as before this change" (no literal value) or named unspecified variants; the analyst made them concrete on the single retry. The judge doing its job. | none |
+| R4 | The Haiku judge accepted AC-FR-002-2/3 on attempt 0 and rejected the **identical text** on attempt 1, so the run stopped on a sound spec. | [#17](https://github.com/AvAdiii/markdown/pull/17), ADR-011 (supersedes the stage-1 rule of ADR-007): verdicts sticky per AC text |
+| R5 | Vague issue: the analyst posted three P1 questions (behaviour, what is external, opt-in) and no code was written. The maintainer answered with `experiment/issues/V1_clarification.md`, written before any run. | none (intended) |
+| R6 | A correct implementation (hidden tests 4/4) failed CI `checklinks` (unresolved API autoref) and `checkspelling` (`treeprocessor` in a docstring). Stage 5 stopped and explained. | [#20](https://github.com/AvAdiii/markdown/pull/20): stage 3 runs both docs checks; the developer may edit `mkdocs.yml` |
+| R7 | Design check failed once: the Changes table listed `tests/test_syntax/extensions/test_toc.py` as *add* although it exists (AST/path check); the architect fixed it on the retry. | none |
+| R8, R9 | The Claude Pro 5-hour limit was reached by the experiment reviews running in parallel. Each run stopped at its first agent call and said why; the status comment showed raw JSON. | [#21](https://github.com/AvAdiii/markdown/pull/21): the CLI's message ("You've hit your 5-hour limit · resets …") comes first |
+| E runs | The experiment reviews of seeded PRs (linked to issues #1–#5) **overwrote each issue's sticky status comment** with their own review status. The earlier versions remain in each comment's edit history. | [#22](https://github.com/AvAdiii/markdown/pull/22): only `autose/issue-N` PRs update the issue status |
+| — | The 15 experiment review dispatches over 5 issues would have cancelled one another in GitHub's single pending-run slot per concurrency group. | [#14](https://github.com/AvAdiii/markdown/pull/14), ADR-010 amendment |
+
+Harness PRs [#11](https://github.com/AvAdiii/markdown/pull/11), [#13](https://github.com/AvAdiii/markdown/pull/13),
+[#14](https://github.com/AvAdiii/markdown/pull/14), [#17](https://github.com/AvAdiii/markdown/pull/17),
+[#20](https://github.com/AvAdiii/markdown/pull/20), [#21](https://github.com/AvAdiii/markdown/pull/21),
+[#22](https://github.com/AvAdiii/markdown/pull/22) were opened on `harness/*` branches and merged by the
+maintainer with an admin bypass of the code-owner rule. #11 makes the lint check report only the
+flake8 errors a change introduces; upstream already had some on Python 3.12.
+
+## Experiment reviews (E1, E2)
+
+Started by `results/dispatch_reviews.sh` (production review job, `workflow_dispatch`,
+`start_stage=review`, `rework=false`) and scored by `results/score_reviews.py`. Each review is
+also posted on its seeded PR ([#6](https://github.com/AvAdiii/markdown/pull/6)–[#10](https://github.com/AvAdiii/markdown/pull/10)).
+
+{{EXPERIMENT_RUNS}}
+
+Ten earlier dispatches of the `opus-shared` and `sonnet-isolated` cells
+(`review_runs_quota_failed.csv`) hit the Claude Pro 5-hour limit and produced no verdict. They were
+re-dispatched after the window reset and are not scored.
