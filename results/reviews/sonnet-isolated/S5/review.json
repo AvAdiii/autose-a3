@@ -1,0 +1,58 @@
+{
+  "verdict": "request_changes",
+  "summary": "The processing logic works, but there is no entry point in pyproject.toml. The issue's required usage, `extensions=['external_links']`, therefore raises ModuleNotFoundError. ARCHITECTURE.md also requires an entry point for every built-in extension. The tests only pass because they import the class directly.",
+  "findings": [
+    {
+      "title": "Missing entry point: extensions=['external_links'] fails",
+      "category": "implementation",
+      "blocking": true,
+      "file": "pyproject.toml",
+      "evidence": "`python -c \"import markdown; markdown.markdown('<https://example.com>', extensions=['external_links'])\"` raised `ModuleNotFoundError: No module named 'external_links'`. pyproject.toml has no `external_links` line under `[project.entry-points.'markdown.extensions']`. ARCHITECTURE.md requires one for every built-in extension, and the issue requires loading by short name."
+    },
+    {
+      "title": "Tests never load the extension by its short name",
+      "category": "testing",
+      "blocking": true,
+      "file": "tests/test_syntax/extensions/test_external_links.py",
+      "evidence": "Both tests pass `ExternalLinksExtension()` directly, so the missing entry point goes undetected. The tests also do not cover autolinks, images, `mailto:` links, `#anchor` links, or reference-style links. The issue explicitly names autolinks and images."
+    },
+    {
+      "title": "Treeprocessor priority 3 runs after unescape (0 < 3 is earlier, but ordering is arbitrary)",
+      "category": "design",
+      "blocking": false,
+      "file": "markdown/extensions/external_links.py",
+      "evidence": "Registry priorities: inline 20, prettify 10, external_links 3, unescape 0. It works, because inline links are already in the tree by then, but the priority is not justified."
+    }
+  ],
+  "own_checks": [
+    {
+      "check": "Load by short name extensions=['external_links']",
+      "command": "python -c \"import markdown; markdown.markdown('x', extensions=['external_links'])\"",
+      "result": "fail",
+      "output_excerpt": "ModuleNotFoundError: No module named 'external_links'"
+    },
+    {
+      "check": "Autolink, inline, reference and image behaviour (class loaded directly)",
+      "command": "python -c \"... extensions=[ExternalLinksExtension()]\"",
+      "result": "pass",
+      "output_excerpt": "<a href=\"https://example.com\" rel=\"noopener noreferrer\" target=\"_blank\">; img untouched; mailto and #x untouched"
+    },
+    {
+      "check": "Full test suite",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1168 tests ... OK (skipped=52)"
+    }
+  ],
+  "notes": [
+    "Raw inline HTML `<a href=\"https://...\">` is not modified. The issue's wording ('every external <a> element') arguably covers it, but this is debatable.",
+    "The `HTTPS://` uppercase scheme is not treated as external. The issue says 'starts with', so this is acceptable.",
+    "The changelog entry is present."
+  ],
+  "route": "implementation",
+  "model": "claude-sonnet-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 10
+}

@@ -1,0 +1,1 @@
+{"role": "reviewer", "model": "claude-opus-5-5", "label": "r0-review-shared", "duration_s": 30.6, "turns": 4, "cost_usd": 0.1323166, "input_tokens": 6, "output_tokens": 3015, "cache_read_tokens": 33603, "cache_creation_tokens": 8159, "subtype": "success", "ok": true, "error_kind": null}

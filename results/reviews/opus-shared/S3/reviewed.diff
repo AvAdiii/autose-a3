@@ -1,0 +1,68 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..70a440d 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -14,6 +14,10 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ## [Unreleased]
+ 
++### Added
++
++* TOC: headings with the `no-toc` class are left out of the table of contents.
++
+ ### Fixed
+ 
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+diff --git a/markdown/extensions/toc.py b/markdown/extensions/toc.py
+index ba65225..6810b3a 100644
+--- a/markdown/extensions/toc.py
++++ b/markdown/extensions/toc.py
+@@ -20,6 +20,7 @@ for details.
+ from __future__ import annotations
+ 
+ from . import Extension
++from ..postprocessors import Postprocessor
+ from ..treeprocessors import Treeprocessor
+ from ..util import parseBoolValue, AMP_SUBSTITUTE, deprecated, HTML_PLACEHOLDER_RE, AtomicString
+ from ..treeprocessors import UnescapeTreeprocessor
+@@ -438,6 +439,15 @@ class TocTreeprocessor(Treeprocessor):
+         self.md.toc = toc
+ 
+ 
++class NoTocPostprocessor(Postprocessor):
++    """ Remove entries for headings marked `no-toc` from the rendered table of contents. """
++
++    def run(self, text: str) -> str:
++        for hid in re.findall(r'<h[1-6][^>]*class="[^"]*no-toc[^"]*"[^>]*id="([^"]+)"', text):
++            text = re.sub(r'<li><a href="#%s">.*?</a>(</li>)?\n?' % re.escape(hid), '', text)
++        return text
++
++
+ class TocExtension(Extension):
+     """ Table of Contents Extension to Python-Markdown. """
+ 
+@@ -509,6 +519,7 @@ class TocExtension(Extension):
+         self.reset()
+         tocext = self.TreeProcessorClass(md, self.getConfigs())
+         md.treeprocessors.register(tocext, 'toc', 5)
++        md.postprocessors.register(NoTocPostprocessor(md), 'no_toc', 5)
+ 
+     def reset(self) -> None:
+         self.md.toc = ''
+diff --git a/tests/test_syntax/extensions/test_toc.py b/tests/test_syntax/extensions/test_toc.py
+index 12a07d5..ce1cac3 100644
+--- a/tests/test_syntax/extensions/test_toc.py
++++ b/tests/test_syntax/extensions/test_toc.py
+@@ -1574,3 +1574,12 @@ class testStripTags(TestCase):
+             strip_tags('foo &lt; &amp; &lt; bar'),
+             'foo &lt; &amp; &lt; bar'
+         )
++
++
++class TestNoTocClass(TestCase):
++
++    def test_no_toc_heading_removed_from_rendered_toc(self):
++        md = Markdown(extensions=['toc', 'attr_list'])
++        html = md.convert('# Guide\n\n## Contents {: .no-toc }\n\n[TOC]\n\n## Install\n')
++        self.assertNotIn('<li><a href="#contents">', html)
++        self.assertIn('<li><a href="#install">', html)

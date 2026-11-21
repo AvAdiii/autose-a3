@@ -1,0 +1,73 @@
+{
+  "verdict": "request_changes",
+  "summary": "The PR strips entries from the rendered `[TOC]` HTML with a regex postprocessor. That fixes the issue's example only. `md.toc_tokens` and `md.toc` still list the excluded heading, which the issue explicitly asks to change. The regex also gives wrong output for nested and similarly named classes. The fix belongs in `TocTreeprocessor`, before the tokens and the TOC HTML are built.",
+  "findings": [
+    {
+      "title": "md.toc_tokens and md.toc still include no-toc headings",
+      "category": "design",
+      "blocking": true,
+      "file": "markdown/extensions/toc.py",
+      "line": 442,
+      "evidence": "Running `Markdown(extensions=['toc','attr_list'])` on the issue's example, `md.toc_tokens` still contains {'id':'contents',...} as a child of Guide. `md.toc` still contains `<li><a href=\"#contents\">Contents</a></li>`. Only the `[TOC]` placeholder output in the body was changed, by a postprocessor that edits the final HTML. The issue says the exclusion must also apply to `md.toc_tokens`. The filtering needs to happen in TocTreeprocessor when the toc tokens are collected."
+    },
+    {
+      "title": "Regex postprocessor is wrong for nesting and class matching",
+      "category": "implementation",
+      "blocking": true,
+      "file": "markdown/extensions/toc.py",
+      "line": 445,
+      "evidence": "Input `[TOC]\\n\\n# A\\n## B {: .foo .no-toc }\\n## C {: .no-toc-x }` rendered a TOC with both B and C removed and an empty `<ul>` left behind. C's class is only `no-toc-x`, but `class=\"[^\"]*no-toc[^\"]*\"` is a substring match. Input `# A\\n## Sub {: .no-toc }\\n### Deep\\n## B` produced a malformed nested `<ul><ul>` structure with Sub's child orphaned. The regex also assumes `class` comes before `id` in the heading tag."
+    },
+    {
+      "title": "Test only covers the rendered-HTML case",
+      "category": "testing",
+      "blocking": true,
+      "file": "tests/test_syntax/extensions/test_toc.py",
+      "line": 1577,
+      "evidence": "The single new test only checks two `assertIn`/`assertNotIn` substrings in the HTML output. It does not check `md.toc_tokens` or `md.toc`. It does not check that the heading keeps `id=\"contents\"`. It does not check nested headings or a class that merely contains `no-toc`."
+    }
+  ],
+  "notes": [
+    "The existing suite passes (1167 tests, OK), but none of those tests exercise the new behaviour.",
+    "The issue allows the class name to be configurable. The PR hard-codes `no-toc`, which is acceptable, but a config option would be nicer.",
+    "The changelog entry is present."
+  ],
+  "own_checks": [
+    {
+      "check": "Rendered TOC omits Contents but keeps Guide, Install and Usage; heading keeps id",
+      "command": "python -c \"import markdown; md=markdown.Markdown(extensions=['toc','attr_list']); print(md.convert('# Guide\\n\\n## Contents {: .no-toc }\\n\\n[TOC]\\n\\n## Install\\n\\n## Usage\\n'))\"",
+      "result": "pass",
+      "output_excerpt": "<h2 class=\"no-toc\" id=\"contents\">Contents</h2> ... TOC lists guide, install, usage only"
+    },
+    {
+      "check": "md.toc_tokens excludes the no-toc heading",
+      "command": "python -c \"... print(md.toc_tokens)\"",
+      "result": "fail",
+      "output_excerpt": "children include {'level': 2, 'id': 'contents', 'name': 'Contents', ...}"
+    },
+    {
+      "check": "md.toc excludes the no-toc heading",
+      "command": "python -c \"... print(repr(md.toc))\"",
+      "result": "fail",
+      "output_excerpt": "'...<li><a href=\"#contents\">Contents</a></li>...'"
+    },
+    {
+      "check": "A class like no-toc-x is not excluded, and nested headings render a valid TOC",
+      "command": "python -c \"... '[TOC]\\n\\n# A\\n## B {: .foo .no-toc }\\n## C {: .no-toc-x }\\n'\"",
+      "result": "fail",
+      "output_excerpt": "TOC shows only A with an empty <ul>; C was removed wrongly"
+    },
+    {
+      "check": "Whole test suite",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1167 tests ... OK (skipped=52)"
+    }
+  ],
+  "route": "design",
+  "model": "claude-sonnet-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 8
+}

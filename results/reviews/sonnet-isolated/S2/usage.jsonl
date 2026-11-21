@@ -1,0 +1,1 @@
+{"role": "reviewer", "model": "claude-sonnet-5-5", "label": "r0-review-isolated", "duration_s": 12.6, "turns": 3, "cost_usd": 0.0651594, "input_tokens": 4, "output_tokens": 1393, "cache_read_tokens": 12014, "cache_creation_tokens": 12505, "subtype": "success", "ok": true, "error_kind": null}

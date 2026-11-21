@@ -4,3 +4,13 @@ opus-isolated,S2,7,44890825281,claude-opus-5-5,isolated,request_changes,1,1,[imp
 opus-isolated,S3,8,44890841473,claude-opus-5-5,isolated,request_changes,1,1,[design] md.toc_tokens and md.toc still include no-toc headings :: 'toc_tokens',design,1,0,3,7,,2727,4,19354,3,23.9
 opus-isolated,S4,9,44890851656,claude-opus-5-5,isolated,approve,1,,,,,0,0,7,,4427,16,117678,9,43.8
 opus-isolated,S5,10,44890867863,claude-opus-5-5,isolated,request_changes,1,1,"[implementation] No entry point for external_links, so extensions=['external_links'] fails :: 'entry point'",implementation,1,0,2,7,,2527,6,32882,4,24.2
+opus-shared,S1,6,44896794659,claude-opus-5-5,shared,request_changes,1,1,[implementation] Empty attribute list is left as literal text instead of being removed :: 'left as literal text instead of being removed The issue asks',implementation,1,0,2,6,,2905,8,38781,5,28.3
+opus-shared,S2,7,44896830144,claude-opus-5-5,shared,request_changes,1,1,[implementation] The URL is built from the label instead of the target page :: 'URL is built from the label',implementation,1,0,2,6,,2100,6,33198,4,19.4
+opus-shared,S3,8,44896839711,claude-opus-5-5,shared,request_changes,1,1,[design] md.toc_tokens and md.toc still include no-toc headings :: 'toc_tokens',design,1,0,3,8,,3015,6,33603,4,30.6
+opus-shared,S4,9,44896854333,claude-opus-5-5,shared,approve,1,,,,,0,0,6,,5453,16,127560,9,54.9
+opus-shared,S5,10,44896874565,claude-opus-5-5,shared,request_changes,1,1,[implementation] Extension cannot be loaded as extensions=['external_links']: no entry point in pyproject.toml :: ''external_links']: no entry point in pyproject.toml Maintain',implementation,1,0,2,5,,2338,6,34103,4,24.3
+sonnet-isolated,S1,6,44896915224,claude-sonnet-5-5,isolated,request_changes,1,1,[implementation] Empty attr list is left as literal text instead of being stripped :: 'left as literal text instead of being stripped The PR adds `',implementation,1,0,2,3,,1512,4,18993,3,14.0
+sonnet-isolated,S2,7,44896933378,claude-sonnet-5-5,isolated,request_changes,1,1,[implementation] URL is built from the label instead of the target :: 'URL is built from the label',implementation,1,0,2,3,,1393,4,12014,3,12.6
+sonnet-isolated,S3,8,44896946310,claude-sonnet-5-5,isolated,request_changes,1,1,[design] md.toc_tokens and md.toc still include no-toc headings :: 'toc_tokens',design,1,0,3,5,,2154,4,19205,3,19.9
+sonnet-isolated,S4,9,44896965636,claude-sonnet-5-5,isolated,approve,1,,,,,0,0,5,,1443,6,33291,4,14.5
+sonnet-isolated,S5,10,44896984226,claude-sonnet-5-5,isolated,request_changes,1,1,[implementation] Missing entry point: extensions=['external_links'] fails :: 'entry point',implementation,1,0,2,3,,1933,6,33306,4,18.7

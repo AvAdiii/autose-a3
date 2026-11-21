@@ -1,0 +1,91 @@
+{
+  "own_checks": [
+    {
+      "check": "Issue example: rendered [TOC] lists Guide, Install, Usage but not Contents",
+      "command": "python -c \"import markdown; md=markdown.Markdown(extensions=['toc','attr_list']); print(md.convert('# Guide\\n\\n## Contents {: .no-toc }\\n\\n[TOC]\\n\\n## Install\\n\\n## Usage\\n'))\"",
+      "result": "pass",
+      "output_excerpt": "<li><a href=\"#guide\">Guide</a><ul> / #install / #usage; no #contents"
+    },
+    {
+      "check": "Contents heading keeps id=\"contents\"",
+      "command": "same probe",
+      "result": "pass",
+      "output_excerpt": "<h2 class=\"no-toc\" id=\"contents\">Contents</h2>"
+    },
+    {
+      "check": "md.toc_tokens excludes the no-toc heading (explicit issue requirement)",
+      "command": "same probe; print(md.toc_tokens)",
+      "result": "fail",
+      "output_excerpt": "children: [{'level': 2, 'id': 'contents', 'name': 'Contents', ...}, {'id': 'install'...}, {'id': 'usage'...}]"
+    },
+    {
+      "check": "md.toc excludes the no-toc heading",
+      "command": "same probe; print(md.toc)",
+      "result": "fail",
+      "output_excerpt": "<li><a href=\"#contents\">Contents</a></li> still present in md.toc"
+    },
+    {
+      "check": "Excluding a heading that has child headings produces valid HTML",
+      "command": "md.convert('[TOC]\\n\\n# A {: .no-toc }\\n\\n## B\\n\\n# C\\n')",
+      "result": "fail",
+      "output_excerpt": "<ul>\\n<ul>\\n<li><a href=\"#b\">B</a></li>\\n</ul>\\n</li>  -- stray </li>, malformed list"
+    },
+    {
+      "check": "Only the exact class no-toc triggers exclusion",
+      "command": "md.convert('[TOC]\\n\\n# A {: .no-tocx }\\n\\n# C\\n')",
+      "result": "fail",
+      "output_excerpt": "TOC contains only #c; heading with class no-tocx was dropped"
+    },
+    {
+      "check": "Content outside the TOC is untouched",
+      "command": "markdown.markdown('# A {: .no-toc }\\n\\n<ul>\\n<li><a href=\"#a\">jump</a></li>\\n</ul>\\n', extensions=['toc','attr_list'])",
+      "result": "fail",
+      "output_excerpt": "<ul>\\n</ul>  -- user's own link list item deleted"
+    },
+    {
+      "check": "Full test suite",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1167 tests ... OK (skipped=52)"
+    }
+  ],
+  "findings": [
+    {
+      "title": "md.toc_tokens and md.toc still include no-toc headings",
+      "category": "design",
+      "blocking": true,
+      "file": "markdown/extensions/toc.py",
+      "line": 442,
+      "evidence": "The issue says the exclusion must also apply to md.toc_tokens. After converting the issue example, md.toc_tokens still has {'id': 'contents', ...} in Guide's children, and md.toc still has <li><a href=\"#contents\">. The postprocessor only rewrites the output string, so the data the TocTreeprocessor builds never changes. The heading should be skipped in TocTreeprocessor.run when the token list is built. The heading should still get its id there."
+    },
+    {
+      "title": "Regex postprocessor breaks markup and deletes content that is not part of the TOC",
+      "category": "implementation",
+      "blocking": true,
+      "file": "markdown/extensions/toc.py",
+      "line": 446,
+      "evidence": "Nested case: '[TOC]\\n\\n# A {: .no-toc }\\n\\n## B\\n\\n# C' renders '<ul>\\n<ul>\\n<li><a href=\"#b\">B</a></li>\\n</ul>\\n</li>', which has a stray </li> and an unwrapped nested <ul>. The pattern `re.sub(r'<li><a href=\"#id\">...')` runs on the whole document, so a user's own raw-HTML list item linking to #a was deleted ('<ul>\\n</ul>'). The pattern `class=\"[^\"]*no-toc[^\"]*\"` is a substring match, so the class `no-tocx` also drops the heading. The regex also assumes class comes before id, and the TOC only nests correctly when the work is done on the token tree."
+    },
+    {
+      "title": "Tests miss the toc_tokens requirement, the issue's full expected output and edge cases",
+      "category": "testing",
+      "blocking": true,
+      "file": "tests/test_syntax/extensions/test_toc.py",
+      "line": 1579,
+      "evidence": "The only test checks for the absence of one <li> substring. Nothing asserts the heading keeps id=\"contents\", nothing checks md.toc_tokens or md.toc (both still contain 'contents' today), and nothing covers a no-toc heading with child headings."
+    }
+  ],
+  "notes": [
+    "ARCHITECTURE.md is followed: the processor is registered through the registry and core does not import from extensions. The problem is the method: rewriting the HTML string after serialization instead of filtering in TocTreeprocessor, which owns the TOC data.",
+    "Consider making the class name a config option (for example `exclude_class`, default 'no-toc'), and document it in docs/extensions/toc.md.",
+    "The changelog entry is present."
+  ],
+  "summary": "The rendered [TOC] for the issue's exact example is correct, but the fix is incomplete and fragile. The issue explicitly asks for md.toc_tokens to exclude the heading, and it doesn't: md.toc_tokens and md.toc still list 'contents'. The regex postprocessor also produces malformed lists when the excluded heading has children, deletes the user's own <li> links elsewhere in the document, and treats a class like 'no-tocx' as 'no-toc'. The exclusion belongs in TocTreeprocessor, when the token list is built.",
+  "verdict": "request_changes",
+  "route": "design",
+  "model": "claude-opus-5-5",
+  "variant": "shared",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 8
+}

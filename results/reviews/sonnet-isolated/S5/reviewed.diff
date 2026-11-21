@@ -1,0 +1,72 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..abd03c9 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -14,6 +14,11 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ## [Unreleased]
+ 
++### Added
++
++* New `external_links` extension: links to `http://` and `https://` URLs get
++  `target="_blank"` and `rel="noopener noreferrer"`.
++
+ ### Fixed
+ 
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+diff --git a/markdown/extensions/external_links.py b/markdown/extensions/external_links.py
+new file mode 100644
+index 0000000..e9eca13
+--- /dev/null
++++ b/markdown/extensions/external_links.py
+@@ -0,0 +1,23 @@
++"""Mark links to other sites so that they open in a new tab."""
++from __future__ import annotations
++
++from . import Extension
++from ..treeprocessors import Treeprocessor
++
++
++class ExternalLinksTreeprocessor(Treeprocessor):
++    def run(self, root):
++        for a in root.iter('a'):
++            href = a.get('href', '')
++            if href.startswith(('http://', 'https://')):
++                a.set('target', '_blank')
++                a.set('rel', 'noopener noreferrer')
++
++
++class ExternalLinksExtension(Extension):
++    def extendMarkdown(self, md):
++        md.treeprocessors.register(ExternalLinksTreeprocessor(md), 'external_links', 3)
++
++
++def makeExtension(**kwargs):  # pragma: no cover
++    return ExternalLinksExtension(**kwargs)
+diff --git a/tests/test_syntax/extensions/test_external_links.py b/tests/test_syntax/extensions/test_external_links.py
+new file mode 100644
+index 0000000..dffd39f
+--- /dev/null
++++ b/tests/test_syntax/extensions/test_external_links.py
+@@ -0,0 +1,21 @@
++"""Tests for the external_links extension."""
++
++from markdown.test_tools import TestCase
++from markdown.extensions.external_links import ExternalLinksExtension
++
++
++class TestExternalLinks(TestCase):
++
++    def test_external_link(self):
++        self.assertMarkdownRenders(
++            '[docs](https://example.com)',
++            '<p><a href="https://example.com" rel="noopener noreferrer" target="_blank">docs</a></p>',
++            extensions=[ExternalLinksExtension()]
++        )
++
++    def test_relative_link_untouched(self):
++        self.assertMarkdownRenders(
++            '[a](/docs/)',
++            '<p><a href="/docs/">a</a></p>',
++            extensions=[ExternalLinksExtension()]
++        )

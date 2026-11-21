@@ -1,0 +1,49 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..1d8fd7c 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -16,6 +16,8 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ### Fixed
+ 
++* Do not create a `:` attribute from an empty attribute list (`{: }`).
++
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+   `<ssh://example.org>` (#1244).
+ * Fix quadratic-time id generation in the `toc` extension when many headers
+diff --git a/markdown/extensions/attr_list.py b/markdown/extensions/attr_list.py
+index 060e476..356bde9 100644
+--- a/markdown/extensions/attr_list.py
++++ b/markdown/extensions/attr_list.py
+@@ -113,7 +113,7 @@ def sanitize_name(name: str) -> str:
+ 
+ class AttrListTreeprocessor(Treeprocessor):
+ 
+-    BASE_RE = r'\{\:?[ ]*([^\}\n ][^\n]*)\}'
++    BASE_RE = r'\{\:?[ ]*([^\}\n :][^\n]*)\}'
+     HEADER_RE = re.compile(r'[ ]+{}[ ]*$'.format(BASE_RE))
+     BLOCK_RE = re.compile(r'\n[ ]*{}[ ]*$'.format(BASE_RE))
+     INLINE_RE = re.compile(r'^{}'.format(BASE_RE))
+diff --git a/tests/test_syntax/extensions/test_attr_list.py b/tests/test_syntax/extensions/test_attr_list.py
+index 73c7796..faad7bf 100644
+--- a/tests/test_syntax/extensions/test_attr_list.py
++++ b/tests/test_syntax/extensions/test_attr_list.py
+@@ -301,3 +301,18 @@ class TestAttrListValuelessAttributes(TestCase):
+             'Key without *value*{ foo= }',
+             '<p>Key without <em foo>value</em></p>'
+         )
++
++
++class TestEmptyAttrList(TestCase):
++
++    def test_empty_list_has_no_colon_attribute(self):
++        html = self.md_convert('# Title {: }')
++        self.assertNotIn(' :>', html)
++
++    def test_empty_list_block_has_no_colon_attribute(self):
++        html = self.md_convert('Some paragraph\n{:}')
++        self.assertNotIn(' :>', html)
++
++    def md_convert(self, src):
++        import markdown
++        return markdown.markdown(src, extensions=['attr_list'])

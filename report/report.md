@@ -28,7 +28,8 @@ YAML (ADR-002). Each round has three jobs with separate permissions:
 
 * **release** (no model) applies the patch, pushes as the GitHub App `autose-dev-avadiii` and opens
   the PR (`pr.md`). It then waits for the fork's CI, which is the stage-5 check.
-* **review** runs on a fresh VM with the harness checked out from `main`. An Opus reviewer sees only
+* **review** runs on a fresh VM with the harness checked out from `main`. The reviewer (Opus in all
+  recorded runs; Sonnet by default after E2, ADR-012) sees only
   the issue, the diff and the PR-head checkout. It must run its own checks and return a schema'd
   verdict, which `review.py` validates, posts as `github-actions[bot]` and routes to the earliest
   stage that a blocking finding names (ADR-008).
@@ -55,12 +56,13 @@ Views: component, stage map and a sequence view of real run
 | 003 | D3 hand-offs | whole artifacts, need-to-know; tester at base commit | Accepted |
 | 004 | D4 state | artifacts + branch + sticky comment; resume on re-run | Accepted |
 | 005 | D5 tools/rights | built-in tools per role, guard hook, no token in agents, per-job scopes | Accepted |
-| 006 | D6 models | Sonnet builders, Opus reviewer, Haiku judge | Accepted (tested by E2) |
+| 006 | D6 models | Sonnet builders, Opus reviewer, Haiku judge | **Superseded in part by 012** |
 | 007 | D7 checks | deterministic checks; LLM judge may fail stage 1 | **Superseded in part by 011** |
 | 008 | D8 review | reviewer isolated by job, VM, identity, model, input; evidence to approve | Accepted (tested by E1) |
 | 009 | D9 safety | every loop bounded in code; untrusted text as data | Accepted |
 | 010 | D10 triggers | label / `/autose` by writers; one run per issue | Accepted (amended, PR #14) |
-| 011 | D7 checks | judge verdicts sticky per AC text | Accepted |
+| 011 | D7 checks | judge verdicts sticky per AC text (after run R4) | Accepted |
+| 012 | D6 models | Sonnet reviewer by default, Opus per run (after E2) | Accepted |
 
 **Top 3 decisions.**
 
@@ -88,7 +90,7 @@ by owner) are bounded in code, not by the model's judgement.
 on attempt 0 and rejected the same, unchanged text on attempt 1. The single retry ran out and the
 run stopped on a sound spec. ADR-007 had treated one stochastic sample as a deterministic gate.
 ADR-011 caches each verdict per AC text, so a retry is judged only on what changed. ADR-007 is kept
-and marked superseded.
+and marked superseded. Likewise, E2 superseded ADR-006's reviewer choice with ADR-012 (§3).
 
 ## 3. Decision experiments
 

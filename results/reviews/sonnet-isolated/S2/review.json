@@ -1,0 +1,52 @@
+{
+  "verdict": "request_changes",
+  "summary": "The link URL is built from the label instead of the target. `[[Getting Started|read the guide]]` links to /read_the_guide/, not /Getting_Started/. This is the opposite of what the issue asks for. The PR's tests only check the visible text, so they pass anyway.",
+  "own_checks": [
+    {
+      "check": "[[Getting Started|read the guide]] has the same href as [[Getting Started]] and shows the label",
+      "command": "python -c \"import markdown; print(markdown.markdown('[[Getting Started|read the guide]]', extensions=['wikilinks']))\"",
+      "result": "fail",
+      "output_excerpt": "<a class=\"wikilink\" href=\"/read_the_guide/\">read the guide</a> (expected href=\"/Getting_Started/\")"
+    },
+    {
+      "check": "base_url, end_url and html_class apply to the target, not the label",
+      "command": "python -c \"import markdown; print(markdown.markdown('[[A b|c]]', extensions=['wikilinks'], extension_configs={'wikilinks':{'base_url':'/w/','end_url':'.html','html_class':'x'}}))\"",
+      "result": "fail",
+      "output_excerpt": "<a class=\"x\" href=\"/w/c.html\">c</a> (expected the href to be /w/A_b.html)"
+    },
+    {
+      "check": "Existing test suite still passes",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1168 tests ... OK (skipped=52)"
+    }
+  ],
+  "findings": [
+    {
+      "title": "URL is built from the label instead of the target",
+      "category": "implementation",
+      "blocking": true,
+      "file": "markdown/extensions/wikilinks.py",
+      "line": 78,
+      "evidence": "The PR sets `label = (m.group(2) or m.group(1)).strip()` and then calls `build_url(label, ...)`. The URL is therefore derived from the display text. With `[[Getting Started|read the guide]]` the output was `<a class=\"wikilink\" href=\"/read_the_guide/\">read the guide</a>`. The issue requires the same URL as `[[Getting Started]]`, which is `/Getting_Started/`. A custom `build_url` also receives the label instead of the target."
+    },
+    {
+      "title": "Tests only check the link text, not the href",
+      "category": "testing",
+      "blocking": true,
+      "file": "tests/test_extensions.py",
+      "line": 311,
+      "evidence": "Both new tests use `assertIn('>read the guide</a>', html)`. Neither checks the href, and neither covers `base_url`, `end_url`, a custom `build_url`, or a plain `[[Page]]`. They pass even though the URL is wrong."
+    }
+  ],
+  "notes": [
+    "The label regex `[\\w0-9_ -]+` rejects punctuation, so `[[A|b-c!]]` is left as literal text. Consider allowing wider label characters.",
+    "The changelog entry is present."
+  ],
+  "route": "implementation",
+  "model": "claude-sonnet-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 7
+}

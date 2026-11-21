@@ -1,0 +1,65 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..9605083 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -16,6 +16,9 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ### Fixed
+ 
++* Fenced code: boolean options such as `linenums` no longer raise `TypeError` when
++  `codehilite` is not enabled; they are left out of the output.
++
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+   `<ssh://example.org>` (#1244).
+ * Fix quadratic-time id generation in the `toc` extension when many headers
+diff --git a/markdown/extensions/fenced_code.py b/markdown/extensions/fenced_code.py
+index 6e2ed6b..c493f29 100644
+--- a/markdown/extensions/fenced_code.py
++++ b/markdown/extensions/fenced_code.py
+@@ -158,7 +158,9 @@ class FencedBlockPreprocessor(Preprocessor):
+                         # `use_pygments` key could be either set to `False` or not defined. It is omitted from output.
+                         kv_pairs = ''.join(
+                             f' {sanitize_name(k)}="{_escape_attrib_html(v)}"'
+-                            for k, v in config.items() if k != 'use_pygments'
++                            for k, v in config.items()
++                            # options for Pygments (`linenums`, ...) are only meaningful to codehilite
++                            if k != 'use_pygments' and isinstance(v, str)
+                         )
+                     code = self._escape(m.group('code'))
+                     code = f'<pre{id_attr}{class_attr}><code{lang_attr}{kv_pairs}>{code}</code></pre>'
+diff --git a/tests/test_syntax/extensions/test_fenced_code.py b/tests/test_syntax/extensions/test_fenced_code.py
+index cbe101d..abf0675 100644
+--- a/tests/test_syntax/extensions/test_fenced_code.py
++++ b/tests/test_syntax/extensions/test_fenced_code.py
+@@ -456,6 +456,31 @@ class TestFencedCode(TestCase):
+         )
+ 
+ 
++class TestFencedCodeBoolOptionsWithoutCodehilite(TestCase):
++
++    def testBareBoolOption(self):
++        self.assertMarkdownRenders(
++            '``` { .python linenums }\nprint(1)\n```',
++            '<pre><code class="language-python">print(1)\n</code></pre>',
++            extensions=['fenced_code', 'attr_list']
++        )
++
++    def testExplicitBoolOptions(self):
++        for attrs in ('linenums="true"', 'guess_lang', 'noclasses', 'use_pygments="false"'):
++            self.assertMarkdownRenders(
++                '``` { .python %s }\nx\n```' % attrs,
++                '<pre><code class="language-python">x\n</code></pre>',
++                extensions=['fenced_code', 'attr_list']
++            )
++
++    def testOtherAttributesKept(self):
++        self.assertMarkdownRenders(
++            '``` { .python data-x="1" linenums }\nx\n```',
++            '<pre><code class="language-python" data-x="1">x\n</code></pre>',
++            extensions=['fenced_code', 'attr_list']
++        )
++
++
+ class TestFencedCodeWithCodehilite(TestCase):
+ 
+     def setUp(self):

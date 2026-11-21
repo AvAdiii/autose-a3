@@ -1,0 +1,48 @@
+{
+  "verdict": "approve",
+  "summary": "The fix is correct and minimal. With fenced_code and attr_list but no codehilite, non-string Pygments options such as linenums are now left out of the output. Other attributes still render. The full suite passes.",
+  "own_checks": [
+    {
+      "check": "The issue's example no longer crashes and renders a plain code block",
+      "command": "markdown.markdown('``` { .python linenums }\\nx\\n```', extensions=['fenced_code','attr_list'])",
+      "result": "pass",
+      "output_excerpt": "<pre><code class=\"language-python\">x\n</code></pre>"
+    },
+    {
+      "check": "Other attributes are kept alongside bool options (data-x with linenums=\"true\")",
+      "command": "same call with { .python data-x=\"1\" linenums=\"true\" }",
+      "result": "pass",
+      "output_excerpt": "<code class=\"language-python\" data-x=\"1\">"
+    },
+    {
+      "check": "hl_lines, both inside attrs and in the legacy form outside them, does not crash without codehilite",
+      "command": "two probes: { .python hl_lines=\"1\" } and ```python hl_lines=\"1 2\"",
+      "result": "pass",
+      "output_excerpt": "<pre><code class=\"language-python\">x</code></pre> for both"
+    },
+    {
+      "check": "Valueless non-bool attributes and a string value of \"0\" are still output, so existing behaviour is unchanged",
+      "command": "probes with data-n=\"0\" title=\"a\" and a bare data-n",
+      "result": "pass",
+      "output_excerpt": "data-n=\"0\" title=\"a\"; bare data-n renders data-n=\"data-n\""
+    },
+    {
+      "check": "Full test suite",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1169 tests ... OK (skipped=52)"
+    }
+  ],
+  "findings": [],
+  "notes": [
+    "The isinstance(v, str) filter also drops the list value of hl_lines without codehilite. Before the change this would have crashed, so dropping it is consistent with the fix.",
+    "The changelog entry has no issue number. The existing entries do.",
+    "The new tests cover the bare flag, explicit bool values, use_pygments=\"false\" and a mix with another attribute. They do not cover hl_lines without codehilite."
+  ],
+  "route": "",
+  "model": "claude-sonnet-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 9
+}

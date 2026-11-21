@@ -38,7 +38,7 @@ flowchart TB
       RELPY["release.py<br/>apply diff.patch, push branch,<br/>open/update PR, wait for CI"]
     end
     subgraph REV["review job · contents:read, pull-requests:write, issues:write · fresh runner"]
-      RVA["Reviewer agent<br/>Opus · Read Grep Glob Bash<br/>no Edit/Write, no token in env"]
+      RVA["Reviewer agent<br/>Sonnet (Opus on request) · Read Grep Glob Bash<br/>no Edit/Write, no token in env"]
       POST["review.py (after the agent exits)<br/>schema check, post PR review,<br/>route: approve | design | implementation | ..."]
     end
   end
@@ -77,7 +77,7 @@ flowchart TB
 | `checks.py` | deterministic | build job | Python AST, `compileall`, `flake8`, `unittest` | none |
 | `guard.py` | PreToolUse hook | every agent | denies tool calls outside the role's policy and logs them | none |
 | `release.py` | deterministic | release job | short-lived GitHub App token (`autose-dev-avadiii`: contents + pull requests write, **no workflows permission**) | `git push`, `gh pr create/edit`, `gh pr checks` |
-| Reviewer | Claude Code headless, `claude-opus-5-5`, `--json-schema` | review job (fresh VM) | `Read Grep Glob Bash`; no Edit/Write; environment has no GitHub token; `persist-credentials: false` | none |
+| Reviewer | Claude Code headless, `claude-sonnet-5-5` by default (ADR-012; Opus per run via `reviewer_model`; all recorded runs used Opus), `--json-schema` | review job (fresh VM) | `Read Grep Glob Bash`; no Edit/Write; environment has no GitHub token; `persist-credentials: false` | none |
 | `review.py` (posting half) | deterministic | review job | `GITHUB_TOKEN` (pull-requests: write, issues: write for the status comment), used only after the reviewer process has exited | validates the verdict, posts the PR review, emits the route |
 
 ## Information each agent receives
