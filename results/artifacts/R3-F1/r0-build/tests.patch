@@ -1,0 +1,84 @@
+diff --git a/tests/test_syntax/extensions/test_wikilinks.py b/tests/test_syntax/extensions/test_wikilinks.py
+new file mode 100644
+index 0000000..efac316
+--- /dev/null
++++ b/tests/test_syntax/extensions/test_wikilinks.py
+@@ -0,0 +1,78 @@
++"""
++Tests for the `wikilinks` extension: `[[Target|Label]]` display labels.
++"""
++
++from markdown.test_tools import TestCase
++from markdown import markdown
++from markdown.extensions.wikilinks import WikiLinkExtension
++
++LABELLED = '<p><a class="wikilink" href="/Getting_Started/">read the guide</a></p>'
++
++
++class TestWikiLinks(TestCase):
++
++    default_kwargs = {'extensions': ['wikilinks']}
++
++    def test_ac_fr_001_1_label(self):
++        self.assertMarkdownRenders('[[Getting Started|read the guide]]', LABELLED)
++
++    def test_ac_fr_001_2_same_href(self):
++        import re
++        a = markdown('[[Getting Started|read the guide]]', extensions=['wikilinks'])
++        b = markdown('[[Getting Started]]', extensions=['wikilinks'])
++        href_a = re.search(r'href="([^"]*)"', a)
++        href_b = re.search(r'href="([^"]*)"', b)
++        self.assertIsNotNone(href_a)
++        self.assertIsNotNone(href_b)
++        self.assertEqual(href_a.group(1), href_b.group(1))
++
++    def test_ac_fr_001_3_no_syntax_left(self):
++        out = markdown('[[Getting Started|read the guide]]', extensions=['wikilinks'])
++        for bad in ('[[', ']]', '|'):
++            self.assertNotIn(bad, out)
++
++    def test_ac_fr_002_1_spaces_around_pipe(self):
++        self.assertMarkdownRenders('[[Getting Started | read the guide]]', LABELLED)
++
++    def test_ac_fr_002_2_label_padding(self):
++        a = markdown('[[Getting Started|  read the guide  ]]', extensions=['wikilinks'])
++        b = markdown('[[Getting Started|read the guide]]', extensions=['wikilinks'])
++        self.assertEqual(a, b)
++        self.assertEqual(a, LABELLED)
++
++    def test_ac_fr_003_1_options(self):
++        self.assertMarkdownRenders(
++            '[[Getting Started|read the guide]]',
++            '<p><a class="myclass" href="/wiki/Getting_Started.html">read the guide</a></p>',
++            extensions=[WikiLinkExtension(base_url='/wiki/', end_url='.html', html_class='myclass')]
++        )
++
++    def test_ac_fr_003_2_empty_class(self):
++        self.assertMarkdownRenders(
++            '[[Getting Started|read the guide]]',
++            '<p><a href="/Getting_Started/">read the guide</a></p>',
++            extensions=[WikiLinkExtension(html_class='')]
++        )
++
++    def test_ac_fr_003_3_custom_build_url(self):
++        calls = []
++
++        def fn(label, base, end):
++            calls.append(label)
++            return '/custom/'
++
++        self.assertMarkdownRenders(
++            '[[Getting Started|read the guide]]',
++            '<p><a class="wikilink" href="/custom/">read the guide</a></p>',
++            extensions=[WikiLinkExtension(build_url=fn)]
++        )
++        self.assertEqual(calls, ['Getting Started'])
++
++    def test_ac_fr_004_1_unlabelled(self):
++        self.assertMarkdownRenders(
++            '[[Getting Started]]',
++            '<p><a class="wikilink" href="/Getting_Started/">Getting Started</a></p>'
++        )
++
++    def test_ac_fr_004_2_blank_wikilink(self):
++        self.assertMarkdownRenders('[[ ]]', '<p></p>')

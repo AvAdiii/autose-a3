@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "reasons": [],
+  "rows": [
+    {
+      "file": "markdown/extensions/attr_list.py",
+      "symbol": "AttrListTreeprocessor.BASE_RE",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-002-3",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-003-3",
+        "AC-FR-004-1",
+        "AC-FR-004-2"
+      ]
+    },
+    {
+      "file": "tests/test_syntax/extensions/test_attr_list.py",
+      "symbol": "new test methods in TestAttrList",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-002-3",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-003-3",
+        "AC-FR-004-1",
+        "AC-FR-004-2"
+      ]
+    },
+    {
+      "file": "docs/changelog.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    }
+  ]
+}

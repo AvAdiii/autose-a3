@@ -1,0 +1,298 @@
+{
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAlternateTOCMarker": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAnchorLink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAnchorLinkWithCustomClass": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAnchorLinkWithCustomClasses": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAnchorLinkWithDoubleInlineCode": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAnchorLinkWithSingleInlineCode": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testAutoLinkEmail": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testCustomLabelAttributeWithAngleBracket": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testDisabledTOCMarker": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testHTMLAttributeWithAngleBracket": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testHeaderInlineMarkup": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testHeadingRemoveFootnoteRef": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testHtmlEntitiesInTOC": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testHtmlSpecialCharsInTOC": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testManyHeadersWithSameText": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testMaxLevel": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testMaxLevelwithBaseLevel": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testMinMaxLevel": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testMinMaxLevelwithAnchorLink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testMinMaxLevelwithBaseLevel": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testMinMaxLevelwithPermalink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testNl2brCompatibility": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testNoTOCMarker": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithCustomClass": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithCustomClasses": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithCustomTitle": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithDoubleInlineCode": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithEmptyText": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithEmptyTitle": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithExtendedLatinInID": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithSingleInlineCode": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithUnicodeInID": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testPermalinkWithUnicodeTitle": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testRawHtmlInTOC": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCBaseLevel": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCInlineMarkupPermalink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCInlineMarkupPermalinkLeading": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCMarker": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCPermalink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCPermalinkLeading": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCReset": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCTitle": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCUniqueFunc": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCUniqueFuncCounters": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCWithCustomClass": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCWithCustomClasses": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCWithCustomTitleClass": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTOCWithEmptyTitleClass": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTocInHeaders": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testTocWithAttrList": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.testUniqueIds": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.test_escaped_char_in_attr_list": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.test_escaped_char_in_id": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOC.test_escaped_code": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_1_hrefs": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_2_md_toc": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_3_multiple_classes": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_002_1_heading_keeps_id": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_002_2_unique_ids": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_003_1_toc_tokens": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_003_2_no_contents_token": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testDontStripCloseBracket": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testDontStripHTMLEntities": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testDontStripOpenBracket": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripCollapseWhitespace": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripComment": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripCommentInElement": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripCommentWithInnerTags": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripElement": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripElementWithNewlines": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripElementWithQuotedBrackets": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripEmptyElement": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_toc.testStripTags.testStripOpenElement": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}

@@ -1,0 +1,26 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..fa7493c 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -16,6 +16,8 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ### Fixed
+ 
++* Fix an empty attribute list (`{:}` or `{: }`) in the `attr_list` extension
++  producing an invalid `:` attribute; it now means "no attributes" (#2).
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+   `<ssh://example.org>` (#1244).
+ * Fix quadratic-time id generation in the `toc` extension when many headers
+diff --git a/markdown/extensions/attr_list.py b/markdown/extensions/attr_list.py
+index 060e476..7fc857e 100644
+--- a/markdown/extensions/attr_list.py
++++ b/markdown/extensions/attr_list.py
+@@ -113,7 +113,7 @@ def sanitize_name(name: str) -> str:
+ 
+ class AttrListTreeprocessor(Treeprocessor):
+ 
+-    BASE_RE = r'\{\:?[ ]*([^\}\n ][^\n]*)\}'
++    BASE_RE = r'\{(?:\:[ ]*(?=\})|\:?[ ]*(?=[^\}\n ]))([^\n]*)\}'
+     HEADER_RE = re.compile(r'[ ]+{}[ ]*$'.format(BASE_RE))
+     BLOCK_RE = re.compile(r'\n[ ]*{}[ ]*$'.format(BASE_RE))
+     INLINE_RE = re.compile(r'^{}'.format(BASE_RE))

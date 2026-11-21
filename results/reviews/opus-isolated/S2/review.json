@@ -1,0 +1,65 @@
+{
+  "verdict": "request_changes",
+  "summary": "The regex now matches `[[Target|Label]]` and the label is shown as link text. But the PR builds the URL from the label, not the target. `[[Getting Started|read the guide]]` links to `/read_the_guide/` when it should link to `/Getting_Started/`. That breaks the issue's main requirement: same URL as `[[Getting Started]]`, only the visible text changes. A custom `build_url` also receives the label instead of the target. The PR's tests only check the visible text, so they don't catch this.",
+  "own_checks": [
+    {
+      "check": "[[Getting Started|read the guide]] links to /Getting_Started/ with text 'read the guide'",
+      "command": "python -c \"import markdown; print(markdown.markdown('[[Getting Started|read the guide]]', extensions=['wikilinks']))\"",
+      "result": "fail",
+      "output_excerpt": "<p><a class=\"wikilink\" href=\"/read_the_guide/\">read the guide</a></p>"
+    },
+    {
+      "check": "Whitespace around the pipe is ignored and the URL is still built from the target",
+      "command": "python -c \"... '[[Getting Started | read the guide]]' ...\"",
+      "result": "fail",
+      "output_excerpt": "<p><a class=\"wikilink\" href=\"/read_the_guide/\">read the guide</a></p>"
+    },
+    {
+      "check": "A custom build_url, base_url, end_url and html_class get the target, not the label",
+      "command": "python -c \"... WikiLinkExtension(base_url='/wiki/', end_url='.html', html_class='wl', build_url=lambda l,b,e: 'X:'+l) ...\"",
+      "result": "fail",
+      "output_excerpt": "<p><a class=\"wl\" href=\"X:read the guide\">read the guide</a></p>"
+    },
+    {
+      "check": "[[Page]] without a pipe is unchanged",
+      "command": "python -c \"... '[[Page]]', '[[Getting Started]]' ...\"",
+      "result": "pass",
+      "output_excerpt": "<p><a class=\"wikilink\" href=\"/Page/\">Page</a></p> / href=\"/Getting_Started/\""
+    },
+    {
+      "check": "Full test suite passes",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1168 tests in 1.188s OK (skipped=52)"
+    }
+  ],
+  "findings": [
+    {
+      "title": "The URL is built from the display label instead of the target page",
+      "category": "implementation",
+      "blocking": true,
+      "file": "markdown/extensions/wikilinks.py",
+      "line": 78,
+      "evidence": "`label = (m.group(2) or m.group(1)).strip()` is then passed to `self.config['build_url'](label, base_url, end_url)`. Running markdown.markdown('[[Getting Started|read the guide]]', extensions=['wikilinks']) gives href=\"/read_the_guide/\" but should give \"/Getting_Started/\". The target (group 1) has to go to build_url, and only a.text should use group 2."
+    },
+    {
+      "title": "The tests never check href, so they miss the wrong URL",
+      "category": "testing",
+      "blocking": true,
+      "file": "tests/test_extensions.py",
+      "line": 310,
+      "evidence": "Both tests only do assertIn('>read the guide</a>', html). They pass even though the href is wrong. They should compare the full output, e.g. '<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>', and also cover base_url/end_url/html_class/build_url with a label."
+    }
+  ],
+  "notes": [
+    "The changelog entry is present.",
+    "docs/extensions/wikilinks.md is not updated to describe the new `[[Target|Label]]` syntax. This is worth adding but does not block the PR.",
+    "The label character class `[\\w0-9_ -]` is narrow: labels with punctuation such as `[[Page|Read this!]]` won't match. This does not block the PR, but consider allowing a wider label set."
+  ],
+  "route": "implementation",
+  "model": "claude-opus-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 7
+}

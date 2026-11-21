@@ -1,0 +1,6 @@
+cell,seeded,pr,run_id,model,variant,verdict,verdict_correct,defect_detected,matched_finding,route,routing_correct,false_rejection,blocking_findings,probes_executed,validation_notes,output_tokens,input_tokens,cache_read_tokens,turns,duration_s
+opus-isolated,S1,6,44890809280,claude-opus-5-5,isolated,request_changes,1,1,[implementation] Empty attribute list is left in the output as literal text instead of being removed :: 'left in the output as literal text instead of being removed ',implementation,1,0,2,6,,2868,6,31901,5,26.8
+opus-isolated,S2,7,44890825281,claude-opus-5-5,isolated,request_changes,1,1,[implementation] The URL is built from the display label instead of the target page :: 'URL is built from the display label',implementation,1,0,2,5,,1880,4,19280,3,17.9
+opus-isolated,S3,8,44890841473,claude-opus-5-5,isolated,request_changes,1,1,[design] md.toc_tokens and md.toc still include no-toc headings :: 'toc_tokens',design,1,0,3,7,,2727,4,19354,3,23.9
+opus-isolated,S4,9,44890851656,claude-opus-5-5,isolated,approve,1,,,,,0,0,7,,4427,16,117678,9,43.8
+opus-isolated,S5,10,44890867863,claude-opus-5-5,isolated,request_changes,1,1,"[implementation] No entry point for external_links, so extensions=['external_links'] fails :: 'entry point'",implementation,1,0,2,7,,2527,6,32882,4,24.2

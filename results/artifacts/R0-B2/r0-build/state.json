@@ -1,0 +1,59 @@
+{
+  "issue": 2,
+  "round": 0,
+  "start": "requirements",
+  "events": [],
+  "stages": {
+    "requirements": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "design": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "implementation": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": [],
+      "files": [
+        "docs/changelog.md",
+        "markdown/extensions/attr_list.py"
+      ]
+    },
+    "testing": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 0,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "ready",
+    "reason": "stages 1-4 passed"
+  },
+  "base": "66a9ee4c6b696d4d55b493edb850954c816fc8b4",
+  "ready_acs": [
+    "AC-FR-001-1",
+    "AC-FR-001-2",
+    "AC-FR-002-1",
+    "AC-FR-002-2",
+    "AC-FR-003-1",
+    "AC-FR-003-2",
+    "AC-FR-004-1",
+    "AC-FR-004-2",
+    "AC-FR-004-3",
+    "AC-FR-005-1"
+  ]
+}

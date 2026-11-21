@@ -1,0 +1,119 @@
+{
+  "ok": true,
+  "reasons": [],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-003",
+    "FR-004"
+  ],
+  "blocked": [
+    {
+      "id": "FR-002",
+      "status": "BLOCKED (B-Q: Q-001; B-MET: AC-FR-002-1; B-SRC: FR-002)"
+    }
+  ],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given the extensions `fenced_code` and `attr_list` and the source \"``` { .python linenums }\\nprint(1)\\n```\", when the source is converted, then no exception is raised and the output contains `<pre><code class=\"language-python\"` and `print(1)`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given the extensions `fenced_code` and `attr_list` and the source \"``` { .python linenums=\\\"true\\\" }\\nprint(1)\\n```\", when the source is converted, then no exception is raised and the output contains `<pre><code class=\"language-python\"` and `print(1)`."
+    },
+    {
+      "id": "AC-FR-001-3",
+      "req": "FR-001",
+      "text": "Given the extensions `fenced_code` and `attr_list` and each of these six sources: \"``` { .python guess_lang }\\nprint(1)\\n```\", \"``` { .python guess_lang=\\\"true\\\" }\\nprint(1)\\n```\", \"``` { .python guess_lang=\\\"false\\\" }\\nprint(1)\\n```\", \"``` { .python noclasses }\\nprint(1)\\n```\", \"``` { .python noclasses=\\\"true\\\" }\\nprint(1)\\n```\", \"``` { .python noclasses=\\\"false\\\" }\\nprint(1)\\n```\", when each source is converted, then no exception is raised and the output contains `<pre><code class=\"language-python\"` and `print(1)`."
+    },
+    {
+      "id": "AC-FR-001-4",
+      "req": "FR-001",
+      "text": "Given the extensions `fenced_code` and `attr_list` and the source \"``` { .python }\\nprint(1)\\n```\", when the source is converted, then the output is exactly `<pre><code class=\"language-python\">print(1)\\n</code></pre>`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given the extensions `fenced_code` and `attr_list` and the source \"``` { .python data-x=\\\"1\\\" }\\nprint(1)\\n```\", when the source is converted, then the output is exactly `<pre><code class=\"language-python\" data-x=\"1\">print(1)\\n</code></pre>`."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given the extensions `fenced_code` and `attr_list` and the source \"``` { data-test=\\\"{}\\\" }\\n# Some python code\\n```\", when the source is converted, then the output is exactly `<pre><code data-test=\"{}\"># Some python code\\n</code></pre>`."
+    },
+    {
+      "id": "AC-FR-004-1",
+      "req": "FR-004",
+      "text": "Given the extensions `fenced_code`, `attr_list` and `codehilite`, and the source \"``` { .python linenums=\\\"true\\\" }\\nprint(1)\\n```\", when the source is converted, then no exception is raised and the output contains `codehilite`."
+    },
+    {
+      "id": "AC-FR-004-2",
+      "req": "FR-004",
+      "text": "Given the extensions `fenced_code`, `attr_list` and `codehilite`, and the source \"``` { .python linenums=True }\\n# Some python code\\n```\", when the source is converted, then no exception is raised and the output contains `codehilite` and `# Some python code`."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-003",
+    "FR-004"
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "What happens to the attribute in the output?",
+      "question": "When `linenums`, `guess_lang` or `noclasses` is on a fenced block and `codehilite` is not enabled, what shall the output contain for that attribute?",
+      "tier": "P2",
+      "options": "(a) omit the attribute: `<pre><code class=\"language-python\">print(1)\\n</code></pre>` (b) keep it with the value as written, for example `linenums=\"true\"` (c) keep it with a normalised value, for example `linenums=\"linenums\"` for a valueless flag (d) Other",
+      "status": "open",
+      "blocks": "FR-002, GLO-001"
+    }
+  ],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "Gives the extensions, the exact source, the action (convert), and observable outcomes (no exception, specific substrings in the output)."
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "Gives the extensions, the exact quoted-value source, the action, and observable outcomes (no exception, specific substrings in the output)."
+      },
+      {
+        "id": "AC-FR-001-3",
+        "testable": true,
+        "reason": "Enumerates all six exact sources, the action, and the same concrete observable outcomes (no exception, specific substrings), so each case is checkable."
+      },
+      {
+        "id": "AC-FR-001-4",
+        "testable": true,
+        "reason": "Gives the exact source and the exact expected output string, so an equality assertion can be written."
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "Gives the exact source and the exact expected output string including the data-x attribute."
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "Gives the exact source and the exact expected output string with the data-test attribute and unhighlighted code body."
+      },
+      {
+        "id": "AC-FR-004-1",
+        "testable": true,
+        "reason": "Gives the extensions including codehilite, the exact source, and a concrete observable (no exception, output contains 'codehilite'); the assertion is weak but fully specified."
+      },
+      {
+        "id": "AC-FR-004-2",
+        "testable": true,
+        "reason": "Gives the extensions, the exact source, and concrete observable substrings ('codehilite' and '# Some python code') plus no-exception; all are checkable without further decisions."
+      }
+    ]
+  }
+}

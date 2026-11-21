@@ -1,0 +1,143 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..70f07e4 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -14,6 +14,11 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ## [Unreleased]
+ 
++### Added
++
++* Add the `external_links` extension, which adds `target="_blank"` and
++  `rel="noopener noreferrer"` to links starting with `http://` or `https://`.
++
+ ### Fixed
+ 
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+diff --git a/docs/extensions/external_links.md b/docs/extensions/external_links.md
+new file mode 100644
+index 0000000..2b545d7
+--- /dev/null
++++ b/docs/extensions/external_links.md
+@@ -0,0 +1,27 @@
++---
++title: External Links Extension
++---
++
++# External Links
++
++## Summary
++
++The External Links extension opens links to other websites in a new browsing
++context.
++
++## Syntax
++
++A link is external when its `href` starts with `http://` or `https://`. Every
++external `<a>` element, including automatic links such as
++`<https://example.com>`, gets `target="_blank"` and `rel="noopener noreferrer"`.
++Relative links, `#anchors` and `mailto:` links, as well as images, are not
++changed.
++
++## Usage
++
++```python
++import markdown
++html = markdown.markdown(text, extensions=['external_links'])
++```
++
++The extension has no configuration options.
+diff --git a/docs/extensions/index.md b/docs/extensions/index.md
+index 1798023..a90a0e1 100644
+--- a/docs/extensions/index.md
++++ b/docs/extensions/index.md
+@@ -50,6 +50,7 @@ Extension                          | Entry Point    | Dot Notation
+ &nbsp; &nbsp; [Tables]             | `tables`       | `markdown.extensions.tables`
+ [Admonition]                       | `admonition`   | `markdown.extensions.admonition`
+ [CodeHilite]                       | `codehilite`   | `markdown.extensions.codehilite`
++[External Links]                   | `external_links` | `markdown.extensions.external_links`
+ [Legacy Attributes]                | `legacy_attrs`  | `markdown.extensions.legacy_attrs`
+ [Legacy Emphasis]                  | `legacy_em`    | `markdown.extensions.legacy_em`
+ [Meta-Data]                        | `meta`         | `markdown.extensions.meta`
+@@ -68,6 +69,7 @@ Extension                          | Entry Point    | Dot Notation
+ [Tables]: tables.md
+ [Admonition]: admonition.md
+ [CodeHilite]: code_hilite.md
++[External Links]: external_links.md
+ [Legacy Attributes]: legacy_attrs.md
+ [Legacy Emphasis]: legacy_em.md
+ [Meta-Data]: meta_data.md
+diff --git a/docs/reference/markdown.extensions.external_links.md b/docs/reference/markdown.extensions.external_links.md
+new file mode 100644
+index 0000000..15929e1
+--- /dev/null
++++ b/docs/reference/markdown.extensions.external_links.md
+@@ -0,0 +1,3 @@
++::: markdown.extensions.external_links
++    options:
++      inherited_members: false
+diff --git a/markdown/extensions/external_links.py b/markdown/extensions/external_links.py
+new file mode 100644
+index 0000000..54c9d79
+--- /dev/null
++++ b/markdown/extensions/external_links.py
+@@ -0,0 +1,47 @@
++# External Links Extension for Python-Markdown
++# ============================================
++
++# Open external links in a new browsing context.
++
++# License: [BSD](https://opensource.org/licenses/bsd-license.php)
++
++"""
++Add `target="_blank"` and `rel="noopener noreferrer"` to external links.
++"""
++
++from __future__ import annotations
++
++from . import Extension
++from ..treeprocessors import Treeprocessor
++
++
++class ExternalLinksTreeprocessor(Treeprocessor):
++    """ Mark every `<a>` element whose `href` starts with `http://` or `https://`. """
++
++    def run(self, root):
++        for el in root.iter('a'):
++            href = el.get('href', '')
++            if href.startswith(('http://', 'https://')):
++                el.set('target', '_blank')
++                el.set('rel', 'noopener noreferrer')
++
++
++class ExternalLinksExtension(Extension):
++    """ Add external links extension to Markdown class. """
++
++    def extendMarkdown(self, md):
++        """ Register the treeprocessor.
++
++        | Class Instance | Registry | Name | Priority |
++        | -------------- | -------- | ---- | :------: |
++        | `ExternalLinksTreeprocessor` | [`treeprocessors`][markdown.Markdown.treeprocessors] | `external_links` | `15` |
++
++        """
++        # flake8: noqa: E501 25
++        md.registerExtension(self)
++        md.treeprocessors.register(ExternalLinksTreeprocessor(md), 'external_links', 15)
++
++
++def makeExtension(**kwargs):  # pragma: no cover
++    """ Return an instance of the `ExternalLinksExtension` """
++    return ExternalLinksExtension(**kwargs)
+diff --git a/pyproject.toml b/pyproject.toml
+index 5464a00..3f7ab72 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -79,6 +79,7 @@ def_list = 'markdown.extensions.def_list:DefListExtension'
+ extra = 'markdown.extensions.extra:ExtraExtension'
+ fenced_code = 'markdown.extensions.fenced_code:FencedCodeExtension'
+ footnotes = 'markdown.extensions.footnotes:FootnoteExtension'
++external_links = 'markdown.extensions.external_links:ExternalLinksExtension'
+ md_in_html = 'markdown.extensions.md_in_html:MarkdownInHtmlExtension'
+ meta = 'markdown.extensions.meta:MetaExtension'
+ nl2br = 'markdown.extensions.nl2br:Nl2BrExtension'

@@ -1,0 +1,55 @@
+{
+  "own_checks": [
+    {
+      "check": "Issue example with toc+attr_list: TOC lists Guide, Install, Usage but not Contents",
+      "command": "python -c \"import markdown; md=markdown.Markdown(extensions=['toc','attr_list']); print(md.convert('# Guide\\n\\n## Contents {: .no-toc }\\n\\n[TOC]\\n\\n## Install\\n\\n## Usage'))\"",
+      "result": "pass",
+      "output_excerpt": "<li><a href=\"#guide\">Guide</a><ul><li><a href=\"#install\">Install</a></li><li><a href=\"#usage\">Usage</a></li> \u2014 no #contents link"
+    },
+    {
+      "check": "Excluded heading still rendered with id=\"contents\"",
+      "command": "same probe",
+      "result": "pass",
+      "output_excerpt": "<h2 class=\"no-toc\" id=\"contents\">Contents</h2>"
+    },
+    {
+      "check": "md.toc_tokens excludes the Contents heading",
+      "command": "same probe, print(md.toc_tokens)",
+      "result": "pass",
+      "output_excerpt": "[{'level': 1, 'id': 'guide', ... 'children': [{... 'id': 'install' ...}, {... 'id': 'usage' ...}]}]"
+    },
+    {
+      "check": "Edge case: a class that only looks similar (no-toc-x) is not excluded; a child under an excluded heading still appears in the TOC",
+      "command": "python -c \"... md.convert('# A\\n\\n## Skip {: .no-toc }\\n\\n### Child\\n\\n## B {: .no-toc-x }') ...\"",
+      "result": "pass",
+      "output_excerpt": "toc_tokens: A -> [Child(level 3), B(level 2)]; Skip absent"
+    },
+    {
+      "check": "With permalink=True, the excluded heading still gets its permalink and is missing from md.toc",
+      "command": "python -c \"... extension_configs={'toc':{'permalink':True}} ...\"",
+      "result": "pass",
+      "output_excerpt": "<h2 class=\"no-toc\" id=\"contents\">Contents<a class=\"headerlink\" href=\"#contents\" ...; toc only lists #x"
+    },
+    {
+      "check": "Full test suite passes",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1173 tests in 1.463s OK (skipped=52)"
+    }
+  ],
+  "findings": [],
+  "notes": [
+    "The extension docs (docs/extensions/toc.md) don't mention the `no-toc` class, which is the place users would look for it. Consider adding a short section next to the `data-toc-label` docs.",
+    "The class name is hard-coded. The issue says a configurable name is optional, so this is acceptable.",
+    "Without the code change, the new tests would fail: test_ac_fr_001_1_hrefs asserts that href=\"#contents\" is missing. I could not re-run them against the base code because git operations are blocked in this environment.",
+    "When a no-toc heading has children, they move up to the previous ancestor in the TOC (e.g. h3 Child appears under h1 A). This is reasonable but not documented."
+  ],
+  "summary": "The PR adds one condition to TocTreeprocessor: headings whose class list contains `no-toc` are left out of toc_tokens, and therefore out of md.toc and the [TOC] output. They still get their id and permalink. I ran the issue's example and two edge cases (a similar class name, an excluded heading with children), and all behaved correctly. The full suite passes and the changelog entry is present. The change stays inside the toc extension and doesn't violate ARCHITECTURE.md. The only gap is missing user docs in docs/extensions/toc.md, which doesn't block merging.",
+  "verdict": "approve",
+  "route": "",
+  "model": "claude-opus-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 19
+}

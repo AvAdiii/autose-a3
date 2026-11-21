@@ -1,0 +1,65 @@
+{
+  "pr": 18,
+  "url": "https://github.com/AvAdiii/markdown/pull/18",
+  "head": "6755d1319d76a87028da205c960b2ec0780b5dfc",
+  "ci_ok": false,
+  "detail": "failing checks: lint (checklinks) (failure) https://github.com/AvAdiii/markdown/actions/runs/44890691958/job/136805627065, lint (checkspelling) (failure) https://github.com/AvAdiii/markdown/actions/runs/44890691958/job/136805626878",
+  "checks": [
+    {
+      "name": "validate-release",
+      "conclusion": "skipped"
+    },
+    {
+      "name": "test (py313)",
+      "conclusion": "success"
+    },
+    {
+      "name": "test (py311)",
+      "conclusion": "success"
+    },
+    {
+      "name": "test (py315, 3.15)",
+      "conclusion": "success"
+    },
+    {
+      "name": "test (py312)",
+      "conclusion": "success"
+    },
+    {
+      "name": "lint (flake8)",
+      "conclusion": "success"
+    },
+    {
+      "name": "lint (checklinks)",
+      "conclusion": "failure"
+    },
+    {
+      "name": "test (py314)",
+      "conclusion": "success"
+    },
+    {
+      "name": "test (pypy311)",
+      "conclusion": "success"
+    },
+    {
+      "name": "lint (pep517check)",
+      "conclusion": "success"
+    },
+    {
+      "name": "test (pygments)",
+      "conclusion": "success"
+    },
+    {
+      "name": "lint (checkspelling)",
+      "conclusion": "failure"
+    },
+    {
+      "name": "validate-unreleased",
+      "conclusion": "success"
+    },
+    {
+      "name": "check-for-entry",
+      "conclusion": "success"
+    }
+  ]
+}

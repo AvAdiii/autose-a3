@@ -1,0 +1,54 @@
+{
+  "own_checks": [
+    {
+      "check": "The three inputs from the issue render without the ':' attribute",
+      "command": "python $TMPDIR/p.py (markdown.markdown on '# Title {: }', 'Some paragraph\\n{:}', '*hi*{: }')",
+      "result": "pass",
+      "output_excerpt": "'<h1>Title</h1>', '<p>Some paragraph</p>', '<p><em>hi</em></p>' (base: '<h1 :>', '<p :>', '<em :>')"
+    },
+    {
+      "check": "Other empty-list forms ({:}, {:   }, {:\\t}, list item, code span) also give no attribute",
+      "command": "python $TMPDIR/p.py",
+      "result": "pass",
+      "output_excerpt": "'# T {:\\t}' => '<h1>T</h1>'; '- item\\n{:}' => '<li>item</li>'; '`code`{:}' => '<code>code</code>'"
+    },
+    {
+      "check": "Non-empty lists still work (class, id, key=value, no-colon form {.a})",
+      "command": "python $TMPDIR/p.py; python -c probe for '# T {: #a .b k=v }'",
+      "result": "pass",
+      "output_excerpt": "<h1 class=\"b\" id=\"a\" k=\"v\">T</h1>; '# T {.a}' => '<h1 class=\"a\">T</h1>'"
+    },
+    {
+      "check": "Output is the same as base for every input except empty lists (compared the old regex with the new one on 24 inputs)",
+      "command": "python $TMPDIR/p.py old > old.txt; python $TMPDIR/p.py > new.txt; diff",
+      "result": "pass",
+      "output_excerpt": "Only differences: the ':' attribute is gone in the empty-list cases. '{}', '{ }', 'para {:}', '# T {:}}' are unchanged"
+    },
+    {
+      "check": "No slowdown from catastrophic backtracking on an unclosed list followed by a long run of spaces",
+      "command": "python -c \"markdown.markdown('*a*{:'+' '*20000, extensions=['attr_list'])\"",
+      "result": "pass",
+      "output_excerpt": "time 0.0046"
+    },
+    {
+      "check": "Full test suite and flake8 pass",
+      "command": "python -m unittest discover tests; python -m flake8 <changed files>",
+      "result": "pass",
+      "output_excerpt": "Ran 1177 tests ... OK (skipped=52); flake8 printed nothing"
+    }
+  ],
+  "findings": [],
+  "notes": [
+    "A greedy `[^\\n]*` capture in BASE_RE still swallows later text up to the last `}` on the line, e.g. `*hi*{:} text {braces}` -> `<em>hi</em>} text {braces`. The base commit does the same thing, apart from the `:` attribute, so this PR did not introduce it.",
+    "`{::}` and `{: : }` still produce `<h1 :>`. These are not empty lists, so they fall outside the issue.",
+    "The new tests fail on the base commit, which prints `<h1 :>` etc., so they do test the change. The `test_ac_fr_*` names are unlike the descriptive names used elsewhere in the file. This is cosmetic."
+  ],
+  "summary": "The PR changes attr_list's BASE_RE so that a list with only a colon and optional spaces, like `{:}` or `{: }`, matches with an empty capture. An empty capture produces no attributes. All three of the issue's examples now render correctly, and non-empty lists still work. I compared the old and new regexes on 24 inputs, and the only change is in empty-list cases. The full suite passes and flake8 is clean. The changelog entry is there, and the new tests fail without the fix.",
+  "verdict": "approve",
+  "route": "",
+  "model": "claude-opus-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 12
+}

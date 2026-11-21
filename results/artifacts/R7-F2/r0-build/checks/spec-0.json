@@ -1,0 +1,138 @@
+{
+  "ok": true,
+  "reasons": [],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003"
+  ],
+  "blocked": [
+    {
+      "id": "FR-004",
+      "status": "BLOCKED (B-SRC: Premises include SRC-002 only as context, the \"unchanged otherwise\" rule is an inference; confirm by Q-002)"
+    },
+    {
+      "id": "FR-005",
+      "status": "BLOCKED (B-SRC: SRC-007; B-MET: option name undefined; B-Q: Q-001)"
+    }
+  ],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given the text `# Guide\\n\\n## Contents {: .no-toc }\\n\\n[TOC]\\n\\n## Install\\n\\n## Usage` and extensions `toc` and `attr_list`, when it is converted, then the output contains `href=\"#guide\"`, `href=\"#install\"` and `href=\"#usage\"` and contains no `href=\"#contents\"`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given the same text, when it is converted, then `md.toc` contains no `>Contents<`."
+    },
+    {
+      "id": "AC-FR-001-3",
+      "req": "FR-001",
+      "text": "Given the text `## Contents {: .a .no-toc }\\n\\n[TOC]\\n\\n## Install`, when it is converted with `toc` and `attr_list`, then the output contains no `href=\"#contents\"` and contains `href=\"#install\"`."
+    },
+    {
+      "id": "AC-FR-002-1",
+      "req": "FR-002",
+      "text": "Given the text from AC-FR-001-1 with `toc` and `attr_list`, when it is converted, then the output contains `<h2` and `id=\"contents\"` within the same tag, and `>Contents</h2>`."
+    },
+    {
+      "id": "AC-FR-002-2",
+      "req": "FR-002",
+      "text": "Given the text `## Contents {: .no-toc }\\n\\n## Contents {: .no-toc }` with `toc` and `attr_list`, when it is converted, then the output contains `id=\"contents\"` and `id=\"contents_1\"`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given the text from AC-FR-001-1 with `toc` and `attr_list`, when it is converted, then `md.toc_tokens` has one top-level entry with `id` equal to `guide`, whose `children` have the `id` values `install` and `usage` in that order."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given the same conversion, when `md.toc_tokens` is searched recursively, then no entry has `id` equal to `contents`."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003"
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "Should the class name be configurable?",
+      "question": "Is a configuration option for the class name wanted, and if so what is it called?",
+      "tier": "P2",
+      "options": "(a) fixed `no-toc` only (b) option named by maintainer, default `no-toc` (c) Other",
+      "status": "open",
+      "blocks": "FR-005"
+    },
+    {
+      "id": "Q-002",
+      "title": "Confirm that all other headings stay unchanged",
+      "question": "Is it intended that headings without `no-toc` are unaffected, including when `attr_list` is not enabled?",
+      "tier": "P2",
+      "options": "(a) yes, unchanged (b) no, other change wanted (c) Other",
+      "status": "open",
+      "blocks": "FR-004"
+    }
+  ],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "The input text, extensions, and exact substring checks on the output (present href values and absent href=\"#contents\") are all stated.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "The same input is converted and the observable value md.toc is checked for the absence of the exact string >Contents<.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-001-3",
+        "testable": true,
+        "reason": "The input, extensions, and exact presence and absence of href substrings in the output are all specified.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-002-1",
+        "testable": true,
+        "reason": "The input and extensions are given, and the output must contain exact substrings: an <h2 tag containing id=\"contents\" and the text >Contents</h2>.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-002-2",
+        "testable": true,
+        "reason": "The input with two identical no-toc Contents headings and the exact id substrings id=\"contents\" and id=\"contents_1\" that must appear are stated.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "md.toc_tokens structure is specified exactly: one top-level entry with id guide and children with ids install and usage in that order.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "A recursive search of md.toc_tokens for any entry with id equal to contents has a clear, exact pass/fail outcome.",
+        "cached": false
+      }
+    ],
+    "judged_now": [
+      "AC-FR-001-1",
+      "AC-FR-001-2",
+      "AC-FR-001-3",
+      "AC-FR-002-1",
+      "AC-FR-002-2",
+      "AC-FR-003-1",
+      "AC-FR-003-2"
+    ]
+  }
+}

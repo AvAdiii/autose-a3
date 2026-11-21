@@ -1,0 +1,42 @@
+{
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_1_label": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_2_same_href": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_3_no_syntax_left": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_002_1_spaces_around_pipe": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_002_2_label_padding": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_1_options": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_2_empty_class": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_3_custom_build_url": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_004_1_unlabelled": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_004_2_blank_wikilink": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}

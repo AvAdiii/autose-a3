@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "reasons": [],
+  "owner": null,
+  "failing_new": {},
+  "regressions": {},
+  "uncovered": [],
+  "base_new": {
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_1_hrefs": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_toc.py\", line 1600, in test_ac_fr_001_1_hrefs\n    self.assertNotIn('href=\"#contents\"', out)\nAssertionError: 'href=\"#contents\"' unexpectedly found in '<h1 id=\"guide\">Guide</h1>\\n<h2 class=\"no-toc\" id=\"contents\">Contents</h2>\\n<div class=\"toc\">\\n<ul>\\n<li><a href=\"#guide\">Guide</a><ul>\\n<li><a href=\"#contents\">Contents</a></li>\\n<li><a href=\"#install\">Install</a></li>\\n<li><a href=\"#usage\">Usage</a></li>\\n</ul>\\n</li>\\n</ul>\\n</div>\\n<h2 id=\"install\">Install</h2>\\n<h2 id=\"usage\">Usage</h2>'\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_2_md_toc": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_toc.py\", line 1604, in test_ac_fr_001_2_md_toc\n    self.assertNotIn('>Contents<', md.toc)\nAssertionError: '>Contents<' unexpectedly found in '<div class=\"toc\">\\n<ul>\\n<li><a href=\"#guide\">Guide</a><ul>\\n<li><a href=\"#contents\">Contents</a></li>\\n<li><a href=\"#install\">Install</a></li>\\n<li><a href=\"#usage\">Usage</a></li>\\n</ul>\\n</li>\\n</ul>\\n</div>\\n'\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_3_multiple_classes": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_toc.py\", line 1608, in test_ac_fr_001_3_multiple_classes\n    self.assertNotIn('href=\"#contents\"', out)\nAssertionError: 'href=\"#contents\"' unexpectedly found in '<h2 class=\"a no-toc\" id=\"contents\">Contents</h2>\\n<div class=\"toc\">\\n<ul>\\n<li><a href=\"#contents\">Contents</a></li>\\n<li><a href=\"#install\">Install</a></li>\\n</ul>\\n</div>\\n<h2 id=\"install\">Install</h2>'\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_002_1_heading_keeps_id": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_002_2_unique_ids": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_003_1_toc_tokens": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_toc.py\", line 1627, in test_ac_fr_003_1_toc_tokens\n    self.assertEqual([c['id'] for c in md.toc_tokens[0]['children']], ['install', 'usage'])\nAssertionError: Lists differ: ['contents', 'install', 'usage'] != ['install', 'usage']\n\nFirst differing element 0:\n'contents'\n'install'\n\nFirst list contains 1 additional elements.\nFirst extra element 2:\n'usage'\n\n- ['contents', 'install', 'usage']\n?  ------------\n\n+ ['install', 'usage']\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_003_2_no_contents_token": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_toc.py\", line 1631, in test_ac_fr_003_2_no_contents_token\n    self.assertNotIn('contents', self._ids(md.toc_tokens))\nAssertionError: 'contents' unexpectedly found in ['guide', 'contents', 'install', 'usage']\n",
+      "outcome": "fail"
+    }
+  },
+  "head_new": {
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_1_hrefs": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_2_md_toc": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_001_3_multiple_classes": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_002_1_heading_keeps_id": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_002_2_unique_ids": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_003_1_toc_tokens": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_toc.TestTOCNoToc.test_ac_fr_003_2_no_contents_token": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_counts": {
+    "pass": 1121,
+    "skip": 52
+  },
+  "baseline_counts": {
+    "pass": 1114,
+    "skip": 52
+  }
+}

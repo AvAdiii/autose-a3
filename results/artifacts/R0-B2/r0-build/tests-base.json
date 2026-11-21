@@ -1,0 +1,150 @@
+{
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_backslash_escape_value": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_curly_after_block": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_curly_after_inline": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_curly_in_double_quote": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_curly_in_single_quote": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_empty_attr_list": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_extra_eq_gets_ignored_inside_curly_inline": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_table_td": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_unclosed_curly_with_long_run_of_spaces": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrList.test_unclosed_quote_ignored": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_001_1_empty_list_header_space": {
+  "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_attr_list.py\", line 312, in test_ac_fr_001_1_empty_list_header_space\n    self.assertMarkdownRenders('# Title {: }', '<h1>Title</h1>')\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<h1 :>Title</h1>' != '<h1>Title</h1>'\n- <h1 :>Title</h1>\n?    --\n+ <h1>Title</h1>\n\n",
+  "outcome": "fail"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_001_2_empty_list_header_no_space": {
+  "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_attr_list.py\", line 315, in test_ac_fr_001_2_empty_list_header_no_space\n    self.assertMarkdownRenders('# Title {:}', '<h1>Title</h1>')\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<h1 :>Title</h1>' != '<h1>Title</h1>'\n- <h1 :>Title</h1>\n?    --\n+ <h1>Title</h1>\n\n",
+  "outcome": "fail"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_002_1_empty_list_block_no_space": {
+  "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_attr_list.py\", line 318, in test_ac_fr_002_1_empty_list_block_no_space\n    self.assertMarkdownRenders('Some paragraph\\n{:}', '<p>Some paragraph</p>')\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p :>Some paragraph</p>' != '<p>Some paragraph</p>'\n- <p :>Some paragraph</p>\n?   --\n+ <p>Some paragraph</p>\n\n",
+  "outcome": "fail"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_002_2_empty_list_block_space": {
+  "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_attr_list.py\", line 321, in test_ac_fr_002_2_empty_list_block_space\n    self.assertMarkdownRenders('Some paragraph\\n{: }', '<p>Some paragraph</p>')\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p :>Some paragraph</p>' != '<p>Some paragraph</p>'\n- <p :>Some paragraph</p>\n?   --\n+ <p>Some paragraph</p>\n\n",
+  "outcome": "fail"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_003_1_empty_list_inline_space": {
+  "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_attr_list.py\", line 324, in test_ac_fr_003_1_empty_list_inline_space\n    self.assertMarkdownRenders('*hi*{: }', '<p><em>hi</em></p>')\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p><em :>hi</em></p>' != '<p><em>hi</em></p>'\n- <p><em :>hi</em></p>\n?       --\n+ <p><em>hi</em></p>\n\n",
+  "outcome": "fail"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_003_2_empty_list_inline_no_space": {
+  "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_attr_list.py\", line 327, in test_ac_fr_003_2_empty_list_inline_no_space\n    self.assertMarkdownRenders('*hi*{:}', '<p><em>hi</em></p>')\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p><em :>hi</em></p>' != '<p><em>hi</em></p>'\n- <p><em :>hi</em></p>\n?       --\n+ <p><em>hi</em></p>\n\n",
+  "outcome": "fail"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_004_1_nonempty_header": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_004_2_nonempty_inline": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_004_3_nonempty_block": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListEmptyList.test_ac_fr_005_1_braces_without_colon_unchanged": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_bad_syntax_header_with_valueless_attribute": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_explicit_value_equal_to_name_preserved": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_fenced_code_valueless_word": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_generic_valueless_attribute": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_get_attrs_and_remainder_marks_valueless_as_none": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_html_only_boolean_attribute": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_key_without_value": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_known_boolean_attribute_html": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_known_boolean_attribute_xhtml": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_serializer_preserves_explicit_value_equal_to_name": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_serializer_renders_none_value_as_bare_name": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_valueless_attribute_among_valued_attributes": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_valueless_attribute_on_block_element": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_valueless_non_boolean_consistent_across_formats": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_valueless_non_boolean_preserved_html": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_valueless_non_boolean_preserved_xhtml": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_attr_list.TestAttrListValuelessAttributes.test_xhtml_only_boolean_attribute": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}

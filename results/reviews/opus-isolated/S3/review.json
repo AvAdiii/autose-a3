@@ -1,0 +1,84 @@
+{
+  "verdict": "request_changes",
+  "summary": "The PR removes `no-toc` entries by running a regex over the final HTML in a postprocessor. That only changes the TOC rendered at the `[TOC]` marker. `md.toc_tokens` and `md.toc` still include the excluded heading, and the issue explicitly asks for `toc_tokens` to exclude it. The regex also matches the class as a substring, so a class like `no-tocx` triggers exclusion. When an excluded heading has child headings, the output HTML is malformed. The fix belongs in `TocTreeprocessor`, which builds the tokens, not in string post-processing. The existing test suite passes (1167 tests).",
+  "own_checks": [
+    {
+      "check": "Issue example: the rendered TOC lists Guide, Install and Usage but not Contents",
+      "command": "python -c \"import markdown; md=markdown.Markdown(extensions=['toc','attr_list']); print(md.convert('# Guide\\n\\n## Contents {: .no-toc }\\n\\n[TOC]\\n\\n## Install\\n\\n## Usage\\n'))\"",
+      "result": "pass",
+      "output_excerpt": "<li><a href=\"#guide\">Guide</a><ul>\n<li><a href=\"#install\">Install</a></li>\n<li><a href=\"#usage\">Usage</a></li>"
+    },
+    {
+      "check": "The Contents heading still renders with id=\"contents\"",
+      "command": "same probe",
+      "result": "pass",
+      "output_excerpt": "<h2 class=\"no-toc\" id=\"contents\">Contents</h2>"
+    },
+    {
+      "check": "md.toc_tokens excludes the no-toc heading",
+      "command": "same probe, print([t['name'] for t in md.toc_tokens[0]['children']])",
+      "result": "fail",
+      "output_excerpt": "['Contents', 'Install', 'Usage']"
+    },
+    {
+      "check": "md.toc excludes the no-toc heading",
+      "command": "same probe, print(repr(md.toc))",
+      "result": "fail",
+      "output_excerpt": "'...<li><a href=\"#contents\">Contents</a></li>\\n<li><a href=\"#install\">...'"
+    },
+    {
+      "check": "A heading whose class only contains no-toc as a substring (no-tocx) is not excluded",
+      "command": "md.convert('[TOC]\\n\\n# Not-toc-ish {: .no-tocx }\\n\\n## C\\n')",
+      "result": "fail",
+      "output_excerpt": "<div class=\"toc\">\n<ul>\n<ul>\n<li><a href=\"#c\">C</a></li>\n</ul>\n</li>\n</ul>  (h1 entry removed, leaving stray </li>)"
+    },
+    {
+      "check": "A no-toc heading with child headings still produces well-formed TOC HTML",
+      "command": "md.convert('[TOC]\\n\\n# A\\n\\n## B {: .no-toc }\\n\\n### B1\\n\\n## C\\n')",
+      "result": "fail",
+      "output_excerpt": "<li><a href=\"#a\">A</a><ul>\n<ul>\n<li><a href=\"#b1\">B1</a></li>\n</ul>\n</li>\n<li><a href=\"#c\">C</a></li>\n</ul>\n</li>\n</ul>  (unbalanced li/ul)"
+    },
+    {
+      "check": "The full test suite passes",
+      "command": "python -m unittest discover tests",
+      "result": "pass",
+      "output_excerpt": "Ran 1167 tests in 1.029s OK (skipped=52)"
+    }
+  ],
+  "findings": [
+    {
+      "title": "md.toc_tokens and md.toc still include no-toc headings",
+      "category": "design",
+      "blocking": true,
+      "file": "markdown/extensions/toc.py",
+      "line": 442,
+      "evidence": "Running the issue's example gives [t['name'] for t in md.toc_tokens[0]['children']] == ['Contents', 'Install', 'Usage'], and md.toc still contains <li><a href=\"#contents\">. The issue says: \"The same should apply to md.toc_tokens\". The exclusion has to happen in TocTreeprocessor.run, where the tokens are built. A postprocessor that regex-edits the output string cannot reach them."
+    },
+    {
+      "title": "The regex matches no-toc as a substring and breaks the HTML structure",
+      "category": "implementation",
+      "blocking": true,
+      "file": "markdown/extensions/toc.py",
+      "line": 446,
+      "evidence": "The pattern class=\"[^\"]*no-toc[^\"]*\" matches class=\"no-tocx\": '# Not-toc-ish {: .no-tocx }' is removed from the TOC. The substitution removes '<li><a ...>..</a>' together with an optional '</li>', but leaves the nested <ul>. For '## B {: .no-toc }' followed by '### B1', the result is '<li><a href=\"#a\">A</a><ul>\\n<ul>\\n<li><a href=\"#b1\">B1</a></li>\\n</ul>\\n</li>...', which is unbalanced markup. The regex also depends on class being serialized before id."
+    },
+    {
+      "title": "The test does not cover toc_tokens or edge cases",
+      "category": "testing",
+      "blocking": true,
+      "file": "tests/test_syntax/extensions/test_toc.py",
+      "line": 1579,
+      "evidence": "The only test checks the rendered HTML string. It has no assertion on md.toc_tokens or md.toc, which the issue requires, so it passes even though toc_tokens is wrong. It also has no case for nested children or a class that only contains no-toc as a substring."
+    }
+  ],
+  "notes": [
+    "The postprocessor is registered at priority 5, after raw_html (30). Every conversion with toc enabled now runs this regex pass over the whole output document.",
+    "The issue allows the class name to be configurable. Consider adding a toc config option (for example `exclude_class`, default 'no-toc') and documenting it in docs/extensions/toc.md. The docs are not updated in this PR."
+  ],
+  "route": "design",
+  "model": "claude-opus-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 8
+}

@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "reasons": [],
+  "files": [
+    "docs/changelog.md",
+    "docs/extensions/index.md",
+    "pyproject.toml",
+    "docs/extensions/external_links.md",
+    "docs/reference/markdown.extensions.external_links.md",
+    "markdown/extensions/external_links.py"
+  ],
+  "log": "$ python -m compileall -q markdown\nexit 0\n\n$ python -m pip install -q --no-deps -e .\nexit 0\n  /tmp/pip-build-env-xoc6w89z/overlay/lib/python3.12/site-packages/setuptools/command/editable_wheel.py:354: BuildBackendWarning: Editable installation.\n  !!\n  \n          ********************************************************************************\n          Please be careful with folders in your working directory with the same\n          name as your package as they may take precedence during imports.\n          ********************************************************************************\n  \n  !!\n    with strategy, WheelFile(wheel_path, \"w\") as wheel_obj:\n\n$ python -c import markdown, markdown.extensions; print(markdown.markdown('*x* [a](b)', extensions=['extra', 'toc']))\nexit 0\n<p><em>x</em> <a href=\"b\">a</a></p>\n\n$ flake8 (new errors only) markdown/extensions/external_links.py\n"
+}

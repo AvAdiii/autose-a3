@@ -1,0 +1,158 @@
+{
+  "ok": false,
+  "reasons": [
+    "AC-FR-003-3: judged not testable: The document is unspecified (\"a document\") and the expected value is 'the output before this change', a baseline that is not written in the criterion, so no exact expected outcome can be asserted."
+  ],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003"
+  ],
+  "blocked": [
+    {
+      "id": "FR-004",
+      "status": "BLOCKED (B-SRC: SRC-008; B-Q: Q-001; B-MET: AC-FR-004-1 depends on Q-001)"
+    }
+  ],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given the extensions `toc` and `attr_list` and the issue's example document (`# Guide`, `## Contents {: .no-toc }`, `[TOC]`, `## Install`, `## Usage`), when it is converted, then the output contains `href=\"#guide\"`, `href=\"#install\"` and `href=\"#usage\"` and does not contain `href=\"#contents\"`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given the same document, when it is converted, then `md.toc` contains `href=\"#install\"` and does not contain `Contents`."
+    },
+    {
+      "id": "AC-FR-001-3",
+      "req": "FR-001",
+      "text": "Given the same document with `{: .no-toc }` removed from the \"Contents\" heading, when it is converted, then the output contains `href=\"#contents\"`."
+    },
+    {
+      "id": "AC-FR-002-1",
+      "req": "FR-002",
+      "text": "Given the issue's example document with `toc` and `attr_list`, when it is converted, then the output contains `id=\"contents\"` on the `h2` element whose text is `Contents`."
+    },
+    {
+      "id": "AC-FR-002-2",
+      "req": "FR-002",
+      "text": "Given two headings `## Contents {: .no-toc }` and `## Contents` in one document, when it is converted, then the two headings have different `id` values and neither is empty."
+    },
+    {
+      "id": "AC-FR-002-3",
+      "req": "FR-002",
+      "text": "Given `## Contents {: .no-toc #custom }`, when it is converted, then the heading has `id=\"custom\"`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given the issue's example document with `toc` and `attr_list`, when it is converted, then `md.toc_tokens` has one top-level entry with `id` equal to `guide`, and its `children` list holds entries with `id` equal to `install` and `usage`, in that order."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given the same document, when it is converted, then no entry anywhere in `md.toc_tokens` has `id` equal to `contents`."
+    },
+    {
+      "id": "AC-FR-003-3",
+      "req": "FR-003",
+      "text": "Given a document with the `toc` extension and no `no-toc` class, when it is converted, then `md.toc_tokens` and `md.toc` are identical to the output before this change."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003"
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "Should the class name be configurable, and under what option name?",
+      "question": "Should the `toc` extension get a configuration option for the excluded-heading class name?",
+      "tier": "P2",
+      "options": "(a) No, fixed `no-toc` only (b) Yes, new option (name to be given by maintainer) (c) Other",
+      "status": "open",
+      "blocks": "FR-004"
+    },
+    {
+      "id": "Q-002",
+      "title": "Sub-headings of an excluded heading",
+      "question": "If an excluded heading has deeper headings below it, should those be listed in `md.toc_tokens` and the TOC, and under which parent?",
+      "tier": "P3",
+      "options": "(a) Listed, attached to the nearest listed parent (b) Excluded together with their parent (c) Other",
+      "status": "open",
+      "blocks": "none (no criterion in this spec covers it)"
+    },
+    {
+      "id": "Q-003",
+      "title": "Permalinks and anchor links on excluded headings",
+      "question": "With `permalink` or `anchorlink` enabled, should an excluded heading still get the link?",
+      "tier": "P3",
+      "options": "(a) Yes, unchanged (b) No (c) Other",
+      "status": "open",
+      "blocks": "none"
+    },
+    {
+      "id": "Q-004",
+      "title": "Several classes on one heading",
+      "question": "Should `## Contents {: .no-toc .other }` be excluded?",
+      "tier": "P3",
+      "options": "(a) Yes, any class token matches (b) Only when `no-toc` is the sole class (c) Other",
+      "status": "open",
+      "blocks": "none"
+    }
+  ],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "The extensions, the exact example document and the exact substrings to find or exclude in the output are all given."
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "The action (convert, then read md.toc) and the exact substring checks (contains href=\"#install\", does not contain \"Contents\") are stated."
+      },
+      {
+        "id": "AC-FR-001-3",
+        "testable": true,
+        "reason": "The document variant with the no-toc class removed is fully specified and the expected substring href=\"#contents\" is exact."
+      },
+      {
+        "id": "AC-FR-002-1",
+        "testable": true,
+        "reason": "The document and the expected outcome (id=\"contents\" on the h2 whose text is Contents) are stated exactly enough to assert."
+      },
+      {
+        "id": "AC-FR-002-2",
+        "testable": true,
+        "reason": "Both headings are given, and the checks (different id values, neither empty) are concrete comparisons on the parsed ids."
+      },
+      {
+        "id": "AC-FR-002-3",
+        "testable": true,
+        "reason": "The heading source `## Contents {: .no-toc #custom }` and the exact expected attribute id=\"custom\" are stated."
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "The expected toc_tokens structure is fully specified: one top-level id guide, with children install and usage in that order."
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "The check that no entry anywhere in md.toc_tokens has id contents is a concrete, exact assertion on a public attribute."
+      },
+      {
+        "id": "AC-FR-003-3",
+        "testable": false,
+        "reason": "The document is unspecified (\"a document\") and the expected value is 'the output before this change', a baseline that is not written in the criterion, so no exact expected outcome can be asserted."
+      }
+    ]
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "issue": 4,
+  "round": 0,
+  "start": "requirements",
+  "events": [],
+  "stages": {
+    "requirements": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "design": {
+      "status": "passed",
+      "attempts": 2,
+      "reasons": []
+    },
+    "implementation": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": [],
+      "files": [
+        "docs/changelog.md",
+        "markdown/extensions/toc.py"
+      ]
+    },
+    "testing": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 0,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "ready",
+    "reason": "stages 1-4 passed"
+  },
+  "base": "1038c85918d6e986116a71e372397609e07ecf1d",
+  "judge_cache": {
+    "Given the text `# Guide\\n\\n## Contents {: .no-toc }\\n\\n[TOC]\\n\\n## Install\\n\\n## Usage` and extensions `toc` and `attr_list`, when it is converted, then the output contains `href=\"#guide\"`, `href=\"#install\"` and `href=\"#usage\"` and contains no `href=\"#contents\"`.": {
+      "testable": true,
+      "reason": "The input text, extensions, and exact substring checks on the output (present href values and absent href=\"#contents\") are all stated."
+    },
+    "Given the same text, when it is converted, then `md.toc` contains no `>Contents<`.": {
+      "testable": true,
+      "reason": "The same input is converted and the observable value md.toc is checked for the absence of the exact string >Contents<."
+    },
+    "Given the text `## Contents {: .a .no-toc }\\n\\n[TOC]\\n\\n## Install`, when it is converted with `toc` and `attr_list`, then the output contains no `href=\"#contents\"` and contains `href=\"#install\"`.": {
+      "testable": true,
+      "reason": "The input, extensions, and exact presence and absence of href substrings in the output are all specified."
+    },
+    "Given the text from AC-FR-001-1 with `toc` and `attr_list`, when it is converted, then the output contains `<h2` and `id=\"contents\"` within the same tag, and `>Contents</h2>`.": {
+      "testable": true,
+      "reason": "The input and extensions are given, and the output must contain exact substrings: an <h2 tag containing id=\"contents\" and the text >Contents</h2>."
+    },
+    "Given the text `## Contents {: .no-toc }\\n\\n## Contents {: .no-toc }` with `toc` and `attr_list`, when it is converted, then the output contains `id=\"contents\"` and `id=\"contents_1\"`.": {
+      "testable": true,
+      "reason": "The input with two identical no-toc Contents headings and the exact id substrings id=\"contents\" and id=\"contents_1\" that must appear are stated."
+    },
+    "Given the text from AC-FR-001-1 with `toc` and `attr_list`, when it is converted, then `md.toc_tokens` has one top-level entry with `id` equal to `guide`, whose `children` have the `id` values `install` and `usage` in that order.": {
+      "testable": true,
+      "reason": "md.toc_tokens structure is specified exactly: one top-level entry with id guide and children with ids install and usage in that order."
+    },
+    "Given the same conversion, when `md.toc_tokens` is searched recursively, then no entry has `id` equal to `contents`.": {
+      "testable": true,
+      "reason": "A recursive search of md.toc_tokens for any entry with id equal to contents has a clear, exact pass/fail outcome."
+    }
+  },
+  "ready_acs": [
+    "AC-FR-001-1",
+    "AC-FR-001-2",
+    "AC-FR-001-3",
+    "AC-FR-002-1",
+    "AC-FR-002-2",
+    "AC-FR-003-1",
+    "AC-FR-003-2"
+  ]
+}

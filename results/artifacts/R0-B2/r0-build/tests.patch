@@ -1,0 +1,44 @@
+diff --git a/tests/test_syntax/extensions/test_attr_list.py b/tests/test_syntax/extensions/test_attr_list.py
+index 73c7796..dcff151 100644
+--- a/tests/test_syntax/extensions/test_attr_list.py
++++ b/tests/test_syntax/extensions/test_attr_list.py
+@@ -301,3 +301,39 @@ class TestAttrListValuelessAttributes(TestCase):
+             'Key without *value*{ foo= }',
+             '<p>Key without <em foo>value</em></p>'
+         )
++
++
++class TestAttrListEmptyList(TestCase):
++    """ An empty attribute list means "no attributes". See issue #2. """
++
++    default_kwargs = {'extensions': ['attr_list']}
++
++    def test_ac_fr_001_1_empty_list_header_space(self):
++        self.assertMarkdownRenders('# Title {: }', '<h1>Title</h1>')
++
++    def test_ac_fr_001_2_empty_list_header_no_space(self):
++        self.assertMarkdownRenders('# Title {:}', '<h1>Title</h1>')
++
++    def test_ac_fr_002_1_empty_list_block_no_space(self):
++        self.assertMarkdownRenders('Some paragraph\n{:}', '<p>Some paragraph</p>')
++
++    def test_ac_fr_002_2_empty_list_block_space(self):
++        self.assertMarkdownRenders('Some paragraph\n{: }', '<p>Some paragraph</p>')
++
++    def test_ac_fr_003_1_empty_list_inline_space(self):
++        self.assertMarkdownRenders('*hi*{: }', '<p><em>hi</em></p>')
++
++    def test_ac_fr_003_2_empty_list_inline_no_space(self):
++        self.assertMarkdownRenders('*hi*{:}', '<p><em>hi</em></p>')
++
++    def test_ac_fr_004_1_nonempty_header(self):
++        self.assertMarkdownRenders('# Title {: .note }', '<h1 class="note">Title</h1>')
++
++    def test_ac_fr_004_2_nonempty_inline(self):
++        self.assertMarkdownRenders('*hi*{: #a .b }', '<p><em class="b" id="a">hi</em></p>')
++
++    def test_ac_fr_004_3_nonempty_block(self):
++        self.assertMarkdownRenders('Some paragraph\n{: .note }', '<p class="note">Some paragraph</p>')
++
++    def test_ac_fr_005_1_braces_without_colon_unchanged(self):
++        self.assertMarkdownRenders('# Title { }', '<h1>Title { }</h1>')

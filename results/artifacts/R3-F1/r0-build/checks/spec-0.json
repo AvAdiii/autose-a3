@@ -1,0 +1,161 @@
+{
+  "ok": false,
+  "reasons": [
+    "AC-FR-004-2: judged not testable: The expected output is defined only as 'the same as before this change', a baseline that is not written in the criterion, so the exact outcome cannot be determined from the text alone."
+  ],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004"
+  ],
+  "blocked": [
+    {
+      "id": "FR-005",
+      "status": "BLOCKED (B-Q: Q-001, Q-002, Q-003; B-MET)"
+    }
+  ],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given default `wikilinks` configuration, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given default configuration, when `[[Getting Started|read the guide]]` and `[[Getting Started]]` are converted, then both `href` values are equal."
+    },
+    {
+      "id": "AC-FR-001-3",
+      "req": "FR-001",
+      "text": "Given default configuration, when `[[Getting Started|read the guide]]` is converted, then the output contains no `[[`, no `]]` and no `|`."
+    },
+    {
+      "id": "AC-FR-002-1",
+      "req": "FR-002",
+      "text": "Given default configuration, when `[[Getting Started | read the guide]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-002-2",
+      "req": "FR-002",
+      "text": "Given default configuration, when `[[Getting Started|  read the guide  ]]` is converted, then the output equals the output for `[[Getting Started|read the guide]]`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given `base_url='/wiki/'`, `end_url='.html'` and `html_class='myclass'`, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a class=\"myclass\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given `html_class=''`, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a href=\"/Getting_Started/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-3",
+      "req": "FR-003",
+      "text": "Given a custom `build_url` that records its first argument, when `[[Getting Started|read the guide]]` is converted, then the recorded argument is `Getting Started` and the `href` is the value it returned."
+    },
+    {
+      "id": "AC-FR-004-1",
+      "req": "FR-004",
+      "text": "Given default configuration, when `[[Getting Started]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">Getting Started</a></p>`."
+    },
+    {
+      "id": "AC-FR-004-2",
+      "req": "FR-004",
+      "text": "Given default configuration, when `[[ ]]` is converted, then the output is the same as before this change (the empty wikilink is dropped and no link is created)."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004"
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "Empty label or empty target",
+      "question": "What should `[[Page|]]` and `[[|Label]]` produce?",
+      "tier": "P2",
+      "options": "(a) `[[Page|]]` links with the target as text, `[[|Label]]` is dropped (b) both are left as literal text (c) both are dropped like `[[ ]]` (d) Other",
+      "status": "open",
+      "blocks": "FR-005"
+    },
+    {
+      "id": "Q-002",
+      "title": "More than one pipe",
+      "question": "How should `[[A|B|C]]` be handled?",
+      "tier": "P2",
+      "options": "(a) target `A`, label `B|C` (b) target `A`, label `B`, rest ignored (c) not recognized, left as literal text (d) Other",
+      "status": "open",
+      "blocks": "FR-005"
+    },
+    {
+      "id": "Q-003",
+      "title": "Characters allowed in the label",
+      "question": "Which characters may a label contain (for example `.`, `,`, `!`, `'`, `&`, `<`)?",
+      "tier": "P2",
+      "options": "(a) any text except `]` and `|` (b) same characters as the target (c) any text except `]]` (d) Other",
+      "status": "open",
+      "blocks": "FR-005"
+    }
+  ],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "The input, default configuration and exact expected HTML output are all stated, so a test can compare the output string directly."
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "Both inputs and the observable outcome (equality of the two href values) are specified, so a test can compare them."
+      },
+      {
+        "id": "AC-FR-001-3",
+        "testable": true,
+        "reason": "The output is fixed and the check is a concrete absence of the substrings '[[', ']]' and '|', which a test can assert."
+      },
+      {
+        "id": "AC-FR-002-1",
+        "testable": true,
+        "reason": "The input with spaces around the pipe and the exact expected HTML output are both stated."
+      },
+      {
+        "id": "AC-FR-002-2",
+        "testable": true,
+        "reason": "The test can convert both inputs under default configuration and compare the outputs for equality; the reference output is the one for the stated input without spaces."
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "The configuration values, input and exact expected HTML output are all given, so the outcome is directly comparable."
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "With html_class set to an empty string, the exact expected output without a class attribute is stated."
+      },
+      {
+        "id": "AC-FR-003-3",
+        "testable": true,
+        "reason": "A custom build_url can record its first argument, and the test can assert that the recorded value is 'Getting Started' and that the href equals the returned value."
+      },
+      {
+        "id": "AC-FR-004-1",
+        "testable": true,
+        "reason": "The input under default configuration and the exact expected HTML output are stated."
+      },
+      {
+        "id": "AC-FR-004-2",
+        "testable": false,
+        "reason": "The expected output is defined only as 'the same as before this change', a baseline that is not written in the criterion, so the exact outcome cannot be determined from the text alone."
+      }
+    ]
+  }
+}

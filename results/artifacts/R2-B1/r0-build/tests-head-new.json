@@ -1,0 +1,198 @@
+{
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testBasicFence": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedCodeAttrNameSanitizedNoCodehiliteWithAttrList": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedCodeCurlyInAttrs": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedCodeEscapedAttrs": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedCodeMismatchedCurlyInAttrs": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedIdAndLangAndClassInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedIdAndLangInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedIdInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageAltPrefix": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageIdAndPygmentsDisabledInAttrNoCodehilite": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageIdAndPygmentsEnabledInAttrNoCodehilite": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageNoCodehiliteWithAttrList": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageNoDot": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageNoPrefix": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguagePygmentsDisabledInAttrNoCodehiliteWithAttrList": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguagePygmentsEnabledInAttrNoCodehiliteWithAttrList": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedLanguageWithDot": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedMultipleClassesInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testFencedTildes": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.testNestedFence": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCode.test_fenced_code_in_raw_html": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testCustomPygmentsFormatter": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedAmps": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedCodeWithHighlightLines": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedCodeWithHighlightLinesInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAndHighlightLines": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAndHighlightLinesInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAndPygmentsDisabled": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAttrCssclass": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAttrGuesslang": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAttrLinenums": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageAttrNoclasses": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageDoubleEscape": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageIdAndPygmentsDisabledInAttr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedLanguageIdInAttrAndPygmentsDisabled": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testFencedMultipleBlocksSameStyle": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testInvalidCustomPygmentsFormatter": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testPygmentsAddLangClassFormatter": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.testSvgCustomPygmentsFormatter": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithCodehilite.test_shebang": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_1_linenums_flag": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_2_linenums_value": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_4_plain_python": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_003_1_data_attr": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_003_2_data_test_braces": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_004_1_codehilite_linenums": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_004_2_codehilite_linenums_true": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}

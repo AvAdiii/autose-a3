@@ -1,0 +1,69 @@
+{
+  "ok": true,
+  "reasons": [],
+  "rows": [
+    {
+      "file": "markdown/extensions/attr_list.py",
+      "symbol": "AttrListTreeprocessor.BASE_RE",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-004-1",
+        "AC-FR-004-2",
+        "AC-FR-004-3",
+        "AC-FR-005-1"
+      ]
+    },
+    {
+      "file": "markdown/extensions/attr_list.py",
+      "symbol": "AttrListTreeprocessor.run",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2"
+      ]
+    },
+    {
+      "file": "markdown/extensions/attr_list.py",
+      "symbol": "AttrListTreeprocessor.assign_attrs",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-002-1",
+        "AC-FR-003-1"
+      ]
+    },
+    {
+      "file": "tests/test_syntax/extensions/test_attr_list.py",
+      "symbol": "new test methods in existing attr_list test class",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-004-1",
+        "AC-FR-004-2",
+        "AC-FR-004-3",
+        "AC-FR-005-1"
+      ]
+    },
+    {
+      "file": "docs/changelog.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    }
+  ]
+}

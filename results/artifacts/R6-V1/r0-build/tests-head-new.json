@@ -1,0 +1,62 @@
+{
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_1_loads_by_name": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_2_construct": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_1_disabled_inline": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_2_disabled_autolink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_1_https": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_2_http": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_3_reference_link": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_1_autolink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_005_1_relative": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_005_2_anchor": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_005_3_mailto": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_1_image": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_2_linked_image": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_1_no_configs": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_2_unknown_option": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}

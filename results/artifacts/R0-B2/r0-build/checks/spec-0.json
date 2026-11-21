@@ -1,0 +1,127 @@
+{
+  "ok": true,
+  "reasons": [],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004",
+    "FR-005"
+  ],
+  "blocked": [],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given the `attr_list` extension is enabled, when `# Title {: }` is converted, then the result is exactly `<h1>Title</h1>`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given the `attr_list` extension is enabled, when `# Title {:}` is converted, then the result is exactly `<h1>Title</h1>`."
+    },
+    {
+      "id": "AC-FR-002-1",
+      "req": "FR-002",
+      "text": "Given the `attr_list` extension is enabled, when `Some paragraph\\n{:}` is converted, then the result is exactly `<p>Some paragraph</p>`."
+    },
+    {
+      "id": "AC-FR-002-2",
+      "req": "FR-002",
+      "text": "Given the `attr_list` extension is enabled, when `Some paragraph\\n{: }` is converted, then the result is exactly `<p>Some paragraph</p>`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given the `attr_list` extension is enabled, when `*hi*{: }` is converted, then the result is exactly `<p><em>hi</em></p>`."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given the `attr_list` extension is enabled, when `*hi*{:}` is converted, then the result is exactly `<p><em>hi</em></p>`."
+    },
+    {
+      "id": "AC-FR-004-1",
+      "req": "FR-004",
+      "text": "Given the `attr_list` extension is enabled, when `# Title {: .note }` is converted, then the result is exactly `<h1 class=\"note\">Title</h1>`."
+    },
+    {
+      "id": "AC-FR-004-2",
+      "req": "FR-004",
+      "text": "Given the `attr_list` extension is enabled, when `*hi*{: #a .b }` is converted, then the result is exactly `<p><em class=\"b\" id=\"a\">hi</em></p>`."
+    },
+    {
+      "id": "AC-FR-004-3",
+      "req": "FR-004",
+      "text": "Given the `attr_list` extension is enabled, when `Some paragraph\\n{: .note }` is converted, then the result is exactly `<p class=\"note\">Some paragraph</p>`."
+    },
+    {
+      "id": "AC-FR-005-1",
+      "req": "FR-005",
+      "text": "Given the `attr_list` extension is enabled, when `# Title { }` is converted, then the result is exactly `<h1>Title { }</h1>`."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004"
+  ],
+  "questions": [],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `# Title {: }`, and the exact expected output `<h1>Title</h1>`."
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `# Title {:}`, and the exact expected output `<h1>Title</h1>`."
+      },
+      {
+        "id": "AC-FR-002-1",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `Some paragraph\\n{:}`, and the exact expected output `<p>Some paragraph</p>`."
+      },
+      {
+        "id": "AC-FR-002-2",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `Some paragraph\\n{: }`, and the exact expected output `<p>Some paragraph</p>`."
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `*hi*{: }`, and the exact expected output `<p><em>hi</em></p>`."
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `*hi*{:}`, and the exact expected output `<p><em>hi</em></p>`."
+      },
+      {
+        "id": "AC-FR-004-1",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `# Title {: .note }`, and the exact expected output `<h1 class=\"note\">Title</h1>`."
+      },
+      {
+        "id": "AC-FR-004-2",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `*hi*{: #a .b }`, and the exact expected string `<p><em class=\"b\" id=\"a\">hi</em></p>`, so the attribute order is fixed by the criterion itself."
+      },
+      {
+        "id": "AC-FR-004-3",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `Some paragraph\\n{: .note }`, and the exact expected output `<p class=\"note\">Some paragraph</p>`."
+      },
+      {
+        "id": "AC-FR-005-1",
+        "testable": true,
+        "reason": "Gives the enabled extension, the input `# Title { }`, and the exact expected output `<h1>Title { }</h1>`, so the non-attribute-list case is fully specified."
+      }
+    ]
+  }
+}

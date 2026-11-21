@@ -1,0 +1,202 @@
+{
+  "ok": false,
+  "reasons": [
+    "AC-FR-007-1: judged not testable: It is not stated how to obtain 'an instance of the extension' (no class name or factory such as makeExtension is given), so the setup is undefined and a test cannot be written from this text alone."
+  ],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004",
+    "FR-005",
+    "FR-006",
+    "FR-007"
+  ],
+  "blocked": [
+    {
+      "id": "FR-008",
+      "status": "BLOCKED (B-Q: Q-001; B-SRC: ASM-001; B-MET: AC-FR-008-1)"
+    },
+    {
+      "id": "FR-009",
+      "status": "BLOCKED (B-Q: Q-002; B-SRC: ASM-002; B-MET: AC-FR-009-1)"
+    }
+  ],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given `markdown.markdown('x', extensions=['external_links'])`, when it is called, then no exception is raised and the result is `<p>x</p>`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given `markdown.Markdown(extensions=['external_links'])`, when it is constructed, then no exception is raised."
+    },
+    {
+      "id": "AC-FR-002-1",
+      "req": "FR-002",
+      "text": "Given no extensions, when `[a](https://example.com)` is converted, then the result is `<p><a href=\"https://example.com\">a</a></p>`."
+    },
+    {
+      "id": "AC-FR-002-2",
+      "req": "FR-002",
+      "text": "Given no extensions, when `<https://example.com>` is converted, then the result is `<p><a href=\"https://example.com\">https://example.com</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given extension `external_links`, when `[a](https://example.com)` is converted, then the result is `<p><a href=\"https://example.com\" rel=\"noopener noreferrer\" target=\"_blank\">a</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given extension `external_links`, when `[a](http://example.com)` is converted, then the result is `<p><a href=\"http://example.com\" rel=\"noopener noreferrer\" target=\"_blank\">a</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-3",
+      "req": "FR-003",
+      "text": "Given extension `external_links`, when `[a][1]` with the definition `[1]: https://example.com` is converted, then the `<a>` element in the result contains `target=\"_blank\"` and `rel=\"noopener noreferrer\"`."
+    },
+    {
+      "id": "AC-FR-004-1",
+      "req": "FR-004",
+      "text": "Given extension `external_links`, when `<https://example.com>` is converted, then the result is `<p><a href=\"https://example.com\" rel=\"noopener noreferrer\" target=\"_blank\">https://example.com</a></p>`."
+    },
+    {
+      "id": "AC-FR-005-1",
+      "req": "FR-005",
+      "text": "Given extension `external_links`, when `[a](page.html)` is converted, then the result is `<p><a href=\"page.html\">a</a></p>`."
+    },
+    {
+      "id": "AC-FR-005-2",
+      "req": "FR-005",
+      "text": "Given extension `external_links`, when `[a](#top)` is converted, then the result is `<p><a href=\"#top\">a</a></p>`."
+    },
+    {
+      "id": "AC-FR-005-3",
+      "req": "FR-005",
+      "text": "Given extension `external_links`, when `[a](mailto:me@example.com)` is converted, then the result contains neither `target=` nor `rel=`."
+    },
+    {
+      "id": "AC-FR-006-1",
+      "req": "FR-006",
+      "text": "Given extension `external_links`, when `![a](https://example.com/i.png)` is converted, then the result is `<p><img alt=\"a\" src=\"https://example.com/i.png\" /></p>`."
+    },
+    {
+      "id": "AC-FR-006-2",
+      "req": "FR-006",
+      "text": "Given extension `external_links`, when `[![a](https://example.com/i.png)](page.html)` is converted, then the `<img>` element has no `target` attribute and no `rel` attribute, and the `<a>` element has none either."
+    },
+    {
+      "id": "AC-FR-007-1",
+      "req": "FR-007",
+      "text": "Given an instance of the extension, when `getConfigs()` is called, then the result is `{}`."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004",
+    "FR-005",
+    "FR-006",
+    "FR-007"
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "Existing target or rel on an external link",
+      "question": "When an external link already has `target` or `rel` (for example from `attr_list`), which wins?",
+      "tier": "P2",
+      "options": "(a) existing value is kept (b) extension value overwrites (c) `rel` merged, `target` kept (d) Other",
+      "status": "open",
+      "blocks": "FR-008"
+    },
+    {
+      "id": "Q-002",
+      "title": "Uppercase schemes and protocol-relative links",
+      "question": "Are `HTTP://example.com` and `//example.com` external?",
+      "tier": "P2",
+      "options": "(a) neither is external, exact lowercase prefix only (b) uppercase schemes are external, `//` is not (c) both are external (d) Other",
+      "status": "open",
+      "blocks": "FR-009"
+    }
+  ],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "The call, the extension name, and the exact expected output `<p>x</p>` are all stated, so a unit test can assert on the return value and on the absence of an exception."
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "The constructor call with the extension is fully specified, and the outcome (no exception raised) is observable."
+      },
+      {
+        "id": "AC-FR-002-1",
+        "testable": true,
+        "reason": "With no extensions, the input and the exact expected HTML string are given, so the output can be compared directly."
+      },
+      {
+        "id": "AC-FR-002-2",
+        "testable": true,
+        "reason": "The autolink input and the exact expected HTML string are stated, so the output can be compared directly."
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "The input and the exact expected HTML, including attribute values and order, are given."
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "The http input and the exact expected HTML, including attributes, are given."
+      },
+      {
+        "id": "AC-FR-003-3",
+        "testable": true,
+        "reason": "The reference-style input is fully specified and the check is an observable substring test on the `<a>` element for target and rel attributes."
+      },
+      {
+        "id": "AC-FR-004-1",
+        "testable": true,
+        "reason": "The autolink input with the extension and the exact expected HTML string are stated."
+      },
+      {
+        "id": "AC-FR-005-1",
+        "testable": true,
+        "reason": "A relative link input and the exact expected HTML with no target or rel attributes are given."
+      },
+      {
+        "id": "AC-FR-005-2",
+        "testable": true,
+        "reason": "A fragment link input and the exact expected HTML with no target or rel attributes are given."
+      },
+      {
+        "id": "AC-FR-005-3",
+        "testable": true,
+        "reason": "The mailto input is given and the outcome is a clear observable check that neither `target=` nor `rel=` appears."
+      },
+      {
+        "id": "AC-FR-006-1",
+        "testable": true,
+        "reason": "The image input and the exact expected `<img>` HTML are stated."
+      },
+      {
+        "id": "AC-FR-006-2",
+        "testable": true,
+        "reason": "The nested image-in-link input is given, and the test can parse the result and check attribute presence on the `<img>` and `<a>` elements; the relative link target follows from AC-FR-005."
+      },
+      {
+        "id": "AC-FR-007-1",
+        "testable": false,
+        "reason": "It is not stated how to obtain 'an instance of the extension' (no class name or factory such as makeExtension is given), so the setup is undefined and a test cannot be written from this text alone."
+      }
+    ]
+  }
+}

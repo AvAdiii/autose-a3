@@ -1,0 +1,1 @@
+{"role": "analyst", "model": "claude-sonnet-5-5", "label": "r0-requirements-1", "duration_s": 23.9, "turns": 2, "cost_usd": 0.0551292, "input_tokens": 4, "output_tokens": 3411, "cache_read_tokens": 31192, "cache_creation_tokens": 4473, "subtype": "success", "ok": true, "error_kind": null}

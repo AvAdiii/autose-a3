@@ -1,0 +1,69 @@
+{
+  "issue": 3,
+  "round": 0,
+  "start": "requirements",
+  "events": [
+    {
+      "t": "09:34:29",
+      "stage": "requirements",
+      "what": "check failed",
+      "reasons": [
+        "AC-FR-004-2: judged not testable: The expected output is defined only as 'the same as before this change', a baseline that is not written in the criterion, so the exact outcome cannot be determined from the text alone."
+      ]
+    }
+  ],
+  "stages": {
+    "requirements": {
+      "status": "passed",
+      "attempts": 2,
+      "reasons": []
+    },
+    "design": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "implementation": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": [],
+      "files": [
+        "docs/changelog.md",
+        "docs/extensions/wikilinks.md",
+        "markdown/extensions/wikilinks.py"
+      ]
+    },
+    "testing": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 0,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "ready",
+    "reason": "stages 1-4 passed"
+  },
+  "base": "bb9e8d8315e22f88fe64b36fb651670563de81e0",
+  "ready_acs": [
+    "AC-FR-001-1",
+    "AC-FR-001-2",
+    "AC-FR-001-3",
+    "AC-FR-002-1",
+    "AC-FR-002-2",
+    "AC-FR-003-1",
+    "AC-FR-003-2",
+    "AC-FR-003-3",
+    "AC-FR-004-1",
+    "AC-FR-004-2"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "reasons": [],
+  "rows": [
+    {
+      "file": "markdown/extensions/fenced_code.py",
+      "symbol": "FencedBlockPreprocessor.run",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-001-4",
+        "AC-FR-003-1",
+        "AC-FR-003-2"
+      ]
+    },
+    {
+      "file": "tests/test_syntax/extensions/test_fenced_code.py",
+      "symbol": "new TestFencedCodeWithoutCodehilite",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-001-4",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-004-1",
+        "AC-FR-004-2"
+      ]
+    },
+    {
+      "file": "docs/changelog.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    }
+  ]
+}

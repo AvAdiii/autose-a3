@@ -1,0 +1,100 @@
+{
+  "ok": true,
+  "reasons": [],
+  "owner": null,
+  "failing_new": {},
+  "regressions": {},
+  "uncovered": [],
+  "base_new": {
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_1_label": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 17, in test_ac_fr_001_1_label\n    self.assertMarkdownRenders('[[Getting Started|read the guide]]', LABELLED)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n+ <p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_2_same_href": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 25, in test_ac_fr_001_2_same_href\n    self.assertIsNotNone(href_a)\nAssertionError: unexpectedly None\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_3_no_syntax_left": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 32, in test_ac_fr_001_3_no_syntax_left\n    self.assertNotIn(bad, out)\nAssertionError: '[[' unexpectedly found in '<p>[[Getting Started|read the guide]]</p>'\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_002_1_spaces_around_pipe": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 35, in test_ac_fr_002_1_spaces_around_pipe\n    self.assertMarkdownRenders('[[Getting Started | read the guide]]', LABELLED)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p>[[Getting Started | read the guide]]</p>' != '<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>'\n- <p>[[Getting Started | read the guide]]</p>\n+ <p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_002_2_label_padding": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 40, in test_ac_fr_002_2_label_padding\n    self.assertEqual(a, b)\nAssertionError: '<p>[[Getting Started|  read the guide  ]]</p>' != '<p>[[Getting Started|read the guide]]</p>'\n- <p>[[Getting Started|  read the guide  ]]</p>\n?                      --              --\n+ <p>[[Getting Started|read the guide]]</p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_1_options": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 44, in test_ac_fr_003_1_options\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a class=\"myclass\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n+ <p><a class=\"myclass\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_2_empty_class": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 51, in test_ac_fr_003_2_empty_class\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a href=\"/Getting_Started/\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n?    ^^       ^       ^              ^^\n+ <p><a href=\"/Getting_Started/\">read the guide</a></p>\n?    ^^^^^^^^^^       ^       ^^^              ^^^^\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_3_custom_build_url": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_wikilinks.py\", line 64, in test_ac_fr_003_3_custom_build_url\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 77, in assertMarkdownRenders\n    self.assertMultiLineEqual(output, expected)\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a class=\"wikilink\" href=\"/custom/\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n+ <p><a class=\"wikilink\" href=\"/custom/\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_004_1_unlabelled": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_004_2_blank_wikilink": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_new": {
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_1_label": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_2_same_href": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_001_3_no_syntax_left": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_002_1_spaces_around_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_002_2_label_padding": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_1_options": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_2_empty_class": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_003_3_custom_build_url": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_004_1_unlabelled": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_wikilinks.TestWikiLinks.test_ac_fr_004_2_blank_wikilink": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_counts": {
+    "pass": 1124,
+    "skip": 52
+  },
+  "baseline_counts": {
+    "pass": 1114,
+    "skip": 52
+  }
+}

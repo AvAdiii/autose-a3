@@ -1,0 +1,95 @@
+{
+  "ok": false,
+  "reasons": [],
+  "needs_clarification": true,
+  "ready": [],
+  "blocked": [
+    {
+      "id": "FR-001",
+      "status": "BLOCKED (B-SRC: SRC-001; B-MET: AC-FR-001-1; B-Q: Q-001, Q-002, Q-003, Q-004, Q-005)"
+    },
+    {
+      "id": "FR-002",
+      "status": "BLOCKED (B-SRC: ASM-001; B-Q: Q-003)"
+    }
+  ],
+  "acs": [],
+  "must_ready": [],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "What behaviour is wanted for external links?",
+      "question": "What should the rendered HTML or library behaviour be so that readers do not lose their place?",
+      "tier": "P1",
+      "options": "(a) add `target=\"_blank\"` to external links (b) add `target=\"_blank\"` plus `rel=\"noopener noreferrer\"` (c) add only a `rel` or CSS class so a site can style or script it (d) Other",
+      "status": "open",
+      "blocks": "FR-001"
+    },
+    {
+      "id": "Q-002",
+      "title": "What counts as an external link?",
+      "question": "Which link targets are external?",
+      "tier": "P1",
+      "options": "(a) any absolute URL with a host (`http://`, `https://`) (b) absolute URLs whose host differs from a configured site host (c) any URL with a scheme, including `mailto:` (d) Other",
+      "status": "open",
+      "blocks": "FR-001"
+    },
+    {
+      "id": "Q-003",
+      "title": "Opt-in or default?",
+      "question": "Should the behaviour be off by default, enabled through an extension or option, or applied to every conversion?",
+      "tier": "P1",
+      "options": "(a) opt-in extension or option, default output unchanged (b) on by default (c) Other",
+      "status": "open",
+      "blocks": "FR-001, FR-002"
+    },
+    {
+      "id": "Q-004",
+      "title": "Which link forms are covered?",
+      "question": "Should the behaviour apply to inline links, reference links, autolinks (`<https://example.com>`) and raw HTML `<a>` tags?",
+      "tier": "P2",
+      "options": "(a) inline and reference links only (b) also autolinks (c) also raw HTML (d) Other",
+      "status": "open",
+      "blocks": "FR-001"
+    },
+    {
+      "id": "Q-005",
+      "title": "Which attributes are added?",
+      "question": "If attributes are added, should the user be able to configure them, and is `rel=\"noopener noreferrer\"` required alongside `target`?",
+      "tier": "P2",
+      "options": "(a) fixed attributes (b) configurable attributes (c) Other",
+      "status": "open",
+      "blocks": "FR-001"
+    }
+  ],
+  "open_p1": [
+    {
+      "id": "Q-001",
+      "title": "What behaviour is wanted for external links?",
+      "question": "What should the rendered HTML or library behaviour be so that readers do not lose their place?",
+      "tier": "P1",
+      "options": "(a) add `target=\"_blank\"` to external links (b) add `target=\"_blank\"` plus `rel=\"noopener noreferrer\"` (c) add only a `rel` or CSS class so a site can style or script it (d) Other",
+      "status": "open",
+      "blocks": "FR-001"
+    },
+    {
+      "id": "Q-002",
+      "title": "What counts as an external link?",
+      "question": "Which link targets are external?",
+      "tier": "P1",
+      "options": "(a) any absolute URL with a host (`http://`, `https://`) (b) absolute URLs whose host differs from a configured site host (c) any URL with a scheme, including `mailto:` (d) Other",
+      "status": "open",
+      "blocks": "FR-001"
+    },
+    {
+      "id": "Q-003",
+      "title": "Opt-in or default?",
+      "question": "Should the behaviour be off by default, enabled through an extension or option, or applied to every conversion?",
+      "tier": "P1",
+      "options": "(a) opt-in extension or option, default output unchanged (b) on by default (c) Other",
+      "status": "open",
+      "blocks": "FR-001, FR-002"
+    }
+  ],
+  "judge": {}
+}

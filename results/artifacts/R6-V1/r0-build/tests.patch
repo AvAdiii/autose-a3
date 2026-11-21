@@ -1,0 +1,93 @@
+diff --git a/tests/test_syntax/extensions/test_external_links.py b/tests/test_syntax/extensions/test_external_links.py
+new file mode 100644
+index 0000000..9bced01
+--- /dev/null
++++ b/tests/test_syntax/extensions/test_external_links.py
+@@ -0,0 +1,87 @@
++"""Tests for the `external_links` extension."""
++
++import markdown
++from markdown.test_tools import TestCase
++
++LINK = '<p><a href="https://example.com" rel="noopener noreferrer" target="_blank">a</a></p>'
++
++
++class TestExternalLinks(TestCase):
++
++    default_kwargs = {'extensions': ['external_links']}
++
++    def test_ac_fr_001_1_loads_by_name(self):
++        self.assertMarkdownRenders('x', '<p>x</p>')
++
++    def test_ac_fr_001_2_construct(self):
++        markdown.Markdown(extensions=['external_links'])
++
++    def test_ac_fr_002_1_disabled_inline(self):
++        self.assertMarkdownRenders(
++            '[a](https://example.com)',
++            '<p><a href="https://example.com">a</a></p>',
++            extensions=[]
++        )
++
++    def test_ac_fr_002_2_disabled_autolink(self):
++        self.assertMarkdownRenders(
++            '<https://example.com>',
++            '<p><a href="https://example.com">https://example.com</a></p>',
++            extensions=[]
++        )
++
++    def test_ac_fr_003_1_https(self):
++        self.assertMarkdownRenders('[a](https://example.com)', LINK)
++
++    def test_ac_fr_003_2_http(self):
++        self.assertMarkdownRenders(
++            '[a](http://example.com)',
++            '<p><a href="http://example.com" rel="noopener noreferrer" target="_blank">a</a></p>'
++        )
++
++    def test_ac_fr_003_3_reference_link(self):
++        out = markdown.markdown('[a][1]\n\n[1]: https://example.com', extensions=['external_links'])
++        self.assertIn('target="_blank"', out)
++        self.assertIn('rel="noopener noreferrer"', out)
++
++    def test_ac_fr_004_1_autolink(self):
++        self.assertMarkdownRenders(
++            '<https://example.com>',
++            '<p><a href="https://example.com" rel="noopener noreferrer" target="_blank">'
++            'https://example.com</a></p>'
++        )
++
++    def test_ac_fr_005_1_relative(self):
++        self.assertMarkdownRenders('[a](page.html)', '<p><a href="page.html">a</a></p>')
++
++    def test_ac_fr_005_2_anchor(self):
++        self.assertMarkdownRenders('[a](#top)', '<p><a href="#top">a</a></p>')
++
++    def test_ac_fr_005_3_mailto(self):
++        out = markdown.markdown('[a](mailto:me@example.com)', extensions=['external_links'])
++        self.assertIn('<a', out)
++        self.assertNotIn('target=', out)
++        self.assertNotIn('rel=', out)
++
++    def test_ac_fr_006_1_image(self):
++        self.assertMarkdownRenders(
++            '![a](https://example.com/i.png)',
++            '<p><img alt="a" src="https://example.com/i.png" /></p>'
++        )
++
++    def test_ac_fr_006_2_linked_image(self):
++        self.assertMarkdownRenders(
++            '[![a](https://example.com/i.png)](page.html)',
++            '<p><a href="page.html"><img alt="a" src="https://example.com/i.png" /></a></p>'
++        )
++
++    def test_ac_fr_007_1_no_configs(self):
++        md = markdown.Markdown(extensions=['external_links'])
++        self.assertEqual(md.registeredExtensions[0].getConfigs(), {})
++
++    def test_ac_fr_007_2_unknown_option(self):
++        with self.assertRaises(KeyError):
++            markdown.Markdown(
++                extensions=['external_links'],
++                extension_configs={'external_links': {'target': '_self'}}
++            )

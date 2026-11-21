@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "reasons": [],
+  "owner": null,
+  "failing_new": {},
+  "regressions": {},
+  "uncovered": [],
+  "base_new": {
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_1_linenums_flag": {
+      "detail": " .python linenums }\\nprint(1)\\n```')\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize None (type NoneType)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_2_linenums_value": {
+      "detail": "ython linenums=\"true\" }\\nprint(1)\\n```')\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize True (type bool)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses (attr='guess_lang')": {
+      "detail": ".python %s }\\nprint(1)\\n```' % attr)\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize None (type NoneType)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses (attr='guess_lang=\"false\"')": {
+      "detail": " { .python %s }\\nprint(1)\\n```' % attr)\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize False (type bool)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses (attr='guess_lang=\"true\"')": {
+      "detail": "` { .python %s }\\nprint(1)\\n```' % attr)\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize True (type bool)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses (attr='noclasses')": {
+      "detail": ".python %s }\\nprint(1)\\n```' % attr)\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize None (type NoneType)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses (attr='noclasses=\"false\"')": {
+      "detail": " { .python %s }\\nprint(1)\\n```' % attr)\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize False (type bool)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses (attr='noclasses=\"true\"')": {
+      "detail": "` { .python %s }\\nprint(1)\\n```' % attr)\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1092, in _assert_plain_python\n    output = self._convert(source)\n             ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_fenced_code.py\", line 1089, in _convert\n    return markdown.markdown(source, extensions=extensions or self.exts)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 509, in markdown\n    return md.convert(text)\n           ^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 367, in convert\n    self.lines = prep.run(self.lines)\n                 ^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 159, in run\n    kv_pairs = ''.join(\n               ^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/extensions/fenced_code.py\", line 160, in <genexpr>\n    f' {sanitize_name(k)}=\"{_escape_attrib_html(v)}\"'\n                            ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 137, in _escape_attrib_html\n    _raise_serialization_error(text)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/serializers.py\", line 81, in _raise_serialization_error\n    raise TypeError(\nTypeError: cannot serialize True (type bool)\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_4_plain_python": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_003_1_data_attr": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_003_2_data_test_braces": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_004_1_codehilite_linenums": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_004_2_codehilite_linenums_true": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_new": {
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_1_linenums_flag": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_2_linenums_value": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_3_guess_lang_noclasses": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_001_4_plain_python": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_003_1_data_attr": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_003_2_data_test_braces": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_004_1_codehilite_linenums": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_fenced_code.TestFencedCodeWithoutCodehilite.test_ac_fr_004_2_codehilite_linenums_true": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_counts": {
+    "pass": 1122,
+    "skip": 52
+  },
+  "baseline_counts": {
+    "pass": 1114,
+    "skip": 52
+  }
+}

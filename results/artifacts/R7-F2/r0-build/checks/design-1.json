@@ -1,0 +1,42 @@
+{
+  "ok": false,
+  "reasons": [
+    "tests/test_syntax/extensions/test_toc.py: listed as add but the file already exists"
+  ],
+  "rows": [
+    {
+      "file": "markdown/extensions/toc.py",
+      "symbol": "TocTreeprocessor.run",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2"
+      ]
+    },
+    {
+      "file": "tests/test_syntax/extensions/test_toc.py",
+      "symbol": "new TestTOCNoTocClass",
+      "change": "add",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2"
+      ]
+    },
+    {
+      "file": "docs/changelog.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    }
+  ]
+}

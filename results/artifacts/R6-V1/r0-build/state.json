@@ -1,0 +1,77 @@
+{
+  "issue": 5,
+  "round": 0,
+  "start": "requirements",
+  "events": [
+    {
+      "t": "09:36:54",
+      "stage": "requirements",
+      "what": "check failed",
+      "reasons": [
+        "AC-FR-007-1: judged not testable: It is not stated how to obtain 'an instance of the extension' (no class name or factory such as makeExtension is given), so the setup is undefined and a test cannot be written from this text alone."
+      ]
+    }
+  ],
+  "stages": {
+    "requirements": {
+      "status": "passed",
+      "attempts": 2,
+      "reasons": []
+    },
+    "design": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "implementation": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": [],
+      "files": [
+        "docs/changelog.md",
+        "docs/extensions/index.md",
+        "pyproject.toml",
+        "docs/extensions/external_links.md",
+        "docs/reference/markdown.extensions.external_links.md",
+        "markdown/extensions/external_links.py"
+      ]
+    },
+    "testing": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 0,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "ready",
+    "reason": "stages 1-4 passed"
+  },
+  "base": "65eb770b961999de50fb9de0c773b2f493b0d67f",
+  "ready_acs": [
+    "AC-FR-001-1",
+    "AC-FR-001-2",
+    "AC-FR-002-1",
+    "AC-FR-002-2",
+    "AC-FR-003-1",
+    "AC-FR-003-2",
+    "AC-FR-003-3",
+    "AC-FR-004-1",
+    "AC-FR-005-1",
+    "AC-FR-005-2",
+    "AC-FR-005-3",
+    "AC-FR-006-1",
+    "AC-FR-006-2",
+    "AC-FR-007-1",
+    "AC-FR-007-2"
+  ]
+}
