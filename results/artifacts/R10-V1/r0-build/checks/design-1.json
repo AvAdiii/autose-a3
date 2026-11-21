@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "reasons": [],
+  "rows": [
+    {
+      "file": "markdown/extensions/external_links.py",
+      "symbol": "new ExternalLinksTreeprocessor",
+      "change": "add",
+      "acs": [
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-003-3",
+        "AC-FR-004-1",
+        "AC-FR-004-2",
+        "AC-FR-005-1",
+        "AC-FR-006-1",
+        "AC-FR-006-2",
+        "AC-FR-006-3",
+        "AC-FR-006-4",
+        "AC-FR-007-1",
+        "AC-FR-007-2"
+      ]
+    },
+    {
+      "file": "markdown/extensions/external_links.py",
+      "symbol": "new ExternalLinksExtension.extendMarkdown",
+      "change": "add",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-008-1"
+      ]
+    },
+    {
+      "file": "markdown/extensions/external_links.py",
+      "symbol": "new makeExtension",
+      "change": "add",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2"
+      ]
+    },
+    {
+      "file": "pyproject.toml",
+      "symbol": "project.entry-points.'markdown.extensions'",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-008-1"
+      ]
+    },
+    {
+      "file": "tests/test_syntax/extensions/test_external_links.py",
+      "symbol": "new TestExternalLinks",
+      "change": "add",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-003-3",
+        "AC-FR-004-1",
+        "AC-FR-004-2",
+        "AC-FR-005-1",
+        "AC-FR-006-1",
+        "AC-FR-006-2",
+        "AC-FR-006-3",
+        "AC-FR-006-4",
+        "AC-FR-007-1",
+        "AC-FR-007-2",
+        "AC-FR-008-1"
+      ]
+    },
+    {
+      "file": "docs/extensions/external_links.md",
+      "symbol": "-",
+      "change": "add",
+      "acs": []
+    },
+    {
+      "file": "docs/extensions/index.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    },
+    {
+      "file": "mkdocs.yml",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    },
+    {
+      "file": "docs/reference/markdown.extensions.external_links.md",
+      "symbol": "-",
+      "change": "add",
+      "acs": []
+    },
+    {
+      "file": "docs/changelog.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    }
+  ]
+}

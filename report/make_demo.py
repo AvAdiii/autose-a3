@@ -71,14 +71,16 @@ SCENES = [
     ("shot", (f"{GH}/pull/12", None),
      "The pull request is opened by the autose dev bot, CI is green, and the review is posted by a different "
      "identity, GitHub Actions. Main is protected, so only I can merge."),
-    ("shot", (f"{GH}/pull/12", "own acceptance checks"),
-     "The reviewer must run its own checks to approve. Here it ran six, including a comparison of the old and new "
+    ("shot", (f"{GH}/pull/19", "independent review: APPROVE"),
+     "The reviewer must run its own checks to approve. This is its approval on the table of contents feature, with "
+     "the checks it derived from the issue and ran itself. On the attribute list fix it compared the old and new "
      "regular expression on twenty four inputs. In the very first run, the Bash sandbox was missing on the runner, "
      "and the reviewer refused to approve what it could not verify. That is the fail closed behaviour I wanted."),
-    ("shot", (f"{GH}/issues/5", "autose needs answers"),
+    ("shot", (f"{GH}/issues/5", "Q-001"),
      "For the vague issue, the analyst did not guess. It posted three questions and stopped before any code. "
      "After I answered on the issue, the pipeline built the extension, its tests and docs. CI then failed on a docs "
-     "spelling lint, so stage five stopped and said why, and I added the docs checks to stage three."),
+     "spelling lint, so stage five stopped and said why. I added the docs checks to stage three, and the next run "
+     "passed CI and was approved."),
     ("slide", slide("A decision that was wrong",
                     "ADR-007 let the Haiku spec judge fail stage 1.<br>Issue #4: the judge accepted two criteria, then "
                     "rejected<br>the <i>same, unchanged text</i> on the retry. Run stopped.<br><br>ADR-011: verdicts are "
@@ -92,18 +94,19 @@ SCENES = [
                     "E1: isolated vs shared author context. E2: Opus vs Sonnet.</span>"),
      "Two experiments test the reviewer on five seeded pull requests: four with one planted defect, one correct. "
      "Experiment one gives the reviewer the authors' context or not. Experiment two swaps Opus for Sonnet. "
-     "The table shows verdicts, defects found, routing and false rejections for each cell. The details and what they "
-     "mean for the two decisions are in the report."),
+     "All three cells scored perfectly, a ceiling effect, so neither hypothesis was supported. Isolation stays because "
+     "it costs nothing, and since Sonnet matched Opus at about sixty percent of the tokens, I superseded the reviewer "
+     "model decision with ADR twelve, as the rule I wrote before the experiment required."),
     ("slide", slide("Results on the five issues",
                     table([("#1 B1 bug", "approved PR #16", "4/4"), ("#2 B2 bug", "approved PR #12", "4/4"),
                            ("#3 F1 feature", "approved PR #15", "4/4"), ("#4 F2 feature", "judge stop, then approved #19", "4/4"),
-                           ("#5 V1 vague", "questions, then PR #18 (docs CI fail)", "4/4")],
+                           ("#5 V1 vague", "questions, CI docs fail, then approved #18", "4/4")],
                           ["issue", "outcome", "hidden tests"])
-                    + "<br><span style='font-size:25px'>Per issue: 6 to 8 agent sessions, 16k to 25k output tokens, "
-                      "6 to 8 minutes.</span>"),
+                    + "<br><span style='font-size:25px'>Per issue: 6 to 10 agent sessions, 16k to 28k output tokens, "
+                      "6 to 10 minutes.</span>"),
      "Across the five issues, every released change passed all of its hidden acceptance tests, which the agents never "
-     "saw. Four pull requests were approved by the reviewer; the vague one was stopped by CI. Each issue took six to "
-     "eight agent sessions and six to eight minutes."),
+     "saw, and all five pull requests ended approved by the reviewer, waiting for me to merge. A successful run took "
+     "six to ten agent sessions and six to ten minutes."),
     ("slide", slide("Limits",
                     "One trial per cell: direction, not significance.<br>Guard rules for Bash are patterns; the real "
                     "fences are<br>the path filter, missing credentials and the sandbox.<br>The subscription quota is a "

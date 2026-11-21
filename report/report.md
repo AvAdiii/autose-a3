@@ -116,16 +116,16 @@ defect, fixed before the runs). The variants were written down before any run (`
 | #2 B2 empty attr list | bug | R0 → R1 | approved PR (after sandbox fix) | 1/1/1/1 | 11 | [#12](https://github.com/AvAdiii/markdown/pull/12) | ✓ | approve | 4/4 | 19.5k | 6.6 min |
 | #3 F1 wikilink labels | feature | R3 | approved PR | 2/1/1/1 | 10 | [#15](https://github.com/AvAdiii/markdown/pull/15) | ✓ | approve | 4/4 | 21.4k | 5.9 min |
 | #4 F2 toc exclusion | feature | R4 → R7 | stopped (judge), then approved | 1/2/1/1 | 7 | [#19](https://github.com/AvAdiii/markdown/pull/19) | ✓ | approve | 4/4 | 15.9k | 6.6 min |
-| #5 V1 vague | vague | R5 → R6 → R8 | asked 3 questions; after answer, PR with CI docs-lint failure | 2/1/1/1 | 15 | [#18](https://github.com/AvAdiii/markdown/pull/18) | ✗ | – | 4/4 | 24.7k | 7.4 min |
+| #5 V1 vague | vague | R5 → R6 → R10 | questions; after answer, CI docs fail; then approved | 1/1/2/2 | 17 | [#18](https://github.com/AvAdiii/markdown/pull/18) | ✓ | approve | 4/4 | 28.3k | 9.6 min |
 
 * **Vague issue (V1).** R5 stopped after the analyst alone: three P1 questions were posted and no
   code was written. After the maintainer answered, the pipeline built the extension, its tests, its
   docs page and its entry point. CI then failed two **docs lints**: an unresolved API-reference link
   and the word "treeprocessor" in a docstring. Stage 5 stopped and explained, as specified. Harness
-  PR #20 now runs both lints in stage 3. R8, the rerun, could not start because the Pro quota was
-  used up; that stop is logged too.
-* **Costs.** Per issue: 6–8 agent sessions, 16–25k output tokens and 6–8 min of wall-clock time.
-  The CLI's API-price equivalent is $0.51–0.64 per issue.
+  PR #20 now runs both lints in stage 3. Two reruns (R8, R9) stopped at their first agent call on the
+  Pro 5-hour limit and said so. R10 then passed CI and was approved, with all 4 hidden tests passing.
+* **Costs.** For a successful run: 6–10 agent sessions, 16–28k output tokens and 6–10 min of
+  wall-clock time. The CLI's API-price equivalent is about $0.5–0.8 per issue.
 * **Totals.** {{TOTALS}}
 * **Every run** is linked in `results/runs.md`, with its artifacts in `results/artifacts/`.
 
@@ -146,7 +146,8 @@ defect, fixed before the runs). The variants were written down before any run (`
   cheap fix. I would now treat any LLM verdict as a cached sample from the start.
 
 * **Narrow agents made the outcomes boring, which is the point.** No build-stage session exceeded
-  10 turns. The design retry in R7 and the spec retries in R2, R3 and R6 were all resolved by
+  10 turns. The design retry in R7, the spec retries in R2, R3 and R6, and the implementation/testing loop in
+  R10 (two attempts each) were all resolved by
   feedback from a code check, not by the model noticing its own error.
 
 * **Fail closed.** The reviewer refused to approve in R0. The quota stop in R8 explained itself and

@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "reasons": [],
+  "owner": null,
+  "failing_new": {},
+  "regressions": {},
+  "uncovered": [],
+  "base_new": {
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_1_loads_by_name": {
+      "detail": "1_loads_by_name\n    markdown.markdown('[a](https://example.com)', extensions=EXT)\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_2_plain_text_unchanged": {
+      "detail": "me/runner/work/markdown/markdown/ws/tests/test_syntax/extensions/test_external_links.py\", line 15, in test_ac_fr_001_2_plain_text_unchanged\n    md = markdown.Markdown(extensions=EXT)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_1_disabled_inline_link": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_2_disabled_autolink": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_1_https_inline_link": {
+      "detail": "ions=EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_2_http_link_with_query": {
+      "detail": "EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_3_text_and_href_unchanged": {
+      "detail": "ions=EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_1_autolink": {
+      "detail": "ensions=EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_2_mailto_autolinks": {
+      "detail": "wn.markdown(src, extensions=EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_005_1_reference_link": {
+      "detail": "          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_1_relative_absolute_path": {
+      "detail": "st_ac_fr_006_1_relative_absolute_path\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 75, in assertMarkdownRenders\n    md = Markdown(**kws)\n         ^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_2_anchor": {
+      "detail": ", line 74, in test_ac_fr_006_2_anchor\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 75, in assertMarkdownRenders\n    md = Markdown(**kws)\n         ^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_3_mailto_link": {
+      "detail": "ons=EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_4_relative_file": {
+      "detail": "87, in test_ac_fr_006_4_relative_file\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 75, in assertMarkdownRenders\n    md = Markdown(**kws)\n         ^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_1_image_only": {
+      "detail": "ne 94, in test_ac_fr_007_1_image_only\n    self.assertMarkdownRenders(\n  File \"/home/runner/work/markdown/markdown/ws/markdown/test_tools.py\", line 75, in assertMarkdownRenders\n    md = Markdown(**kws)\n         ^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_2_linked_image": {
+      "detail": "c_fr_007_2_linked_image\n    out = markdown.markdown(\n          ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_008_1_no_config_needed": {
+      "detail": "ions=EXT)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 508, in markdown\n    md = Markdown(**kwargs)\n         ^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 128, in __init__\n    self.registerExtensions(extensions=kwargs.get('extensions', []),\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 181, in registerExtensions\n    ext = self.build_extension(ext, configs.get(ext, {}))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/markdown/markdown/ws/markdown/core.py\", line 220, in build_extension\n    ext = entry_points[0].load()\n          ^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/metadata/__init__.py\", line 205, in load\n    module = import_module(match.group('module'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/importlib/__init__.py\", line 90, in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen importlib._bootstrap>\", line 1387, in _gcd_import\n  File \"<frozen importlib._bootstrap>\", line 1360, in _find_and_load\n  File \"<frozen importlib._bootstrap>\", line 1324, in _find_and_load_unlocked\nModuleNotFoundError: No module named 'markdown.extensions.external_links'\n",
+      "outcome": "error"
+    }
+  },
+  "head_new": {
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_1_loads_by_name": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_2_plain_text_unchanged": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_1_disabled_inline_link": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_2_disabled_autolink": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_1_https_inline_link": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_2_http_link_with_query": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_3_text_and_href_unchanged": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_1_autolink": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_2_mailto_autolinks": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_005_1_reference_link": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_1_relative_absolute_path": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_2_anchor": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_3_mailto_link": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_4_relative_file": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_1_image_only": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_2_linked_image": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_008_1_no_config_needed": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_counts": {
+    "pass": 1072,
+    "skip": 111
+  },
+  "baseline_counts": {
+    "pass": 1055,
+    "skip": 111
+  }
+}

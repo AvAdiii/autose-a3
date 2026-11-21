@@ -25,12 +25,12 @@ transcript.
 | R7-F2 | #4 F2 | [44890548514](https://github.com/AvAdiii/markdown/actions/runs/44890548514) | `/autose` | 1/2/1/1 | [#19](https://github.com/AvAdiii/markdown/pull/19) | pass | approve | 4/4 | approved PR | 15,859 | 398 s |
 | R8-V1 | #5 V1 | [44893689623](https://github.com/AvAdiii/markdown/actions/runs/44893689623) | `/autose` | 1/–/–/– | – | – | – | – | stopped: Claude Pro 5-hour limit | 0 | 124 s |
 | R9-V1 | #5 V1 | [44895471619](https://github.com/AvAdiii/markdown/actions/runs/44895471619) | `/autose` | 1/–/–/– | – | – | – | – | stopped: Claude Pro 5-hour limit | 0 | 155 s |
-{{R10}}
+| R10-V1 | #5 V1 | [44896794171](https://github.com/AvAdiii/markdown/actions/runs/44896794171) | `/autose` (new token) | 1/1/2/2 | [#18](https://github.com/AvAdiii/markdown/pull/18) | pass | approve | 4/4 | approved PR (docs checks in stage 3 passed CI) | 28,310 | 573 s |
 
 Reviews by the reviewer on the pipeline PRs are on the PRs themselves, posted by
 `github-actions[bot]`: [#12](https://github.com/AvAdiii/markdown/pull/12),
 [#15](https://github.com/AvAdiii/markdown/pull/15), [#16](https://github.com/AvAdiii/markdown/pull/16),
-[#19](https://github.com/AvAdiii/markdown/pull/19). Every PR is still open for the maintainer to
+[#19](https://github.com/AvAdiii/markdown/pull/19). R10 used a new `CLAUDE_CODE_OAUTH_TOKEN` (the same subscription plan, a second account's quota window). Every PR is still open for the maintainer to
 merge or close; the workflow never merges.
 
 ## What each incident taught, and the harness PR that fixed it
@@ -60,7 +60,23 @@ Started by `results/dispatch_reviews.sh` (production review job, `workflow_dispa
 `start_stage=review`, `rework=false`) and scored by `results/score_reviews.py`. Each review is
 also posted on its seeded PR ([#6](https://github.com/AvAdiii/markdown/pull/6)–[#10](https://github.com/AvAdiii/markdown/pull/10)).
 
-{{EXPERIMENT_RUNS}}
+| Cell | Seeded | PR | Run | Verdict | Route | Defect found | Own checks run | Output tokens |
+|---|---|---|---|---|---|---|---|---|
+| opus-isolated | S1 | [#6](https://github.com/AvAdiii/markdown/pull/6) | [44890809280](https://github.com/AvAdiii/markdown/actions/runs/44890809280) | request_changes | implementation | yes | 6 | 2,868 |
+| opus-isolated | S2 | [#7](https://github.com/AvAdiii/markdown/pull/7) | [44890825281](https://github.com/AvAdiii/markdown/actions/runs/44890825281) | request_changes | implementation | yes | 5 | 1,880 |
+| opus-isolated | S3 | [#8](https://github.com/AvAdiii/markdown/pull/8) | [44890841473](https://github.com/AvAdiii/markdown/actions/runs/44890841473) | request_changes | design | yes | 7 | 2,727 |
+| opus-isolated | S4 | [#9](https://github.com/AvAdiii/markdown/pull/9) | [44890851656](https://github.com/AvAdiii/markdown/actions/runs/44890851656) | approve | – | n/a | 7 | 4,427 |
+| opus-isolated | S5 | [#10](https://github.com/AvAdiii/markdown/pull/10) | [44890867863](https://github.com/AvAdiii/markdown/actions/runs/44890867863) | request_changes | implementation | yes | 7 | 2,527 |
+| opus-shared | S1 | [#6](https://github.com/AvAdiii/markdown/pull/6) | [44896794659](https://github.com/AvAdiii/markdown/actions/runs/44896794659) | request_changes | implementation | yes | 6 | 2,905 |
+| opus-shared | S2 | [#7](https://github.com/AvAdiii/markdown/pull/7) | [44896830144](https://github.com/AvAdiii/markdown/actions/runs/44896830144) | request_changes | implementation | yes | 6 | 2,100 |
+| opus-shared | S3 | [#8](https://github.com/AvAdiii/markdown/pull/8) | [44896839711](https://github.com/AvAdiii/markdown/actions/runs/44896839711) | request_changes | design | yes | 8 | 3,015 |
+| opus-shared | S4 | [#9](https://github.com/AvAdiii/markdown/pull/9) | [44896854333](https://github.com/AvAdiii/markdown/actions/runs/44896854333) | approve | – | n/a | 6 | 5,453 |
+| opus-shared | S5 | [#10](https://github.com/AvAdiii/markdown/pull/10) | [44896874565](https://github.com/AvAdiii/markdown/actions/runs/44896874565) | request_changes | implementation | yes | 5 | 2,338 |
+| sonnet-isolated | S1 | [#6](https://github.com/AvAdiii/markdown/pull/6) | [44896915224](https://github.com/AvAdiii/markdown/actions/runs/44896915224) | request_changes | implementation | yes | 3 | 1,512 |
+| sonnet-isolated | S2 | [#7](https://github.com/AvAdiii/markdown/pull/7) | [44896933378](https://github.com/AvAdiii/markdown/actions/runs/44896933378) | request_changes | implementation | yes | 3 | 1,393 |
+| sonnet-isolated | S3 | [#8](https://github.com/AvAdiii/markdown/pull/8) | [44896946310](https://github.com/AvAdiii/markdown/actions/runs/44896946310) | request_changes | design | yes | 5 | 2,154 |
+| sonnet-isolated | S4 | [#9](https://github.com/AvAdiii/markdown/pull/9) | [44896965636](https://github.com/AvAdiii/markdown/actions/runs/44896965636) | approve | – | n/a | 5 | 1,443 |
+| sonnet-isolated | S5 | [#10](https://github.com/AvAdiii/markdown/pull/10) | [44896984226](https://github.com/AvAdiii/markdown/actions/runs/44896984226) | request_changes | implementation | yes | 3 | 1,933 |
 
 Ten earlier dispatches of the `opus-shared` and `sonnet-isolated` cells
 (`review_runs_quota_failed.csv`) hit the Claude Pro 5-hour limit and produced no verdict. They were

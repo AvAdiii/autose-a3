@@ -1,0 +1,148 @@
+{
+  "issue": 5,
+  "round": 0,
+  "start": "requirements",
+  "events": [
+    {
+      "t": "11:03:12",
+      "stage": "testing",
+      "what": "developer disputes a test",
+      "dispute": "TEST_DISPUTE: tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_008_1_no_config_needed: AC-FR-008-1 only requires the output to match AC-FR-003-1, and the spec's findings say attribute order is unspecified. The test asserts an exact `href, target, rel` order, which the core serializer's lexical sorting (`href, rel, target`) makes impossible without a core change."
+    }
+  ],
+  "stages": {
+    "requirements": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "design": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "implementation": {
+      "status": "passed",
+      "attempts": 2,
+      "reasons": [],
+      "files": [
+        "docs/changelog.md",
+        "docs/extensions/index.md",
+        "mkdocs.yml",
+        "pyproject.toml",
+        "docs/extensions/external_links.md",
+        "docs/reference/markdown.extensions.external_links.md",
+        "markdown/extensions/external_links.py"
+      ]
+    },
+    "testing": {
+      "status": "passed",
+      "attempts": 2,
+      "reasons": []
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 1,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "ready",
+    "reason": "stages 1-4 passed"
+  },
+  "base": "10be0dd38b9bfa065501d248c522fdf530743946",
+  "judge_cache": {
+    "Given the text `[a](https://example.com)`, when `markdown.markdown(text, extensions=['external_links'])` is called, then no exception is raised.": {
+      "testable": true,
+      "reason": "The input text, the call `markdown.markdown(text, extensions=['external_links'])`, and the outcome (no exception raised) are all stated exactly."
+    },
+    "Given an instance `markdown.Markdown(extensions=['external_links'])`, when `convert('text')` is called, then the result is `<p>text</p>`.": {
+      "testable": true,
+      "reason": "The instance construction, the `convert('text')` call, and the exact expected string `<p>text</p>` are all specified."
+    },
+    "Given the text `[a](https://example.com)`, when `markdown.markdown(text)` is called, then the result is `<p><a href=\"https://example.com\">a</a></p>`.": {
+      "testable": true,
+      "reason": "The input, the call without extensions, and the exact expected HTML string are fully specified."
+    },
+    "Given the text `<https://example.com>`, when `markdown.markdown(text)` is called with no extensions, then the result contains neither `target=` nor `rel=`.": {
+      "testable": true,
+      "reason": "The input and the call without extensions are given, and the outcome (output contains neither `target=` nor `rel=`) is a concrete substring check."
+    },
+    "Given the text `[a](https://example.com)` and the extension enabled, when converted, then the output contains one `<a` start tag whose attributes include `href=\"https://example.com\"`, `target=\"_blank\"` and `rel=\"noopener noreferrer\"`.": {
+      "testable": true,
+      "reason": "The input and extension are given, and the outcome is a checkable condition: one `<a` start tag whose attributes include the three stated values, with attribute order left unconstrained by the wording 'include'."
+    },
+    "Given the text `[a](http://example.com/x?y=1)` and the extension enabled, when converted, then the `<a` start tag includes `target=\"_blank\"` and `rel=\"noopener noreferrer\"`.": {
+      "testable": true,
+      "reason": "The input and extension are given, and the outcome (the `<a` start tag includes `target=\"_blank\"` and `rel=\"noopener noreferrer\"`) is an exact attribute check."
+    },
+    "Given the text `[a](https://example.com)` and the extension enabled, when converted, then the link text and `href` are unchanged: the output contains `href=\"https://example.com\"` and `>a</a>`.": {
+      "testable": true,
+      "reason": "The input and extension are given, and the outcome is two concrete substring checks: `href=\"https://example.com\"` and `>a</a>`."
+    },
+    "Given the text `<https://example.com>` and the extension enabled, when converted, then the `<a` start tag includes `href=\"https://example.com\"`, `target=\"_blank\"` and `rel=\"noopener noreferrer\"`.": {
+      "testable": true,
+      "reason": "The autolink input and extension are given, and the outcome (the `<a` start tag includes the href, target and rel values) is an exact attribute check."
+    },
+    "Given the text `<mailto:a@example.com>` or `<a@example.com>` and the extension enabled, when converted, then the output contains neither `target=` nor `rel=`.": {
+      "testable": true,
+      "reason": "Both alternative inputs are explicitly listed and the outcome (output contains neither `target=` nor `rel=`) is a concrete substring check for each."
+    },
+    "Given the text `[a][1]` followed by a blank line and `[1]: https://example.com`, with the extension enabled, when converted, then the `<a` start tag includes `target=\"_blank\"` and `rel=\"noopener noreferrer\"`.": {
+      "testable": true,
+      "reason": "The reference-link input with its definition, the extension, and the expected start-tag attributes are all stated."
+    },
+    "Given the text `[a](/docs/page.html)` and the extension enabled, when converted, then the result is `<p><a href=\"/docs/page.html\">a</a></p>`.": {
+      "testable": true,
+      "reason": "The relative-path input, the extension, and the exact expected HTML string are fully specified."
+    },
+    "Given the text `[a](#section)` and the extension enabled, when converted, then the result is `<p><a href=\"#section\">a</a></p>`.": {
+      "testable": true,
+      "reason": "The fragment-link input, the extension, and the exact expected HTML string are fully specified."
+    },
+    "Given the text `[a](mailto:a@example.com)` and the extension enabled, when converted, then the output contains neither `target=` nor `rel=`.": {
+      "testable": true,
+      "reason": "The mailto input and extension are given, and the outcome (output contains neither `target=` nor `rel=`) is a concrete substring check."
+    },
+    "Given the text `[a](page.html)` and the extension enabled, when converted, then the result is `<p><a href=\"page.html\">a</a></p>`.": {
+      "testable": true,
+      "reason": "The bare relative-path input, the extension, and the exact expected HTML string are fully specified."
+    },
+    "Given the text `![alt](https://example.com/i.png)` and the extension enabled, when converted, then the result is `<p><img alt=\"alt\" src=\"https://example.com/i.png\" /></p>`.": {
+      "testable": true,
+      "reason": "The image input, the extension, and the exact expected HTML string `<p><img alt=\"alt\" src=\"https://example.com/i.png\" /></p>` are all stated."
+    },
+    "Given the text `[![alt](https://example.com/i.png)](https://example.com)` and the extension enabled, when converted, then the `<a` start tag includes `target=\"_blank\"` and `rel=\"noopener noreferrer\"`, and the `<img` tag contains neither `target=` nor `rel=`.": {
+      "testable": true,
+      "reason": "The linked-image input and extension are given, and the outcome is two checkable conditions on the `<a` start tag and the `<img` tag's attributes."
+    },
+    "Given the extension named `external_links`, when `markdown.markdown('[a](https://example.com)', extensions=['external_links'])` is called, then no configuration is needed and the output matches AC-FR-003-1.": {
+      "testable": true,
+      "reason": "The call with the extension name and no configuration is given, and the expected output is defined by the explicit attribute checks in AC-FR-003-1, which is a concrete outcome."
+    }
+  },
+  "ready_acs": [
+    "AC-FR-001-1",
+    "AC-FR-001-2",
+    "AC-FR-002-1",
+    "AC-FR-002-2",
+    "AC-FR-003-1",
+    "AC-FR-003-2",
+    "AC-FR-003-3",
+    "AC-FR-004-1",
+    "AC-FR-004-2",
+    "AC-FR-005-1",
+    "AC-FR-006-1",
+    "AC-FR-006-2",
+    "AC-FR-006-3",
+    "AC-FR-006-4",
+    "AC-FR-007-1",
+    "AC-FR-007-2",
+    "AC-FR-008-1"
+  ]
+}

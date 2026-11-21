@@ -1,0 +1,68 @@
+{
+  "verdict": "approve",
+  "summary": "The PR does what the maintainer decided. It adds a built-in `external_links` extension, loadable by its short name. The extension is a tree processor at priority 15, so it runs after inline parsing (20) and before prettify (10). It adds `target=\"_blank\"` and `rel=\"noopener noreferrer\"` to every `<a>` whose href starts with `http://` or `https://`, including automatic links. Relative links, `#anchors`, `mailto:` links and images are left alone, and output is unchanged when the extension is not enabled. The PR follows ARCHITECTURE.md: it subclasses `Extension`, defines `makeExtension`, has an entry point in `pyproject.toml`, keeps no state between documents and does not touch the core. It also adds a changelog entry and docs pages wired into `mkdocs.yml`. All my probes and the full test suite pass, and I found no blocking problems.",
+  "own_checks": [
+    {
+      "check": "Loads by short name `extensions=['external_links']` through the entry point; the dotted path also works",
+      "command": "python probe: importlib.metadata entry_points + markdown.markdown(..., extensions=['markdown.extensions.external_links'])",
+      "result": "pass",
+      "output_excerpt": "['markdown.extensions.external_links:ExternalLinksExtension']; <p><a href=\"https://x.com\" rel=\"noopener noreferrer\" target=\"_blank\">a</a></p>"
+    },
+    {
+      "check": "https and http inline links (http one with a query string) get target and rel; href and text unchanged",
+      "command": "python $TMPDIR/p/probe.py in.txt",
+      "result": "pass",
+      "output_excerpt": "'[a](http://x.com/?a=1&b=2)' => <p><a href=\"http://x.com/?a=1&amp;b=2\" rel=\"noopener noreferrer\" target=\"_blank\">a</a></p>"
+    },
+    {
+      "check": "Automatic links <https://...> and <http://...> get target and rel",
+      "command": "python $TMPDIR/p/probe.py in.txt",
+      "result": "pass",
+      "output_excerpt": "'<https://x.com>' => <p><a href=\"https://x.com\" rel=\"noopener noreferrer\" target=\"_blank\">https://x.com</a></p>"
+    },
+    {
+      "check": "Relative links, /paths, #anchors, mailto links, email automatic links and protocol-relative //x.com are not changed",
+      "command": "python $TMPDIR/p/probe.py in.txt",
+      "result": "pass",
+      "output_excerpt": "'[a](/p)' => <p><a href=\"/p\">a</a></p>; '[a](#s)' => <p><a href=\"#s\">a</a></p>; '[a](mailto:a@b.c)' => <p><a href=\"mailto:a@b.c\">a</a></p>"
+    },
+    {
+      "check": "Images are unaffected; for a linked image only the outer <a> changes",
+      "command": "python $TMPDIR/p/probe.py in.txt",
+      "result": "pass",
+      "output_excerpt": "<p><a href=\"https://x.com\" rel=\"noopener noreferrer\" target=\"_blank\"><img alt=\"i\" src=\"https://x/i.png\" /></a></p>"
+    },
+    {
+      "check": "Reference links with a title and links nested in emphasis are handled",
+      "command": "python $TMPDIR/p/probe.py in.txt",
+      "result": "pass",
+      "output_excerpt": "<a href=\"https://x.com\" rel=\"noopener noreferrer\" target=\"_blank\" title=\"T\">a</a>"
+    },
+    {
+      "check": "Output is unchanged when the extension is off; works alongside footnotes/toc/extra/wikilinks (links inside footnote text change; footnote, TOC and wikilinks do not); a reused Markdown instance gives the same output after reset()",
+      "command": "python combo probe with in2.txt",
+      "result": "pass",
+      "output_excerpt": "footnote body: <a href=\"https://y.com\" rel=\"noopener noreferrer\" target=\"_blank\">b</a>; footnote-ref/TOC/wikilink untouched; reuse equality True; without ext: <a href=\"https://x.com\">a</a>"
+    },
+    {
+      "check": "Full test suite and the PR's tests pass",
+      "command": "python -m unittest discover tests; python -m unittest tests.test_syntax.extensions.test_external_links",
+      "result": "pass",
+      "output_excerpt": "Ran 1183 tests in 0.972s OK (skipped=52); OK"
+    }
+  ],
+  "findings": [],
+  "notes": [
+    "The scheme check is case-sensitive, so `[a](HTTPS://x.com)` is not treated as external. This matches the maintainer's literal rule ('starts with http:// or https://'). A case-insensitive check would be a reasonable follow-up.",
+    "Raw inline HTML `<a href=\"https://...\">` is not changed because it is stashed (ADR-3). This is consistent with the architecture, and the docs could mention it.",
+    "The two 'disabled' tests (test_ac_fr_002_*) would pass without the PR. They are regression guards, which is fine; the other tests do exercise the new behaviour.",
+    "The new row in the docs/extensions/index.md table has a slightly misaligned column width. This is cosmetic.",
+    "A hook blocked shell commands containing literal URLs, so I generated the probe inputs indirectly into $TMPDIR."
+  ],
+  "route": "",
+  "model": "claude-opus-5-5",
+  "variant": "isolated",
+  "round": 0,
+  "validation_notes": [],
+  "pr": 18
+}

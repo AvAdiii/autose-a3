@@ -6,7 +6,7 @@
     "developer": "claude-sonnet-5-5",
     "tester": "claude-sonnet-5-5",
     "judge": "claude-haiku-5-5",
-    "reviewer": "claude-opus-5-5"
+    "reviewer": "claude-sonnet-5-5"
   },
   "max_turns": {
     "analyst": 40,
@@ -30,7 +30,7 @@
   "ci_wait_s": 900,
   "branch_prefix": "autose/issue-",
   "label": "autose",
-  "developer_write_globs": ["markdown/**", "docs/**", "pyproject.toml", "README.md"],
+  "developer_write_globs": ["markdown/**", "docs/**", "pyproject.toml", "README.md", "mkdocs.yml"],
   "tester_write_globs": ["tests/**"],
   "test_runner_start": "tests"
 }

@@ -1,0 +1,70 @@
+{
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_1_loads_by_name": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_001_2_plain_text_unchanged": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_1_disabled_inline_link": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_002_2_disabled_autolink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_1_https_inline_link": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_2_http_link_with_query": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_003_3_text_and_href_unchanged": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_1_autolink": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_004_2_mailto_autolinks": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_005_1_reference_link": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_1_relative_absolute_path": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_2_anchor": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_3_mailto_link": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_006_4_relative_file": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_1_image_only": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_007_2_linked_image": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_syntax.extensions.test_external_links.TestExternalLinks.test_ac_fr_008_1_no_config_needed": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}
