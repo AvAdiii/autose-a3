@@ -37,9 +37,9 @@ flowchart TB
     subgraph REL["release job · App token (contents, PRs) · no model"]
       RELPY["release.py<br/>apply diff.patch, push branch,<br/>open/update PR, wait for CI"]
     end
-    subgraph REV["review job · contents:read, pull-requests:write · fresh runner"]
+    subgraph REV["review job · contents:read, pull-requests:write, issues:write · fresh runner"]
       RVA["Reviewer agent<br/>Opus · Read Grep Glob Bash<br/>no Edit/Write, no token in env"]
-      POST["post_review.py<br/>schema check, post PR review,<br/>route: approve | design | implementation | ..."]
+      POST["review.py (after the agent exits)<br/>schema check, post PR review,<br/>route: approve | design | implementation | ..."]
     end
   end
 
@@ -67,7 +67,7 @@ flowchart TB
 |---|---|---|---|---|
 | `autose.yml` | caller workflow | GitHub Actions | `permissions: {}` at top; each job widens only what it needs | gate job, then `autose-round.yml` up to 3 times |
 | gate job | deterministic | `ubuntu-latest` | `issues: write` (reaction + status comment), API read of collaborator permission | decides start stage and issue number, writes `trigger.json` |
-| `autose-round.yml` | reusable workflow | GitHub Actions | build → release → review jobs | `orchestrator.py`, `release.py`, reviewer + `post_review.py` |
+| `autose-round.yml` | reusable workflow | GitHub Actions | build → release → review jobs | `orchestrator.py`, `release.py`, reviewer + `review.py` |
 | `orchestrator.py` | deterministic state machine (Python) | build job | `GITHUB_TOKEN` (issues: write) kept in its own process; spawns agents with a scrubbed environment | the four builder agents, the spec judge, `checks.py` |
 | Analyst | Claude Code headless, `claude-sonnet-5-5` | build job | `Read Grep Glob Write`; Write only to `spec.md` | none |
 | Architect | Claude Code headless, `claude-sonnet-5-5` | build job | `Read Grep Glob Write Bash`; Write only to `design.md`; Bash for read-only probes, tree reset afterwards | none |
@@ -76,9 +76,9 @@ flowchart TB
 | Spec judge | Claude Code headless, `claude-haiku-5-5`, no tools, `--json-schema` | build job | none | none |
 | `checks.py` | deterministic | build job | Python AST, `compileall`, `flake8`, `unittest` | none |
 | `guard.py` | PreToolUse hook | every agent | denies tool calls outside the role's policy and logs them | none |
-| `release.py` | deterministic | release job | short-lived GitHub App token (`autose-dev`: contents + pull requests write, **no workflows permission**) | `git push`, `gh pr create/edit`, `gh pr checks` |
+| `release.py` | deterministic | release job | short-lived GitHub App token (`autose-dev-avadiii`: contents + pull requests write, **no workflows permission**) | `git push`, `gh pr create/edit`, `gh pr checks` |
 | Reviewer | Claude Code headless, `claude-opus-5-5`, `--json-schema` | review job (fresh VM) | `Read Grep Glob Bash`; no Edit/Write; environment has no GitHub token; `persist-credentials: false` | none |
-| `post_review.py` | deterministic | review job | `GITHUB_TOKEN` (pull-requests: write), used after the reviewer process has exited | posts the PR review, emits the route |
+| `review.py` (posting half) | deterministic | review job | `GITHUB_TOKEN` (pull-requests: write, issues: write for the status comment), used only after the reviewer process has exited | validates the verdict, posts the PR review, emits the route |
 
 ## Information each agent receives
 
