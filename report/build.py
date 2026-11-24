@@ -31,7 +31,7 @@ line,path.l{stroke:#333;stroke-width:1.2;marker-end:url(#a);fill:none}</style>
 <rect class="b" x="550" y="48" width="95" height="44" rx="4"/><text x="597" y="64" text-anchor="middle" class="t">5 release</text>
 <text x="597" y="78" text-anchor="middle">App push, PR, CI</text>
 <rect class="b" x="550" y="118" width="95" height="54" rx="4"/><text x="597" y="134" text-anchor="middle" class="t">6 review</text>
-<text x="597" y="148" text-anchor="middle">fresh VM, Opus</text><text x="597" y="162" text-anchor="middle">issue+diff only</text>
+<text x="597" y="148" text-anchor="middle">fresh VM, no push</text><text x="597" y="162" text-anchor="middle">issue+diff only</text>
 <rect class="b" x="665" y="80" width="88" height="44" rx="5"/><text x="709" y="98" text-anchor="middle" class="t">Human</text>
 <text x="709" y="113" text-anchor="middle">merges</text>
 <line x1="85" y1="102" x2="104" y2="102"/><line x1="175" y1="102" x2="194" y2="102"/>
@@ -39,6 +39,55 @@ line,path.l{stroke:#333;stroke-width:1.2;marker-end:url(#a);fill:none}</style>
 <line x1="645" y1="140" x2="664" y2="112"/>
 <path class="l" d="M597,172 L597,190 L235,190 L235,83"/><text x="300" y="185">request_changes → earliest stage named (≤2 rounds)</text>
 </svg>"""
+
+LANES = ["Maintainer", "gate", "build: orchestrator", "agents (Sonnet/Haiku)", "release (App)", "fork CI", "review job"]
+MSGS = [  # (from, to, label, time)
+    (0, 1, "/autose on issue #2", "09:26:22"),
+    (1, 2, "permission=admin; trigger.json", "09:26:30"),
+    (2, 3, "analyst: issue in <untrusted-issue>", ""),
+    (3, 2, "spec.md 11 ACs; judge 11/11 testable", "09:28:04"),
+    (2, 3, "architect: spec + ARCHITECTURE.md", ""),
+    (3, 2, "design.md; AST check passed", ""),
+    (2, 3, "developer: spec + design", ""),
+    (3, 2, "diff.patch; build check passed", ""),
+    (2, 3, "tester at base bb9e8d8", ""),
+    (3, 2, "fail on base, pass on head; 1114→1125", "09:29:21"),
+    (2, 4, "artifact r0-build", ""),
+    (4, 5, "push 30f9655, PR #12", "09:29:39"),
+    (5, 4, "13 checks green", "09:31:46"),
+    (4, 6, "pr=12, ci_ok", ""),
+    (6, 6, "issue + diff only; 6 own checks", ""),
+    (6, 0, "APPROVED review on PR #12", "09:32:54"),
+]
+
+
+def seq_svg() -> str:
+    W, top, dy = 760, 30, 17
+    xs = [45, 135, 235, 450, 560, 645, 712]  # wide gap where the agent hand-offs are labelled
+    H = top + dy * (len(MSGS) + 1) + 10
+    o = [f'<svg viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica" font-size="9.5">',
+         '<defs><marker id="s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">'
+         '<path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>']
+    for x, n in zip(xs, LANES):
+        o.append(f'<rect x="{x-52}" y="4" width="104" height="18" rx="3" fill="#eef1f6" stroke="#334"/>'
+                 f'<text x="{x}" y="16" text-anchor="middle" font-weight="bold">{n}</text>'
+                 f'<line x1="{x}" y1="22" x2="{x}" y2="{H-4}" stroke="#bbb" stroke-dasharray="3 3"/>')
+    for i, (a, b, lab, t) in enumerate(MSGS):
+        y = top + dy * (i + 1)
+        if a == b:
+            x = xs[a]
+            o.append(f'<path d="M{x},{y-6} h18 v8 h-16" fill="none" stroke="#333" marker-end="url(#s)"/>'
+                     f'<text x="{x-6}" y="{y-8}" text-anchor="end">{lab}</text>')
+        else:
+            x1, x2 = xs[a], xs[b]
+            o.append(f'<line x1="{x1}" y1="{y}" x2="{x2 + (-3 if x2 > x1 else 3)}" y2="{y}" stroke="#333" '
+                     f'marker-end="url(#s)"{" stroke-dasharray=\"4 2\"" if b < a else ""}/>'
+                     f'<text x="{(x1+x2)/2}" y="{y-3}" text-anchor="middle">{lab}</text>')
+        if t:
+            o.append(f'<text x="{W-2}" y="{y-3}" text-anchor="end" fill="#666" font-size="8.5">{t}</text>')
+    o.append("</svg>")
+    return "".join(o)
+
 
 CSS = """@page{size:A4;margin:16mm 15mm 15mm 15mm;@bottom-center{content:counter(page);font-size:9pt;color:#666}}
 body{font-family:Helvetica,Arial,sans-serif;font-size:9.6pt;line-height:1.36;color:#111}
@@ -51,17 +100,19 @@ a{color:#1a4fa0;text-decoration:none}.fig svg{width:100%;height:auto;margin:2pt 
 
 def totals() -> str:
     rows = list(csv.DictReader((ROOT / "results/results.csv").open()))
-    out = sum(int(r["output_tokens"] or 0) for r in rows)
-    cr = sum(int(r["cache_read_tokens"] or 0) for r in rows)
+    k = lambda rs, c: sum(int(r.get(c) or 0) for r in rs)
+    out, inp, cr, cc = (k(rows, c) for c in ("output_tokens", "input_tokens", "cache_read_tokens",
+                                              "cache_creation_tokens"))
     usd = sum(float(r["cost_usd"] or 0) for r in rows)
-    n = sum(int(r["sessions"] or 0) for r in rows)
-    s = (f"{len(rows)} pipeline runs, {n} agent sessions, {out:,} output tokens, {cr:,} cache-read tokens, "
-         f"${usd:.2f} API-price equivalent")
+    s = (f"Pipeline: {len(rows)} runs, {k(rows, 'sessions')} agent sessions, {out:,} output, {inp:,} "
+         f"uncached input, {cc:,} cache-write and {cr:,} cache-read tokens "
+         f"(**{out + inp + cc + cr:,} in total**), ${usd:.2f} at API prices")
     rv = ROOT / "results/reviews_scored.csv"
     if rv.exists():
         rr = list(csv.DictReader(rv.open()))
-        s += (f"; experiment reviews: {len(rr)} sessions, "
-              f"{sum(int(r['output_tokens'] or 0) for r in rr):,} output tokens")
+        ro, ri, rc = k(rr, "output_tokens"), k(rr, "input_tokens"), k(rr, "cache_read_tokens")
+        s += (f". Experiment reviews: {len(rr)} sessions, {ro:,} output, {ri:,} input and {rc:,} "
+              f"cache-read tokens (**{ro + ri + rc:,}**)")
     return s + "."
 
 
@@ -69,7 +120,7 @@ def main() -> None:
     md = (R / "report.md").read_text()
     exp = (R / "experiments.md").read_text() if (R / "experiments.md").exists() else "*(pending)*"
     md = md.replace("{{EXPERIMENTS}}", exp).replace("{{TOTALS}}", totals())
-    html = markdown.markdown(md, extensions=["tables", "sane_lists"]).replace("{{SVG}}", SVG)
+    html = markdown.markdown(md, extensions=["tables", "sane_lists"]).replace("{{SVG}}", SVG).replace("{{SEQ}}", seq_svg())
     doc = f"<html><head><meta charset='utf-8'><style>{CSS}</style></head><body>{html}</body></html>"
     pdf = HTML(string=doc).write_pdf(ROOT / "report.pdf")
     import subprocess

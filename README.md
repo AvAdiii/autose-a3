@@ -35,7 +35,7 @@ Details: [`architecture/views/component_view.md`](architecture/views/component_v
 ```
 README.md, report.pdf, demo.mp4
 architecture/views/        component view, stage map, sequence view of run 44889589134
-architecture/decisions/    ADR-001 … ADR-011 (Nygard format; ADR-007 superseded in part by ADR-011)
+architecture/decisions/    ADR-001 … ADR-012 (Nygard format; ADR-007 superseded in part by ADR-011, ADR-006 by ADR-012)
 workflow/                  copy of .github/workflows/ and .github/autose/ (agents, prompts, checks, A1 skill)
 experiment/issues/         B1 B2 (bugs), F1 F2 (features), V1 (vague) + the maintainer's V1 answer
 experiment/hidden_tests/   4 hidden acceptance tests per issue + run_hidden.sh (never in the fork)
@@ -80,14 +80,15 @@ logged to `usage.jsonl` and summed per run in `results/results.csv` (`output_tok
 | Least privilege per job | `permissions: {}` at workflow level; per-job scopes in ADR-005 (the build job cannot push) |
 | Issue text is untrusted | gate accepts write-level users only; issue text is wrapped in a nonce-tagged `<untrusted-issue>` block; the guard hook blocks network tools, `gh`, git state changes and writes outside each role's paths (ADR-009) |
 | Design before agent code | submission commit `6c3d6a5` (views + ADRs, 12:43 IST) precedes the fork's harness commit `66a9ee4` (13:00) |
-| Wrong ADRs are kept | ADR-007 is marked *Superseded in part* by ADR-011, with the run that proved it wrong |
+| Wrong ADRs are kept | ADR-007 is marked *Superseded in part* by ADR-011 (run R4), ADR-006 by ADR-012 (experiment E2) |
 
 ## Use of AI (disclosure)
 
 I used Claude Code (Claude Opus 5.5) as an assistant throughout this assignment: to draft and
 debug the harness code, prompts and workflow YAML, to draft the ADRs and views from my decisions, to
 write the hidden tests, reference fixes and seeded PRs, to analyse the run artifacts, and to draft
-this README and the report. I reviewed and decided every design choice, checked every claim against
+this README and the report, and for a final review pass of the submission against the
+assignment brief. I reviewed and decided every design choice, checked every claim against
 the run logs and artifacts, and ran all experiments on the real workflow. The agents *inside* the
 workflow are Claude models by design (see Models above). The requirements agent reuses my A1 skill
 (`workflow/autose/skills/requirements-specifier/SKILL.md`), and the architect designs against my A2
