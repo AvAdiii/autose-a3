@@ -11,7 +11,7 @@ always merges.
   + [`autose-round.yml`](https://github.com/AvAdiii/markdown/blob/main/.github/workflows/autose-round.yml),
   harness in [`.github/autose/`](https://github.com/AvAdiii/markdown/tree/main/.github/autose). A copy is in
   [`workflow/`](workflow/).
-- **Report:** [`report.pdf`](report.pdf). **Demo:** [`demo.mp4`](demo.mp4).
+- **Report:** [`report.pdf`](report.pdf). **Demo:** [`demo.mp4`](demo.mp4) (4:47, no audio, on-screen captions): real run R11 on issue #3, from the `/autose` comment to the posted review and the hidden tests; waits are sped up and labelled.
 - **All runs, PRs and reviews:** [`results/runs.md`](results/runs.md); one row per run in
   [`results/results.csv`](results/results.csv).
 
@@ -21,7 +21,7 @@ Labelling an issue `autose` (or commenting `/autose`) by a user with write acces
 then up to three *rounds*. Each round is three jobs: **build** (a deterministic Python state machine
 runs the analyst, spec judge, architect, developer and tester agents, each followed by a code check),
 **release** (no model: applies the patch, pushes the branch as the `autose-dev-avadiii` GitHub App,
-opens the PR, waits for CI) and **review** (a fresh VM: a reviewer, Opus in every recorded run and Sonnet from ADR-012 on, that sees only the issue, the
+opens the PR, waits for CI) and **review** (a fresh VM: a reviewer, Opus in runs R0–R10 and Sonnet from ADR-012 on (R11, the demo run), that sees only the issue, the
 diff and the checkout, runs its own checks, and returns a structured verdict). `request_changes`
 sends the run back to the earliest stage the blocking findings name, at most twice. Every stage
 writes its artifact (`spec.md`, `design.md`, `diff.patch`, `test_report.md`, `pr.md`, `review.md`), a
@@ -58,7 +58,7 @@ results/                   results.csv, runs.md, reviews_scored.csv, per-run art
    review. Experiments use *Run workflow* (`workflow_dispatch`): `start_stage=review`, `pr`,
    `reviewer_variant`, `reviewer_model`, `rework=false` (see `results/dispatch_reviews.sh`).
 4. **Models:** analyst, architect, developer, tester `claude-sonnet-5-5`; spec judge `claude-haiku-5-5`;
-   reviewer `claude-sonnet-5-5` (ADR-012, after experiment E2; every recorded pipeline run used `claude-opus-5-5`, the ADR-006 choice), Claude Code CLI 2.1.323 headless.
+   reviewer `claude-sonnet-5-5` (ADR-012, after experiment E2; runs R0–R10 used `claude-opus-5-5`, the ADR-006 choice; R11 used Sonnet), Claude Code CLI 2.1.323 headless.
 
 ## Cost, quota and the spending cap
 

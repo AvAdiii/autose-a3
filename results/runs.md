@@ -26,11 +26,12 @@ transcript.
 | R8-V1 | #5 V1 | [44893689623](https://github.com/AvAdiii/markdown/actions/runs/44893689623) | `/autose` | 1/–/–/– | – | – | – | – | stopped: Claude Pro 5-hour limit | 0 | 124 s |
 | R9-V1 | #5 V1 | [44895471619](https://github.com/AvAdiii/markdown/actions/runs/44895471619) | `/autose` | 1/–/–/– | – | – | – | – | stopped: Claude Pro 5-hour limit | 0 | 155 s |
 | R10-V1 | #5 V1 | [44896794171](https://github.com/AvAdiii/markdown/actions/runs/44896794171) | `/autose` (new token) | 1/1/2/2 | [#18](https://github.com/AvAdiii/markdown/pull/18) | pass | approve | 4/4 | approved PR (docs checks in stage 3 passed CI) | 28,310 | 573 s |
+| R11-F1 | #3 F1 | [45405624215](https://github.com/AvAdiii/markdown/actions/runs/45405624215) | `/autose` (recorded for `demo.mp4`) | 1/1/1/1 | [#15](https://github.com/AvAdiii/markdown/pull/15) | pass | approve (Sonnet reviewer, ADR-012) | 4/4 | approved PR | 15,834 | 391 s |
 
 Reviews by the reviewer on the pipeline PRs are on the PRs themselves, posted by
 `github-actions[bot]`: [#12](https://github.com/AvAdiii/markdown/pull/12),
 [#15](https://github.com/AvAdiii/markdown/pull/15), [#16](https://github.com/AvAdiii/markdown/pull/16),
-[#19](https://github.com/AvAdiii/markdown/pull/19). R10 used a new `CLAUDE_CODE_OAUTH_TOKEN` (the same subscription plan, a second account's quota window). Every PR is still open for the maintainer to
+[#19](https://github.com/AvAdiii/markdown/pull/19). R11 is the run recorded in `demo.mp4` and the first pipeline run with the Sonnet reviewer of ADR-012. R10 used a new `CLAUDE_CODE_OAUTH_TOKEN` (the same subscription plan, a second account's quota window). Every PR is still open for the maintainer to
 merge or close; the workflow never merges.
 
 ## What each incident taught, and the harness PR that fixed it

@@ -1,0 +1,126 @@
+{
+ "tests.test_extensions.TestAdmonition.testRE": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testConfigAsKwargsOnInit": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testGetConfig": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testGetConfigDefault": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testGetConfigInfo": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testGetConfigs": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testSetConfig": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestExtensionClass.testSetConfigWithBadKey": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestMetaData.testBasicMetaData": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestMetaData.testMetaDataReset": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestMetaData.testMetaDataWithoutNewline": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestMetaData.testMissingMetaData": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestMetaData.testYamlMetaData": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestSmarty.testCustomSubstitutions": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.testBasicWikilinks": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.testComplexSettings": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.testSimpleSettings": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.testURLCallback": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.testWikilinkWhitespace": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.testWikilinksMetaData": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_001_1_label": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_001_2_label_in_text": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_001_3_no_brackets_or_pipe": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_002_1_space_around_pipe": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_002_2_extra_space_equal": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_003_1_base_end_class": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_003_2_empty_class": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_003_3_build_url_args": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_004_1_no_pipe": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_004_2_whitespace_no_pipe": {
+  "detail": "",
+  "outcome": "pass"
+ },
+ "tests.test_extensions.TestWikiLinks.test_ac_fr_004_3_blank_removed": {
+  "detail": "",
+  "outcome": "pass"
+ }
+}

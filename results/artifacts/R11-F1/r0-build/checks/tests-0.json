@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "reasons": [],
+  "owner": null,
+  "failing_new": {},
+  "regressions": {},
+  "uncovered": [],
+  "base_new": {
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_001_1_label": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 256, in test_ac_fr_001_1_label\n    self.assertEqual(\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n+ <p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_001_2_label_in_text": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 262, in test_ac_fr_001_2_label_in_text\n    self.assertEqual(\nAssertionError: '<p>Some text with a [[WikiLink|shown]].</p>' != '<p>Some text with a <a class=\"wikilink\" href=\"/WikiLink/\">shown</a>.</p>'\n- <p>Some text with a [[WikiLink|shown]].</p>\n+ <p>Some text with a <a class=\"wikilink\" href=\"/WikiLink/\">shown</a>.</p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_001_3_no_brackets_or_pipe": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 269, in test_ac_fr_001_3_no_brackets_or_pipe\n    self.assertNotIn('[[', out)\nAssertionError: '[[' unexpectedly found in '<p>[[Getting Started|read the guide]]</p>'\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_002_1_space_around_pipe": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 273, in test_ac_fr_002_1_space_around_pipe\n    self.assertEqual(\nAssertionError: '<p>[[Getting Started | read the guide]]</p>' != '<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>'\n- <p>[[Getting Started | read the guide]]</p>\n+ <p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_002_2_extra_space_equal": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 279, in test_ac_fr_002_2_extra_space_equal\n    self.assertEqual(\nAssertionError: '<p>[[  Getting Started  |  read the guide  ]]</p>' != '<p>[[Getting Started|read the guide]]</p>'\n- <p>[[  Getting Started  |  read the guide  ]]</p>\n?      --               -- --              --\n+ <p>[[Getting Started|read the guide]]</p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_003_1_base_end_class": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 286, in test_ac_fr_003_1_base_end_class\n    self.assertEqual(\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a class=\"foo\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n+ <p><a class=\"foo\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_003_2_empty_class": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 296, in test_ac_fr_003_2_empty_class\n    self.assertEqual(\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a href=\"/Getting_Started/\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n?    ^^       ^       ^              ^^\n+ <p><a href=\"/Getting_Started/\">read the guide</a></p>\n?    ^^^^^^^^^^       ^       ^^^              ^^^^\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_003_3_build_url_args": {
+      "detail": "Traceback (most recent call last):\n  File \"/home/runner/work/markdown/markdown/ws/tests/test_extensions.py\", line 313, in test_ac_fr_003_3_build_url_args\n    self.assertEqual(\nAssertionError: '<p>[[Getting Started|read the guide]]</p>' != '<p><a class=\"wikilink\" href=\"/bar/\">read the guide</a></p>'\n- <p>[[Getting Started|read the guide]]</p>\n+ <p><a class=\"wikilink\" href=\"/bar/\">read the guide</a></p>\n\n",
+      "outcome": "fail"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_004_1_no_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_004_2_whitespace_no_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_004_3_blank_removed": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_new": {
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_001_1_label": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_001_2_label_in_text": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_001_3_no_brackets_or_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_002_1_space_around_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_002_2_extra_space_equal": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_003_1_base_end_class": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_003_2_empty_class": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_003_3_build_url_args": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_004_1_no_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_004_2_whitespace_no_pipe": {
+      "detail": "",
+      "outcome": "pass"
+    },
+    "tests.test_extensions.TestWikiLinks.test_ac_fr_004_3_blank_removed": {
+      "detail": "",
+      "outcome": "pass"
+    }
+  },
+  "head_counts": {
+    "pass": 1066,
+    "skip": 111
+  },
+  "baseline_counts": {
+    "pass": 1055,
+    "skip": 111
+  }
+}

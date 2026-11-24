@@ -42,7 +42,7 @@ needs a code-owner review, so only a human merges.
 | 3 | Implementation | developer (Sonnet) | build | `diff.patch` | non-empty, no `tests/`/`.github/` edits, `compileall`, `pip install -e`, import, flake8, docs build + spelling | retry inside the 3-attempt 3/4 budget |
 | 4 | Testing | tester (Sonnet), **at the base commit** | build | `test_report.md` | every AC has a test; new tests **fail on base, pass on head**; full suite passes | back to 3; after 2 failures back to 2 once |
 | 5 | Release | none (`release.py`) | release | `pr.md` + PR link | PR open, every CI check on the head `success` | stop; `pr.md` names the failing check |
-| 6 | Review | reviewer (Opus in R0–R10; Sonnet from ADR-012) | review | `review.md` + `review.json` | `approve` (needs ≥1 executed check) or rounds used up | earliest stage named by a blocking finding; ≤2 rework rounds |
+| 6 | Review | reviewer (Opus in R0–R10; Sonnet from ADR-012, R11) | review | `review.md` + `review.json` | `approve` (needs ≥1 executed check) or rounds used up | earliest stage named by a blocking finding; ≤2 rework rounds |
 
 ### 1.3 Sequence view: real run [44889589134](https://github.com/AvAdiii/markdown/actions/runs/44889589134) (issue #2, PR #12)
 
@@ -84,13 +84,13 @@ implementation, and a new test counts only if it fails on the base commit and pa
 This rejects tautological tests, the cheapest way for an agent to fool a test gate. Every stage
 check is deterministic (parsers, AST symbol checks, the test runner, flake8, docs build) except a
 narrow Haiku testability judge. The gates were not decorative: a code check stopped or sent back
-work in 7 of the 9 runs that reached an agent, CI caught one more (§4), and every released head
+work in 7 of the 10 runs that reached an agent, CI caught one more (§4), and every released head
 passed all its hidden tests.
 
 **ADR-001/002: narrow agents inside a deterministic state machine.** My A2 data drove this: the
 single broad agent there (Qwen3.5-9B, local) timed out in 6/6 runs after 86–107 tool calls. In
 autose each agent has one artifact, one tool set and a turn cap, and Python decides routing and
-budgets. Every build-stage session (42 in all) took 5–42 s and at most 10 turns.
+budgets. Every build-stage session (47 in all) took 5–42 s and at most 10 turns.
 
 **Superseded decisions.** In run R4 the judge accepted AC-FR-002-2/3 on attempt 0 and rejected the
 same, unchanged text on attempt 1; the single retry ran out and the run stopped on a sound spec.
@@ -124,24 +124,24 @@ isolation as the main guard against correlated blind spots, which is one more re
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | #1 B1 linenums crash | bug | R2 | approved PR | 2/1/1/1 | 8 | [#16](https://github.com/AvAdiii/markdown/pull/16) | ✓ | approve | 4/4 | 24.0k | 7.6 min |
 | #2 B2 empty attr list | bug | R0 → R1 | comment (sandbox broken), then approved | 1/1/1/1 | 11 | [#12](https://github.com/AvAdiii/markdown/pull/12) | ✓ | approve | 4/4 | 19.5k | 6.6 min |
-| #3 F1 wikilink labels | feature | R3 | approved PR | 2/1/1/1 | 10 | [#15](https://github.com/AvAdiii/markdown/pull/15) | ✓ | approve | 4/4 | 21.4k | 5.9 min |
+| #3 F1 wikilink labels | feature | R3, R11 (demo) | approved PR, twice | 2/1/1/1, 1/1/1/1 | 10, 11 | [#15](https://github.com/AvAdiii/markdown/pull/15) | ✓ | approve | 4/4, 4/4 | 21.4k, 15.8k | 5.9, 6.5 min |
 | #4 F2 toc exclusion | feature | R4 → R7 | stopped (judge flip), then approved | 1/2/1/1 | 7 | [#19](https://github.com/AvAdiii/markdown/pull/19) | ✓ | approve | 4/4 | 15.9k | 6.6 min |
 | #5 V1 vague | vague | R5 → R6 → R10 | questions; CI docs fail; approved | 1/1/2/2 | 17 | [#18](https://github.com/AvAdiii/markdown/pull/18) | ✓ | approve | 4/4 | 28.3k | 9.6 min |
 
-**Pass rate per stage** (all 11 runs; R8/R9 stopped on the subscription quota before any agent
+**Pass rate per stage** (all 12 runs; R8/R9 stopped on the subscription quota before any agent
 output and are excluded; "first try" = passed its check on attempt 1).
 
 | Stage | Entered | Passed (eventually) | Passed first try | What stopped or retried it |
 |---|---|---|---|---|
-| 1 Requirements | 9 | 7 (78 %) | 4 (44 %) | R2, R3, R6 judge-driven retries (fixed); R4 judge flip (stop, → ADR-011); R5 vague issue (stop with questions, intended) |
-| 2 Design | 7 | 7 (100 %) | 6 (86 %) | R7: `add` row for a file that exists (AST/path check), fixed on retry |
-| 3 Implementation | 7 | 7 (100 %) | 7 (100 %) | built every time; R10 re-entered stage 3 once from stage 4 |
-| 4 Testing | 7 | 7 (100 %) | 6 (86 %) | R10: a test asserted an attribute order the serializer cannot produce; the developer filed a `TEST_DISPUTE`, the tester rewrote it (the dispute path, live) |
-| 5 Release (CI) | 7 | 6 (86 %) | 6 (86 %) | R6: CI docs lints (`checklinks`, spelling) → stage 3 now runs both (PR #20) |
-| 6 Review | 6 | 5 approve (83 %) | 5 | R0: reviewer could not execute anything and refused to approve |
+| 1 Requirements | 10 | 8 (80 %) | 5 (50 %) | R2, R3, R6 judge-driven retries (fixed); R4 judge flip (stop, → ADR-011); R5 vague issue (stop with questions, intended) |
+| 2 Design | 8 | 8 (100 %) | 7 (88 %) | R7: `add` row for a file that exists (AST/path check), fixed on retry |
+| 3 Implementation | 8 | 8 (100 %) | 8 (100 %) | built every time; R10 re-entered stage 3 once from stage 4 |
+| 4 Testing | 8 | 8 (100 %) | 7 (88 %) | R10: a test asserted an attribute order the serializer cannot produce; the developer filed a `TEST_DISPUTE`, the tester rewrote it (the dispute path, live) |
+| 5 Release (CI) | 8 | 7 (88 %) | 7 (88 %) | R6: CI docs lints (`checklinks`, spelling) → stage 3 now runs both (PR #20) |
+| 6 Review | 7 | 6 approve (86 %) | 6 | R0: reviewer could not execute anything and refused to approve |
 
 **Hidden tests.** 4 per issue, kept outside the fork and run on the exact head each run released:
-**28/28 on 7 released heads (5 PRs)**, including the R6 head that failed CI on docs only. Each
+**32/32 on 8 released heads (5 PRs)**, including the R6 head that failed CI on docs only. Each
 hidden test was validated to fail on the base and pass with my reference fix.
 
 **What the reviewer caught, and where it was wrong.**
@@ -158,14 +158,14 @@ hidden test was validated to fail on the base and pass with my reference fix.
   honestly but approved on the tester's evidence. In R10 the guard blocked literal URLs, so it built
   probes indirectly. (3) In R0 it was right not to approve but for an infrastructure reason; it
   produced no finding. (4) It never sent a real pipeline PR back: every builder head was correct
-  (28/28 hidden), so the **send-back loop was exercised only on seeded PRs with `rework=false`**.
+  (32/32 hidden), so the **send-back loop was exercised only on seeded PRs with `rework=false`**.
 
 **Why the numbers look so clean, and what that does and does not show.** In A2 I used a local
 9B model (Qwen3.5-9B), which failed often enough that the interesting result was the failure itself. Claude
 Sonnet/Opus solved all five issues, so the model is not the bottleneck here and the 100 % rows
 should not be read as "the architecture makes agents correct". The issues are small, single-module
 changes in a well-tested library. The evidence for the *architecture* is elsewhere: the checks
-fired in 7 of 9 runs and each time it was a code check, not the model, that noticed the problem; and
+fired in 7 of 10 runs and each time it was a code check, not the model, that noticed the problem; and
 every real failure (sandbox, CI drift, judge flip, quota, concurrency) was a harness or
 infrastructure failure that the design stopped and explained instead of hiding. The one live
 model error was the *tester's* (R10), and it was caught because the developer may dispute a test

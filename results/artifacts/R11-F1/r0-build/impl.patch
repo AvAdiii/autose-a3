@@ -1,0 +1,69 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..d10f4f2 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -14,6 +14,11 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ## [Unreleased]
+ 
++### Added
++
++* Support a display label with `[[Target|Label]]` in the `wikilinks` extension
++  (#3).
++
+ ### Fixed
+ 
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+diff --git a/docs/extensions/wikilinks.md b/docs/extensions/wikilinks.md
+index b0f2538..25f2cc7 100644
+--- a/docs/extensions/wikilinks.md
++++ b/docs/extensions/wikilinks.md
+@@ -53,6 +53,17 @@ extensions: [wikilinks]
+ [[Wiki Link]]
+ ```
+ 
++A different link text can be given after a pipe: `[[Target|Label]]` links to
++the same URL as `[[Target]]` but shows the label. Whitespace around the pipe is
++ignored. The label accepts the same characters as the target.
++
++``` md-render
++---
++extensions: [wikilinks]
++---
++[[Wiki Link|read the guide]]
++```
++
+ ## Usage
+ 
+ See [Extensions](index.md) for general extension usage. Use `wikilinks` as the
+diff --git a/markdown/extensions/wikilinks.py b/markdown/extensions/wikilinks.py
+index 70d0ea5..84cf494 100644
+--- a/markdown/extensions/wikilinks.py
++++ b/markdown/extensions/wikilinks.py
+@@ -59,7 +59,7 @@ class WikiLinkExtension(Extension):
+         self.md = md
+ 
+         # append to end of inline patterns
+-        WIKILINK_RE = r'\[\[([\w0-9_ -]+)\]\]'
++        WIKILINK_RE = r'\[\[([\w0-9_ -]+)(?:\|([\w0-9_ -]+))?\]\]'
+         wikilinkPattern = WikiLinksInlineProcessor(WIKILINK_RE, self.getConfigs())
+         wikilinkPattern.md = md
+         md.inlinePatterns.register(wikilinkPattern, 'wikilink', 75)
+@@ -73,12 +73,13 @@ class WikiLinksInlineProcessor(InlineProcessor):
+         self.config = config
+ 
+     def handleMatch(self, m: re.Match[str], data: str) -> tuple[etree.Element | str, int, int]:
+-        if m.group(1).strip():
++        target = m.group(1).strip()
++        if target:
+             base_url, end_url, html_class = self._getMeta()
+-            label = m.group(1).strip()
+-            url = self.config['build_url'](label, base_url, end_url)
++            text = (m.group(2) or '').strip() or target
++            url = self.config['build_url'](target, base_url, end_url)
+             a = etree.Element('a')
+-            a.text = label
++            a.text = text
+             a.set('href', url)
+             if html_class:
+                 a.set('class', html_class)

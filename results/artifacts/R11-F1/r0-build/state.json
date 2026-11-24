@@ -1,0 +1,107 @@
+{
+  "issue": 3,
+  "round": 0,
+  "start": "requirements",
+  "events": [],
+  "stages": {
+    "requirements": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "design": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    },
+    "implementation": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": [],
+      "files": [
+        "docs/changelog.md",
+        "docs/extensions/wikilinks.md",
+        "markdown/extensions/wikilinks.py"
+      ]
+    },
+    "testing": {
+      "status": "passed",
+      "attempts": 1,
+      "reasons": []
+    }
+  },
+  "budgets": {
+    "spec_retries": 0,
+    "design_retries": 0,
+    "impl_attempts": 0,
+    "tester_attempts": 0,
+    "design_revisits": 0,
+    "test_disputes": 0,
+    "reviewer_evidence_retries": 0,
+    "provider_retries": 0
+  },
+  "final": {
+    "status": "ready",
+    "reason": "stages 1-4 passed"
+  },
+  "base": "77387dd0f5032eed33b427925cb583ca66f816dc",
+  "judge_cache": {
+    "Given the `wikilinks` extension with default settings, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>`.": {
+      "testable": true,
+      "reason": "The input, default settings, and exact expected HTML string are all stated, so a unit test can compare the output directly."
+    },
+    "Given the `wikilinks` extension with default settings, when `Some text with a [[WikiLink|shown]].` is converted, then the output is `<p>Some text with a <a class=\"wikilink\" href=\"/WikiLink/\">shown</a>.</p>`.": {
+      "testable": true,
+      "reason": "The input sentence and the exact expected HTML output are both given, so the test is a direct string comparison."
+    },
+    "Given the `wikilinks` extension with default settings, when `[[Getting Started|read the guide]]` is converted, then the output does not contain `[[` and does not contain `|`.": {
+      "testable": true,
+      "reason": "The input is fixed and the outcome is a concrete absence check: the output must not contain '[[' or '|'."
+    },
+    "Given the `wikilinks` extension with default settings, when `[[Getting Started | read the guide]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>`.": {
+      "testable": true,
+      "reason": "The input with spaces around the pipe and the exact expected HTML output are stated, so the test is an exact comparison."
+    },
+    "Given the `wikilinks` extension with default settings, when `[[  Getting Started  |  read the guide  ]]` is converted, then the output equals the output for `[[Getting Started|read the guide]]`.": {
+      "testable": true,
+      "reason": "The test converts two fixed inputs and checks that the outputs are equal, which is an exact, observable comparison."
+    },
+    "Given the extension with `base_url='/wiki/'`, `end_url='.html'` and `html_class='foo'`, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a class=\"foo\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>`.": {
+      "testable": true,
+      "reason": "The settings (base_url, end_url, html_class), the input, and the exact expected HTML are all specified."
+    },
+    "Given the extension with `html_class=''`, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a href=\"/Getting_Started/\">read the guide</a></p>`.": {
+      "testable": true,
+      "reason": "With html_class set to an empty string and a fixed input, the exact expected HTML with no class attribute is stated."
+    },
+    "Given the extension with a `build_url` callable that records its arguments and returns `/bar/`, when `[[Getting Started|read the guide]]` is converted, then the callable was called with `Getting Started`, `/` and `/`, and the output is `<p><a class=\"wikilink\" href=\"/bar/\">read the guide</a></p>`.": {
+      "testable": true,
+      "reason": "A recording callable can assert the exact arguments it received and the returned href in the output, both of which are stated."
+    },
+    "Given the `wikilinks` extension with default settings, when `Some text with a [[WikiLink]].` is converted, then the output is `<p>Some text with a <a class=\"wikilink\" href=\"/WikiLink/\">WikiLink</a>.</p>`.": {
+      "testable": true,
+      "reason": "The input without a pipe and the exact expected HTML output are given, so the test is a direct string comparison."
+    },
+    "Given the `wikilinks` extension with default settings, when `[[ foo bar_baz ]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/foo_bar_baz/\">foo bar_baz</a></p>`.": {
+      "testable": true,
+      "reason": "The input with mixed spacing and underscores and the exact expected HTML, including the href slug and the link text, are stated."
+    },
+    "Given the `wikilinks` extension with default settings, when `foo [[ ]] bar` is converted, then the output is `<p>foo  bar</p>`.": {
+      "testable": true,
+      "reason": "The input with an empty link name and the exact expected output '<p>foo  bar</p>' are specified, so the test is a direct comparison."
+    }
+  },
+  "ready_acs": [
+    "AC-FR-001-1",
+    "AC-FR-001-2",
+    "AC-FR-001-3",
+    "AC-FR-002-1",
+    "AC-FR-002-2",
+    "AC-FR-003-1",
+    "AC-FR-003-2",
+    "AC-FR-003-3",
+    "AC-FR-004-1",
+    "AC-FR-004-2",
+    "AC-FR-004-3"
+  ]
+}

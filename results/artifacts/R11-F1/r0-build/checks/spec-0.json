@@ -1,0 +1,188 @@
+{
+  "ok": true,
+  "reasons": [],
+  "needs_clarification": false,
+  "ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004"
+  ],
+  "blocked": [],
+  "acs": [
+    {
+      "id": "AC-FR-001-1",
+      "req": "FR-001",
+      "text": "Given the `wikilinks` extension with default settings, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-001-2",
+      "req": "FR-001",
+      "text": "Given the `wikilinks` extension with default settings, when `Some text with a [[WikiLink|shown]].` is converted, then the output is `<p>Some text with a <a class=\"wikilink\" href=\"/WikiLink/\">shown</a>.</p>`."
+    },
+    {
+      "id": "AC-FR-001-3",
+      "req": "FR-001",
+      "text": "Given the `wikilinks` extension with default settings, when `[[Getting Started|read the guide]]` is converted, then the output does not contain `[[` and does not contain `|`."
+    },
+    {
+      "id": "AC-FR-002-1",
+      "req": "FR-002",
+      "text": "Given the `wikilinks` extension with default settings, when `[[Getting Started | read the guide]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/Getting_Started/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-002-2",
+      "req": "FR-002",
+      "text": "Given the `wikilinks` extension with default settings, when `[[  Getting Started  |  read the guide  ]]` is converted, then the output equals the output for `[[Getting Started|read the guide]]`."
+    },
+    {
+      "id": "AC-FR-003-1",
+      "req": "FR-003",
+      "text": "Given the extension with `base_url='/wiki/'`, `end_url='.html'` and `html_class='foo'`, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a class=\"foo\" href=\"/wiki/Getting_Started.html\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-2",
+      "req": "FR-003",
+      "text": "Given the extension with `html_class=''`, when `[[Getting Started|read the guide]]` is converted, then the output is `<p><a href=\"/Getting_Started/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-003-3",
+      "req": "FR-003",
+      "text": "Given the extension with a `build_url` callable that records its arguments and returns `/bar/`, when `[[Getting Started|read the guide]]` is converted, then the callable was called with `Getting Started`, `/` and `/`, and the output is `<p><a class=\"wikilink\" href=\"/bar/\">read the guide</a></p>`."
+    },
+    {
+      "id": "AC-FR-004-1",
+      "req": "FR-004",
+      "text": "Given the `wikilinks` extension with default settings, when `Some text with a [[WikiLink]].` is converted, then the output is `<p>Some text with a <a class=\"wikilink\" href=\"/WikiLink/\">WikiLink</a>.</p>`."
+    },
+    {
+      "id": "AC-FR-004-2",
+      "req": "FR-004",
+      "text": "Given the `wikilinks` extension with default settings, when `[[ foo bar_baz ]]` is converted, then the output is `<p><a class=\"wikilink\" href=\"/foo_bar_baz/\">foo bar_baz</a></p>`."
+    },
+    {
+      "id": "AC-FR-004-3",
+      "req": "FR-004",
+      "text": "Given the `wikilinks` extension with default settings, when `foo [[ ]] bar` is converted, then the output is `<p>foo  bar</p>`."
+    }
+  ],
+  "must_ready": [
+    "FR-001",
+    "FR-002",
+    "FR-003",
+    "FR-004"
+  ],
+  "questions": [
+    {
+      "id": "Q-001",
+      "title": "Empty label",
+      "question": "What should `[[Getting Started|]]` (pipe with empty label) produce?",
+      "tier": "P3",
+      "options": "(a) link with the target as visible text (b) left as literal text (c) removed from output, like `[[ ]]` (d) Other",
+      "status": "open",
+      "blocks": "none (edge case outside the stated asks)"
+    },
+    {
+      "id": "Q-002",
+      "title": "Empty target",
+      "question": "What should `[[|read the guide]]` (empty target) produce?",
+      "tier": "P3",
+      "options": "(a) removed from output (b) left as literal text (c) Other",
+      "status": "open",
+      "blocks": "none (edge case outside the stated asks)"
+    },
+    {
+      "id": "Q-003",
+      "title": "Several pipes and label characters",
+      "question": "What should `[[A|B|C]]` produce, and may a label contain characters beyond letters, digits, underscore, space and hyphen?",
+      "tier": "P3",
+      "options": "(a) not recognised, left as literal text (b) the first pipe separates, the rest is label text (c) Other",
+      "status": "open",
+      "blocks": "none (edge case outside the stated asks)"
+    }
+  ],
+  "open_p1": [],
+  "judge": {
+    "criteria": [
+      {
+        "id": "AC-FR-001-1",
+        "testable": true,
+        "reason": "The input, default settings, and exact expected HTML string are all stated, so a unit test can compare the output directly.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-001-2",
+        "testable": true,
+        "reason": "The input sentence and the exact expected HTML output are both given, so the test is a direct string comparison.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-001-3",
+        "testable": true,
+        "reason": "The input is fixed and the outcome is a concrete absence check: the output must not contain '[[' or '|'.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-002-1",
+        "testable": true,
+        "reason": "The input with spaces around the pipe and the exact expected HTML output are stated, so the test is an exact comparison.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-002-2",
+        "testable": true,
+        "reason": "The test converts two fixed inputs and checks that the outputs are equal, which is an exact, observable comparison.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-003-1",
+        "testable": true,
+        "reason": "The settings (base_url, end_url, html_class), the input, and the exact expected HTML are all specified.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-003-2",
+        "testable": true,
+        "reason": "With html_class set to an empty string and a fixed input, the exact expected HTML with no class attribute is stated.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-003-3",
+        "testable": true,
+        "reason": "A recording callable can assert the exact arguments it received and the returned href in the output, both of which are stated.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-004-1",
+        "testable": true,
+        "reason": "The input without a pipe and the exact expected HTML output are given, so the test is a direct string comparison.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-004-2",
+        "testable": true,
+        "reason": "The input with mixed spacing and underscores and the exact expected HTML, including the href slug and the link text, are stated.",
+        "cached": false
+      },
+      {
+        "id": "AC-FR-004-3",
+        "testable": true,
+        "reason": "The input with an empty link name and the exact expected output '<p>foo  bar</p>' are specified, so the test is a direct comparison.",
+        "cached": false
+      }
+    ],
+    "judged_now": [
+      "AC-FR-001-1",
+      "AC-FR-001-2",
+      "AC-FR-001-3",
+      "AC-FR-002-1",
+      "AC-FR-002-2",
+      "AC-FR-003-1",
+      "AC-FR-003-2",
+      "AC-FR-003-3",
+      "AC-FR-004-1",
+      "AC-FR-004-2",
+      "AC-FR-004-3"
+    ]
+  }
+}

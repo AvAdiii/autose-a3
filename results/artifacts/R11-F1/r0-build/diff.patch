@@ -1,0 +1,159 @@
+diff --git a/docs/changelog.md b/docs/changelog.md
+index cba971a..d10f4f2 100644
+--- a/docs/changelog.md
++++ b/docs/changelog.md
+@@ -14,6 +14,11 @@ See the [Contributing Guide](contributing.md) for details.
+ 
+ ## [Unreleased]
+ 
++### Added
++
++* Support a display label with `[[Target|Label]]` in the `wikilinks` extension
++  (#3).
++
+ ### Fixed
+ 
+ * Support automatic links with URL schemes other than HTTP and FTP, such as
+diff --git a/docs/extensions/wikilinks.md b/docs/extensions/wikilinks.md
+index b0f2538..25f2cc7 100644
+--- a/docs/extensions/wikilinks.md
++++ b/docs/extensions/wikilinks.md
+@@ -53,6 +53,17 @@ extensions: [wikilinks]
+ [[Wiki Link]]
+ ```
+ 
++A different link text can be given after a pipe: `[[Target|Label]]` links to
++the same URL as `[[Target]]` but shows the label. Whitespace around the pipe is
++ignored. The label accepts the same characters as the target.
++
++``` md-render
++---
++extensions: [wikilinks]
++---
++[[Wiki Link|read the guide]]
++```
++
+ ## Usage
+ 
+ See [Extensions](index.md) for general extension usage. Use `wikilinks` as the
+diff --git a/markdown/extensions/wikilinks.py b/markdown/extensions/wikilinks.py
+index 70d0ea5..84cf494 100644
+--- a/markdown/extensions/wikilinks.py
++++ b/markdown/extensions/wikilinks.py
+@@ -59,7 +59,7 @@ class WikiLinkExtension(Extension):
+         self.md = md
+ 
+         # append to end of inline patterns
+-        WIKILINK_RE = r'\[\[([\w0-9_ -]+)\]\]'
++        WIKILINK_RE = r'\[\[([\w0-9_ -]+)(?:\|([\w0-9_ -]+))?\]\]'
+         wikilinkPattern = WikiLinksInlineProcessor(WIKILINK_RE, self.getConfigs())
+         wikilinkPattern.md = md
+         md.inlinePatterns.register(wikilinkPattern, 'wikilink', 75)
+@@ -73,12 +73,13 @@ class WikiLinksInlineProcessor(InlineProcessor):
+         self.config = config
+ 
+     def handleMatch(self, m: re.Match[str], data: str) -> tuple[etree.Element | str, int, int]:
+-        if m.group(1).strip():
++        target = m.group(1).strip()
++        if target:
+             base_url, end_url, html_class = self._getMeta()
+-            label = m.group(1).strip()
+-            url = self.config['build_url'](label, base_url, end_url)
++            text = (m.group(2) or '').strip() or target
++            url = self.config['build_url'](target, base_url, end_url)
+             a = etree.Element('a')
+-            a.text = label
++            a.text = text
+             a.set('href', url)
+             if html_class:
+                 a.set('class', html_class)
+diff --git a/tests/test_extensions.py b/tests/test_extensions.py
+index b8bc3c8..5c09e84 100644
+--- a/tests/test_extensions.py
++++ b/tests/test_extensions.py
+@@ -252,6 +252,85 @@ Some text with a [[WikiLink]]."""
+             '<p><a class="wikilink" href="/bar/">foo</a></p>'
+         )
+ 
++    def test_ac_fr_001_1_label(self):
++        self.assertEqual(
++            self.md.convert('[[Getting Started|read the guide]]'),
++            '<p><a class="wikilink" href="/Getting_Started/">read the guide</a></p>'
++        )
++
++    def test_ac_fr_001_2_label_in_text(self):
++        self.assertEqual(
++            self.md.convert('Some text with a [[WikiLink|shown]].'),
++            '<p>Some text with a <a class="wikilink" href="/WikiLink/">shown</a>.</p>'
++        )
++
++    def test_ac_fr_001_3_no_brackets_or_pipe(self):
++        out = self.md.convert('[[Getting Started|read the guide]]')
++        self.assertNotIn('[[', out)
++        self.assertNotIn('|', out)
++
++    def test_ac_fr_002_1_space_around_pipe(self):
++        self.assertEqual(
++            self.md.convert('[[Getting Started | read the guide]]'),
++            '<p><a class="wikilink" href="/Getting_Started/">read the guide</a></p>'
++        )
++
++    def test_ac_fr_002_2_extra_space_equal(self):
++        self.assertEqual(
++            self.md.convert('[[  Getting Started  |  read the guide  ]]'),
++            markdown.markdown('[[Getting Started|read the guide]]', extensions=['wikilinks'])
++        )
++
++    def test_ac_fr_003_1_base_end_class(self):
++        from markdown.extensions.wikilinks import WikiLinkExtension
++        self.assertEqual(
++            markdown.markdown(
++                '[[Getting Started|read the guide]]',
++                extensions=[WikiLinkExtension(base_url='/wiki/', end_url='.html', html_class='foo')]
++            ),
++            '<p><a class="foo" href="/wiki/Getting_Started.html">read the guide</a></p>'
++        )
++
++    def test_ac_fr_003_2_empty_class(self):
++        from markdown.extensions.wikilinks import WikiLinkExtension
++        self.assertEqual(
++            markdown.markdown(
++                '[[Getting Started|read the guide]]',
++                extensions=[WikiLinkExtension(html_class='')]
++            ),
++            '<p><a href="/Getting_Started/">read the guide</a></p>'
++        )
++
++    def test_ac_fr_003_3_build_url_args(self):
++        from markdown.extensions.wikilinks import WikiLinkExtension
++        calls = []
++
++        def my_url_builder(label, base, end):
++            calls.append((label, base, end))
++            return '/bar/'
++
++        md = markdown.Markdown(extensions=[WikiLinkExtension(build_url=my_url_builder)])
++        self.assertEqual(
++            md.convert('[[Getting Started|read the guide]]'),
++            '<p><a class="wikilink" href="/bar/">read the guide</a></p>'
++        )
++        self.assertEqual(calls, [('Getting Started', '/', '/')])
++
++    def test_ac_fr_004_1_no_pipe(self):
++        self.assertEqual(
++            self.md.convert('Some text with a [[WikiLink]].'),
++            '<p>Some text with a <a class="wikilink" href="/WikiLink/">WikiLink</a>.</p>'
++        )
++
++    def test_ac_fr_004_2_whitespace_no_pipe(self):
++        self.assertEqual(
++            self.md.convert('[[ foo bar_baz ]]'),
++            '<p><a class="wikilink" href="/foo_bar_baz/">foo bar_baz</a></p>'
++        )
++
++    def test_ac_fr_004_3_blank_removed(self):
++        self.assertEqual(self.md.convert('foo [[ ]] bar'), '<p>foo  bar</p>')
++
+ 
+ class TestAdmonition(unittest.TestCase):
+     """ Test Admonition Extension. """

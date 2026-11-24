@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "reasons": [],
+  "rows": [
+    {
+      "file": "markdown/extensions/wikilinks.py",
+      "symbol": "WikiLinkExtension.extendMarkdown",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2"
+      ]
+    },
+    {
+      "file": "markdown/extensions/wikilinks.py",
+      "symbol": "WikiLinksInlineProcessor.handleMatch",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-003-3",
+        "AC-FR-004-1",
+        "AC-FR-004-2",
+        "AC-FR-004-3"
+      ]
+    },
+    {
+      "file": "tests/test_extensions.py",
+      "symbol": "TestWikiLinks",
+      "change": "modify",
+      "acs": [
+        "AC-FR-001-1",
+        "AC-FR-001-2",
+        "AC-FR-001-3",
+        "AC-FR-002-1",
+        "AC-FR-002-2",
+        "AC-FR-003-1",
+        "AC-FR-003-2",
+        "AC-FR-003-3",
+        "AC-FR-004-1",
+        "AC-FR-004-2",
+        "AC-FR-004-3"
+      ]
+    },
+    {
+      "file": "docs/extensions/wikilinks.md",
+      "symbol": "Syntax section",
+      "change": "modify",
+      "acs": []
+    },
+    {
+      "file": "docs/changelog.md",
+      "symbol": "-",
+      "change": "modify",
+      "acs": []
+    }
+  ]
+}
