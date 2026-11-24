@@ -11,7 +11,7 @@ always merges.
   + [`autose-round.yml`](https://github.com/AvAdiii/markdown/blob/main/.github/workflows/autose-round.yml),
   harness in [`.github/autose/`](https://github.com/AvAdiii/markdown/tree/main/.github/autose). A copy is in
   [`workflow/`](workflow/).
-- **Report:** [`report.pdf`](report.pdf). **Demo:** [`demo.mp4`](demo.mp4) (4:47, no audio, on-screen captions): real run R11 on issue #3, from the `/autose` comment to the posted review and the hidden tests; waits are sped up and labelled.
+- **Report:** [`report.pdf`](report.pdf). **Demo:** [`demo.mp4`](demo.mp4) (4:56, no audio, on-screen captions): the architecture, then real run R11 on issue #3 from the `/autose` comment to the posted review and the hidden tests; waits are sped up and labelled.
 - **All runs, PRs and reviews:** [`results/runs.md`](results/runs.md); one row per run in
   [`results/results.csv`](results/results.csv).
 
